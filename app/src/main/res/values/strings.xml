@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WOLO</string>
+    <string name="title_activity_gamezone">GamezoneActivity</string>
+    <string name="title_activity_info">InfoActivity</string>
+    <string name="loadingText_success">Карты загружены</string>
+
+</resources>

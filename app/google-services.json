@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "848816670042",
+    "firebase_url": "https://wolo2018.firebaseio.com",
+    "project_id": "wolo2018",
+    "storage_bucket": "wolo2018.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848816670042:android:86d47ac401509cd9",
+        "android_client_info": {
+          "package_name": "com.wolo.a222"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848816670042-0dgnc76gsksace8h8r4v2rch40mm55fu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wolo.a222",
+            "certificate_hash": "dbea03edbf2503e47c63c415230463f13cab8177"
+          }
+        },
+        {
+          "client_id": "848816670042-g46r7q2nfvjb6k47hk4g7q70grn6fv51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFPDbn8IuX3F7fMo_OrEyziAdKt7IYp0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848816670042-g46r7q2nfvjb6k47hk4g7q70grn6fv51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
