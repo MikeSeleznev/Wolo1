@@ -7,19 +7,6 @@
     tools:context=".MainActivity"
     android:background="#17171c">
 
-    <Button
-        android:id="@+id/buttonShop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="92dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="@+id/frameLayout7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.785"
-        app:layout_constraintStart_toStartOf="@+id/frameLayout7" />
-
     <View
         android:id="@+id/divider11"
         android:layout_width="wrap_content"
@@ -103,7 +90,7 @@
         android:layout_height="17dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif"
-        android:text="Вы можете купить 4 колоды, по цене 3!"
+        android:text="Вы можете купить 3 колоды, по цене 2!"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -184,57 +171,6 @@
         app:layout_constraintVertical_bias="0.062" />
 
     <ImageButton
-        android:id="@+id/MUSIC"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginBottom="8dp"
-        android:background="@null"
-        android:padding="0px"
-        android:scaleType="fitCenter"
-        android:src="@drawable/music"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/frameLayout7"
-        app:layout_constraintVertical_bias="0.281" />
-
-    <CheckedTextView
-        android:id="@+id/kolodaname4"
-        android:layout_width="134dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="12dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="МУЗЫКА"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.765"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MUSIC" />
-
-    <CheckedTextView
-        android:id="@+id/kolodanumcards4"
-        android:layout_width="134dp"
-        android:layout_height="14dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="sans-serif"
-        android:text="Цена: 2$"
-        android:textAlignment="center"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/OHFUCK"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.765"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kolodaname4"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageButton
         android:id="@+id/EROTIC"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -301,10 +237,10 @@
         android:src="@drawable/ohfuck"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/frameLayout7"
-        app:layout_constraintHorizontal_bias="0.982"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/frameLayout7"
-        app:layout_constraintVertical_bias="0.55" />
+        app:layout_constraintVertical_bias="0.281" />
 
     <CheckedTextView
         android:id="@+id/kolodaname6"
@@ -352,10 +288,10 @@
         android:src="@drawable/alldecks"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.833" />
+        app:layout_constraintVertical_bias="0.563" />
 
     <CheckedTextView
         android:id="@+id/kolodaname7"
@@ -367,7 +303,7 @@
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintHorizontal_bias="0.765"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/alldeck" />
 
@@ -375,14 +311,14 @@
         android:id="@+id/kolodanumcards7"
         android:layout_width="134dp"
         android:layout_height="14dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="164dp"
         android:fontFamily="sans-serif"
-        android:text="Цена: 6$"
+        android:text="Цена: 4$"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintHorizontal_bias="0.765"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kolodaname7"
         app:layout_constraintVertical_bias="0.0" />

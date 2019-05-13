@@ -2,6 +2,7 @@ package com.wolo.a222.Firebase;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.firebase.FirebaseApp;
@@ -26,7 +27,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class InitFB {
+public class InitFB implements ValueEventListener {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
@@ -42,6 +43,8 @@ public class InitFB {
         FirebaseApp.initializeApp(context);
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
+
+        mDatabaseReference.child("packs").addValueEventListener(this);
 
         Observable<Packs> myObservable = Observable.create(
                 new ObservableOnSubscribe<Packs>() {
@@ -105,5 +108,15 @@ public class InitFB {
             }
         };
             myObservable.subscribe(myObserver);
+    }
+
+    @Override
+    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError databaseError) {
+
     }
 }

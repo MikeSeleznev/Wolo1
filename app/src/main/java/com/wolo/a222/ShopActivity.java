@@ -27,14 +27,6 @@ public class ShopActivity extends AppCompatActivity {
             }
         });
 
-        buttonShop = findViewById(R.id.buttonShop);
-        buttonShop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
     }
 
 }
