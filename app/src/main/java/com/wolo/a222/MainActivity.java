@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     Boolean openFragment;
     ImageButton closeMenuImageButton;
 
-
     final ArrayList<String> gamersArray = new ArrayList<>();
 
 
@@ -76,10 +75,13 @@ public class MainActivity extends AppCompatActivity {
                 Packs packs = gsonS.fromJson(jsonS, Packs.class);
 
                 if (!(packs == null)){
-                    cards = new Cards[2];
+                    cards = new Cards[5];
                     packs.getUsuallStringArray();
                     cards[0] = new Cards(Const.USUAL, packs.getUsuallStringArray());
                     cards[1] = new Cards(Const.EXTREME, packs.getExtremeStringArray());
+                    cards[2] = new Cards(Const.SPORT, packs.getSportStringArray());
+                    cards[3] = new Cards(Const.EROTIC, packs.getEroticStringArray());
+                    cards[4] = new Cards(Const.OHFUCK, packs.getOhfuckStringArray());
                 } else {
                     cards = new Cards[2];
                     cards[0] = new Cards(Const.USUAL, getResources().getStringArray(R.array.usuall));
@@ -172,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 
 
 

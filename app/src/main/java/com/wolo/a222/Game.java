@@ -22,6 +22,9 @@ public class Game {
     private boolean repeatPlayer;
     Players player1;
     Players player2;
+    Boolean paidSport = false;
+    Boolean paidErotic = false;
+    Boolean paidOhfuck = false;
 
 
 
@@ -299,5 +302,15 @@ public class Game {
     public String getShortNameFromString(String s){
         char[] name1 = s.toCharArray();
         return Character.toString(name1[0]);
+    }
+
+    public void setPaidSport(){
+        paidSport = true;
+    }
+    public void setPaidErotic(){
+        paidErotic = true;
+    }
+    public void setPaidOhfuck(){
+        paidOhfuck = true;
     }
 }

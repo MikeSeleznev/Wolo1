@@ -10,7 +10,6 @@ import com.wolo.a222.Firebase.InitFB;
 
 public class IntroActivity extends AppCompatActivity {
 
-    InitFB initFB;
     TextView loadingText;
 
     @Override

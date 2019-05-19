@@ -7,6 +7,9 @@ public class Packs {
 
     private List<String> usuall = null;
     private List<String> extreme = null;
+    private List<String> sport = null;
+    private List<String> erotic = null;
+    private List<String> ohfuck = null;
 
     public List<String> getExtreme() {
         return extreme;
@@ -25,6 +28,34 @@ public class Packs {
 
     }
 
+    public List<String> getSport() {
+        return sport;
+    }
+
+    public void setSport(List<String> sport) {
+        this.sport = sport;
+
+    }
+
+    public List<String> getErotic() {
+        return erotic;
+    }
+
+    public void setErotic(List<String> erotic) {
+        this.erotic = erotic;
+
+    }
+
+    public List<String> getOhfuck() {
+        return ohfuck;
+    }
+
+    public void setOhfuck(List<String> ohfuck) {
+        this.ohfuck = ohfuck;
+
+    }
+
+
     public String[] getUsuallStringArray() {
         int n = 0;
         String[] str = new String[usuall.size() - 1];
@@ -40,6 +71,42 @@ public class Packs {
         int n = 0;
         String[] str = new String[extreme.size() - 1];
         for (String s: extreme) {
+            if (!(s==null)){
+                str[n] = s.toString();
+                n+=1;}
+        }
+        return str;
+    }
+
+    public String[] getSportStringArray() {
+
+        int n = 0;
+        String[] str = new String[sport.size() - 1];
+        for (String s: sport) {
+            if (!(s==null)){
+                str[n] = s.toString();
+                n+=1;}
+        }
+        return str;
+    }
+
+    public String[] getEroticStringArray() {
+
+        int n = 0;
+        String[] str = new String[sport.size() - 1];
+        for (String s: sport) {
+            if (!(s==null)){
+                str[n] = s.toString();
+                n+=1;}
+        }
+        return str;
+    }
+
+    public String[] getOhfuckStringArray() {
+
+        int n = 0;
+        String[] str = new String[sport.size() - 1];
+        for (String s: sport) {
             if (!(s==null)){
                 str[n] = s.toString();
                 n+=1;}

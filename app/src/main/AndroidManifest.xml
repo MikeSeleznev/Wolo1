@@ -3,6 +3,7 @@
     package="com.wolo.a222">
 
     <uses-permission android:name="com.android.vending.BILLING" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,26 +11,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.wolo.a222.MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.wolo.a222.ShopActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".Market.MarketActivity"></activity>
         <activity
-            android:name="com.wolo.a222.InfoActivity"
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ShopActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".InfoActivity"
             android:label="@string/title_activity_info"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.wolo.a222.TaskActivity"
+            android:name=".TaskActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wolo.a222.SelectActivity"
+            android:name=".SelectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wolo.a222.GamezoneActivity"
+            android:name=".GamezoneActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wolo.a222.IntroActivity"
+            android:name=".IntroActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

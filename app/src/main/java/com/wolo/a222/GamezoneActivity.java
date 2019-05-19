@@ -56,9 +56,8 @@ public class GamezoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mDetector = new GestureDetector(this, new MyGestureListener());
         openFragment = false;
+
         Gson gson = new Gson();
-
-
         String json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "");
         game = gson.fromJson(json, Game.class);
 
