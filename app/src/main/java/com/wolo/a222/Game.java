@@ -113,7 +113,7 @@ public class Game {
 
     public String whoStartGame() {
         StringBuilder str = new StringBuilder();
-        str.append("Игру начинает ");
+        str.append("Игру начинает игрок ");
         str.append(getFirstPlayer().getFullName());
         setPlayer1(getFirstPlayer());
         return str.toString();
@@ -135,7 +135,7 @@ public class Game {
         StringBuilder str = new StringBuilder();
         str.append("Игрок ");
         str.append(getFirstPlayer().getFullName());
-        str.append(" крутит бытылку еще раз ");
+        str.append(" крутит бутылку еще раз ");
         return str.toString();
     }
 
@@ -302,6 +302,18 @@ public class Game {
     public String getShortNameFromString(String s){
         char[] name1 = s.toCharArray();
         return Character.toString(name1[0]);
+    }
+
+    public Boolean getPaidSport() {
+        return paidSport;
+    }
+
+    public Boolean getPaidErotic() {
+        return paidErotic;
+    }
+
+    public Boolean getPaidOhfuck() {
+        return paidOhfuck;
     }
 
     public void setPaidSport(){

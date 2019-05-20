@@ -1,6 +1,7 @@
 package com.wolo.a222;
 
 import android.content.Intent;
+import android.media.Image;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckedTextView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -26,6 +28,18 @@ public class SelectActivity extends AppCompatActivity {
     ImageButton topMenu;
     Boolean openFragment;
     CheckedTextView kolodanumcards2;
+    CheckedTextView kolodanumcards3; //sport
+    CheckedTextView kolodanumcards5; //erotic
+    CheckedTextView kolodanumcards6;//ohfuck
+
+    ImageButton sport;
+    ImageButton ohfuck;
+    ImageButton erotic;
+    ImageView closedSport;
+    ImageView closedErotic;
+    ImageView closedOhFuck;
+    Game game;
+    Intent taskIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,19 +49,23 @@ public class SelectActivity extends AppCompatActivity {
         closeMenuImageButton = (ImageButton) findViewById(R.id.closeMenuImageButtonSelectActivity);
         closeMenuImageButton.setVisibility(View.INVISIBLE);
 
-        Gson gson = new Gson();
-        String json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "");
-        Game game = gson.fromJson(json, Game.class);
+        sport = findViewById(R.id.SPORT);
+        closedSport = findViewById(R.id.closedSport);
+
+        erotic = findViewById(R.id.EROTIC);
+        closedErotic = findViewById(R.id.closedErotic);
+
+        ohfuck = findViewById(R.id.OHFUCK);
+        closedOhFuck = findViewById(R.id.closedOhFuck);
 
         kolodanumcards = (CheckedTextView) findViewById(R.id.kolodanumcards);
-        kolodanumcards.setText(game.cards[0].leftCardsInt());
-
         kolodanumcards2 = (CheckedTextView) findViewById(R.id.kolodanumcards2);
-        kolodanumcards2.setText(game.cards[1].leftCardsInt());
-
+        kolodanumcards3 = (CheckedTextView) findViewById(R.id.kolodanumcards3);
+        kolodanumcards5 = (CheckedTextView) findViewById(R.id.kolodanumcards5);
+        kolodanumcards6 = (CheckedTextView) findViewById(R.id.kolodanumcards6);
 
         user = (TextView)findViewById(R.id.selectedUser);
-        user.setText(game.getChoosedPlayer().getFullName());
+
 
         usual = (ImageButton) findViewById(R.id.usual);
         usual.setOnClickListener(new View.OnClickListener() {
@@ -120,4 +138,71 @@ public class SelectActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Gson gson = new Gson();
+        String json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "");
+        game = gson.fromJson(json, Game.class);
+
+        kolodanumcards.setText(game.cards[0].leftCardsInt());
+        kolodanumcards2.setText(game.cards[1].leftCardsInt());
+        kolodanumcards3.setText(game.cards[2].leftCardsInt());
+        kolodanumcards5.setText(game.cards[3].leftCardsInt());
+        kolodanumcards6.setText(game.cards[4].leftCardsInt());
+
+        user.setText(game.getChoosedPlayer().getFullName());
+
+
+
+        if (game.paidSport){
+            sport.setImageResource(R.drawable.sport);
+            closedSport.setVisibility(View.INVISIBLE);
+        }
+
+        sport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (game.paidSport){
+                    taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
+                }else taskIntent = new Intent(SelectActivity.this, ShopActivity.class);
+
+                taskIntent.putExtra("pack", Const.SPORT);
+                startActivity(taskIntent);
+            }
+        });
+
+        if (game.paidErotic){
+            erotic.setImageResource(R.drawable.erotic);
+            closedErotic.setVisibility(View.INVISIBLE);
+        }
+
+        erotic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (game.paidErotic){
+                    taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
+                }else taskIntent = new Intent(SelectActivity.this, ShopActivity.class);
+                taskIntent.putExtra("pack", Const.EROTIC);
+                startActivity(taskIntent);
+            }
+        });
+
+        if (game.paidOhfuck){
+            ohfuck.setImageResource(R.drawable.ohfuck);
+            closedOhFuck.setVisibility(View.INVISIBLE);
+        }
+
+        ohfuck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (game.paidOhfuck) {
+                    taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
+                }else taskIntent = new Intent(SelectActivity.this, ShopActivity.class);
+
+                taskIntent.putExtra("pack", Const.OHFUCK);
+                startActivity(taskIntent);
+            }
+        });
+    }
 }

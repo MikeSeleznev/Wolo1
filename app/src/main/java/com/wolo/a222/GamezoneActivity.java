@@ -214,6 +214,12 @@ public class GamezoneActivity extends AppCompatActivity {
         });
 
 
+        String jsonT = gson.toJson(game);
+        sPref = PreferenceManager.getDefaultSharedPreferences(GamezoneActivity.this);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString("game", jsonT);
+        ed.commit();
+
 
     }
 
@@ -424,6 +430,7 @@ public class GamezoneActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
     }
 
     @Override
@@ -516,5 +523,16 @@ public class GamezoneActivity extends AppCompatActivity {
         bottle.startAnimation(rotation);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+       Gson gson = new Gson();
+        String json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "");
+        game = gson.fromJson(json, Game.class);
+
+        numberOfPlayers = game.numberOfPlayers();
+
+
+    }
 }
 

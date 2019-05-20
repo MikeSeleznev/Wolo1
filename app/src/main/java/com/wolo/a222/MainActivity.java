@@ -43,8 +43,13 @@ public class MainActivity extends AppCompatActivity {
 
     final ArrayList<String> gamersArray = new ArrayList<>();
 
-
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Gson gson = new Gson();
+        String json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "");
+        game = gson.fromJson(json, Game.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +67,11 @@ public class MainActivity extends AppCompatActivity {
         closeMenuImageButton = (ImageButton) findViewById(R.id.closeMenuImageButton);
         closeMenuImageButton.setVisibility(View.INVISIBLE);
 
-        game = new Game();
+        //Gson gson = new Gson();
+        //String json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "");
+        //game = gson.fromJson(json, Game.class);
+
+
 
 
 

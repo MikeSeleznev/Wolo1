@@ -17,6 +17,7 @@ import com.wolo.a222.R
 import com.wolo.a222.Staff.SaveLoadDataJson
 import android.os.Handler
 import android.widget.TextView
+import com.wolo.a222.Market.Billing
 
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
@@ -36,7 +37,7 @@ class InitFB(context: Context) : ValueEventListener {
         initFirebase(context)
     }
 
-    public fun initFirebase(context: Context) {
+    fun initFirebase(context: Context) {
         FirebaseApp.initializeApp(context)
         mFirebaseDatabase = FirebaseDatabase.getInstance()
         mDatabaseReference = mFirebaseDatabase!!.reference
@@ -52,6 +53,7 @@ class InitFB(context: Context) : ValueEventListener {
                                     pack = dataSnapshot.getValue(Packs::class.java)!!
                                     emitter.onNext(pack)
                                     if (pack != null) {
+                                        Billing().queryPurchases(context)
                                         emitter.onComplete()
                                     }
                                 }

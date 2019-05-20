@@ -5,6 +5,7 @@ import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.preference.PreferenceManager
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
@@ -14,6 +15,7 @@ import android.widget.TextView
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.SkuDetails
 import com.android.billingclient.api.SkuDetailsParams
+import com.google.gson.Gson
 import com.wolo.a222.Market.Billing
 import com.wolo.a222.Market.ButtonOnClick
 import io.reactivex.Observer
@@ -39,6 +41,7 @@ class ShopActivity : AppCompatActivity() {
 
         closeMenuImageButton = findViewById<View>(R.id.closeMenuImageButtonShopActivity) as ImageButton
         closeMenuImageButton.setOnClickListener { finish() }
+
         imageButtonSport = findViewById(R.id.SPORT)
         imageButtonSport.setOnClickListener(ButtonOnClick(imageButtonSport, this, observableBilling, this@ShopActivity, Const.SPORT))
 
@@ -83,4 +86,21 @@ class ShopActivity : AppCompatActivity() {
 
     }
 
+    @Override
+    override fun onStart() {
+        super.onStart()
+        val gson = Gson()
+        val json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "")
+        var  game = gson.fromJson(json, Game::class.java)
+
+        if (game.getPaidErotic() == true){
+            imageButtonEROTIC.setImageResource(R.drawable.eroticclose)
+        }
+        if (game.getPaidOhfuck() == true){
+            imageButtonOHFUCK.setImageResource(R.drawable.ohfuckclose)
+        }
+        if (game.getPaidSport() == true){
+            imageButtonSport.setImageResource(R.drawable.sportclose)
+        }
+    }
 }
