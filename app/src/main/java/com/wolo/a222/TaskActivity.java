@@ -11,9 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+
+import java.util.Random;
 
 public class TaskActivity extends AppCompatActivity {
     TextView theme;
@@ -26,6 +29,7 @@ public class TaskActivity extends AppCompatActivity {
     ImageButton closeMenuImageButton;
     ImageButton topMenu;
     Boolean openFragment;
+    ImageView imageWolo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,7 @@ public class TaskActivity extends AppCompatActivity {
         topMenu = (ImageButton) findViewById(R.id.topmenuTaskActivity);
         closeMenuImageButton = (ImageButton) findViewById(R.id.closeMenuImageButtonTaskActivity);
         closeMenuImageButton.setVisibility(View.INVISIBLE);
+        imageWolo = findViewById(R.id.imageWolo);
 
         Intent intent = getIntent();
         pack = intent.getStringExtra("pack");
@@ -121,4 +126,39 @@ public class TaskActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        randomWolo();
+
+    }
+
+    private void randomWolo() {
+        Random number = new Random();
+        int r1 = number.nextInt(9);
+        if (r1 == 1){
+            imageWolo.setImageResource(R.drawable.w1);
+        } else if(r1 == 2){
+            imageWolo.setImageResource(R.drawable.w2);
+        } else if(r1 == 3){
+            imageWolo.setImageResource(R.drawable.w3);}
+        else if(r1 == 4){
+            imageWolo.setImageResource(R.drawable.w4);}
+        else if(r1 == 5){
+            imageWolo.setImageResource(R.drawable.w5);}
+        else if(r1 == 6){
+            imageWolo.setImageResource(R.drawable.w6);}
+        else if(r1 == 7){
+            imageWolo.setImageResource(R.drawable.w7);}
+        else if(r1 == 8){
+            imageWolo.setImageResource(R.drawable.w8);}
+        else if(r1 == 9){
+            imageWolo.setImageResource(R.drawable.w9);}
+        else if (r1 == 0){
+            randomWolo();
+        };
+    }
+
+
 }

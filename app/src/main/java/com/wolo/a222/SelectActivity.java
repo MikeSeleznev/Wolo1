@@ -154,10 +154,19 @@ public class SelectActivity extends AppCompatActivity {
         user.setText(game.getChoosedPlayer().getFullName());
 
 
-
         if (game.paidSport){
             sport.setImageResource(R.drawable.sport);
             closedSport.setVisibility(View.INVISIBLE);
+        }
+
+        if (game.paidErotic){
+            erotic.setImageResource(R.drawable.erotic);
+            closedErotic.setVisibility(View.INVISIBLE);
+        }
+
+        if (game.paidOhfuck){
+            ohfuck.setImageResource(R.drawable.ohfuck);
+            closedOhFuck.setVisibility(View.INVISIBLE);
         }
 
         sport.setOnClickListener(new View.OnClickListener() {
@@ -172,11 +181,6 @@ public class SelectActivity extends AppCompatActivity {
             }
         });
 
-        if (game.paidErotic){
-            erotic.setImageResource(R.drawable.erotic);
-            closedErotic.setVisibility(View.INVISIBLE);
-        }
-
         erotic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,11 +191,6 @@ public class SelectActivity extends AppCompatActivity {
                 startActivity(taskIntent);
             }
         });
-
-        if (game.paidOhfuck){
-            ohfuck.setImageResource(R.drawable.ohfuck);
-            closedOhFuck.setVisibility(View.INVISIBLE);
-        }
 
         ohfuck.setOnClickListener(new View.OnClickListener() {
             @Override

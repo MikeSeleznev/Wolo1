@@ -17,8 +17,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectedUser"
-        tools:ignore="MissingConstraints"
-        />
+        tools:ignore="MissingConstraints" />
 
     <FrameLayout
         android:id="@+id/frameLayout3"
@@ -83,20 +82,21 @@
 
     <TextView
         android:id="@+id/quest"
-        android:layout_width="294dp"
-        android:layout_height="239dp"
+        android:layout_width="321dp"
+        android:layout_height="173dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-medium"
+        android:gravity="center"
         android:text="Хи-хи-хи) Вам не повезло! Вам необходимо лизнуть ухо  участника «User» ! "
         android:textAlignment="center"
         android:textSize="18sp"
-        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/doneButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/leftCards" />
+        app:layout_constraintTop_toBottomOf="@+id/leftCards"
+        app:layout_constraintVertical_bias="0.874" />
 
     <Button
         android:id="@+id/doneButton"
@@ -163,6 +163,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageWolo"
+        android:layout_width="237dp"
+        android:layout_height="235dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/divider8"
+        app:layout_constraintVertical_bias="0.302"
+        app:srcCompat="@drawable/w1" />
 
 
 </android.support.constraint.ConstraintLayout>

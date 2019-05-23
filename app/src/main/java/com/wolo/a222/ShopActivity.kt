@@ -32,6 +32,7 @@ class ShopActivity : AppCompatActivity() {
     internal lateinit var loadingText2: TextView
     private lateinit var imageButtonOHFUCK: ImageButton
     private lateinit var imageButtonEROTIC: ImageButton
+    private lateinit var imageButtonAlldeck: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,9 @@ class ShopActivity : AppCompatActivity() {
 
         imageButtonEROTIC = findViewById(R.id.EROTIC)
         imageButtonEROTIC.setOnClickListener(ButtonOnClick(imageButtonEROTIC, this, observableBilling, this@ShopActivity, Const.EROTIC))
+
+        imageButtonAlldeck = findViewById(R.id.alldeck)
+        imageButtonAlldeck.setOnClickListener(ButtonOnClick(imageButtonAlldeck, this, observableBilling, this@ShopActivity, Const.ALLDECK))
 
         frameLayoutLoading = findViewById(R.id.frameLayoutLoading)
         loadingText2 = findViewById(R.id.loadingText2)
@@ -101,6 +105,9 @@ class ShopActivity : AppCompatActivity() {
         }
         if (game.getPaidSport() == true){
             imageButtonSport.setImageResource(R.drawable.sportclose)
+        }
+        if (game.getPaidAlldecks() == true){
+            imageButtonAlldeck.setImageResource(R.drawable.alldecksclose)
         }
     }
 }

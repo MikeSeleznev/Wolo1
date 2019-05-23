@@ -22,6 +22,7 @@ class Billing(): PurchasesUpdatedListener {
     private lateinit var sportSku: SkuDetails
     private lateinit var eroticSku: SkuDetails
     private lateinit var ohFuckSku: SkuDetails
+    private lateinit var alldecksSKU: SkuDetails
     private lateinit var mcontext: Context
     var sku: SkuDetails? = null
     private lateinit var byingPack: String
@@ -48,7 +49,7 @@ class Billing(): PurchasesUpdatedListener {
                     emitter.onNext("Ok")
                     emitter.onComplete()
 
-                    val skuList = listOf("000003", "000004", "000005", "000006")
+                    val skuList = listOf("000003", "000007", "000005", "000006")
                     params = SkuDetailsParams
                             .newBuilder()
                             .setSkusList(skuList)
@@ -66,7 +67,10 @@ class Billing(): PurchasesUpdatedListener {
                                 eroticSku = skuDetails
                             } else if (Const.ohfuckSKU == sku) {
                                 ohFuckSku = skuDetails
+                            } else if (Const.alldecksSKU == sku) {
+                                alldecksSKU = skuDetails
                             }
+
                         }
                     }
                 }
@@ -101,6 +105,8 @@ class Billing(): PurchasesUpdatedListener {
                     game.setPaidErotic()
                 } else if (byingPack == Const.OHFUCK) {
                     game.setPaidOhfuck()
+                } else if (byingPack == Const.ALLDECK) {
+                    game.setPaidAlldecks()
                 }
 
             }
@@ -123,7 +129,8 @@ class Billing(): PurchasesUpdatedListener {
             sku = eroticSku
         } else if (pack == Const.OHFUCK) {
             sku = ohFuckSku
-        }
+        } else if (pack == Const.ALLDECK) {
+            sku = alldecksSKU }
 
         if (sku != null) {
             val flowParams = BillingFlowParams.newBuilder()

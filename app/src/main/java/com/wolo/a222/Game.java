@@ -25,6 +25,7 @@ public class Game {
     Boolean paidSport = false;
     Boolean paidErotic = false;
     Boolean paidOhfuck = false;
+    Boolean paidAlldecks = false;
 
 
 
@@ -315,6 +316,10 @@ public class Game {
     public Boolean getPaidOhfuck() {
         return paidOhfuck;
     }
+    public Boolean getPaidAlldecks() {
+        return paidAlldecks;
+    }
+
 
     public void setPaidSport(){
         paidSport = true;
@@ -324,5 +329,8 @@ public class Game {
     }
     public void setPaidOhfuck(){
         paidOhfuck = true;
+    }
+    public void setPaidAlldecks(){
+        paidAlldecks = true;
     }
 }
