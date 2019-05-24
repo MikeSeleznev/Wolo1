@@ -1,6 +1,6 @@
 package com.wolo.a222;
 
-import com.wolo.a222.Firebase.Packs;
+import com.wolo.a222.Model.Firebase.Packs;
 
 import java.util.Arrays;
 import java.util.List;

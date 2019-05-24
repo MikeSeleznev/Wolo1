@@ -1,7 +1,6 @@
 package com.wolo.a222;
 
 import android.content.Intent;
-import android.media.Image;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-
+import com.wolo.a222.View.Activity.ShopActivity;
+import com.wolo.a222.View.Activity.TaskActivity;
+import com.wolo.a222.View.Activity.TopMenuActivity;
 
 
 public class SelectActivity extends AppCompatActivity {
@@ -72,7 +73,7 @@ public class SelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
-                taskIntent.putExtra("pack", Const.USUAL);
+                taskIntent.putExtra("pack", Const.INSTANCE.getUSUAL());
                 startActivity(taskIntent);
                 finish();
             }
@@ -83,7 +84,7 @@ public class SelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
-                taskIntent.putExtra("pack", Const.EXTREME);
+                taskIntent.putExtra("pack", Const.INSTANCE.getEXTREME());
                 startActivity(taskIntent);
                 finish();
             }
@@ -176,7 +177,7 @@ public class SelectActivity extends AppCompatActivity {
                     taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
                 }else taskIntent = new Intent(SelectActivity.this, ShopActivity.class);
 
-                taskIntent.putExtra("pack", Const.SPORT);
+                taskIntent.putExtra("pack", Const.INSTANCE.getSPORT());
                 startActivity(taskIntent);
             }
         });
@@ -187,7 +188,7 @@ public class SelectActivity extends AppCompatActivity {
                 if (game.paidErotic){
                     taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
                 }else taskIntent = new Intent(SelectActivity.this, ShopActivity.class);
-                taskIntent.putExtra("pack", Const.EROTIC);
+                taskIntent.putExtra("pack", Const.INSTANCE.getEROTIC());
                 startActivity(taskIntent);
             }
         });
@@ -199,7 +200,7 @@ public class SelectActivity extends AppCompatActivity {
                     taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
                 }else taskIntent = new Intent(SelectActivity.this, ShopActivity.class);
 
-                taskIntent.putExtra("pack", Const.OHFUCK);
+                taskIntent.putExtra("pack", Const.INSTANCE.getOHFUCK());
                 startActivity(taskIntent);
             }
         });

@@ -1,9 +1,9 @@
-package com.wolo.a222.Firebase;
+package com.wolo.a222.Model.Firebase;
 
 
 public class Pack {
 
-    private Packs packs;
+    public Packs packs;
 
     public Packs getPacks() {
         return packs;

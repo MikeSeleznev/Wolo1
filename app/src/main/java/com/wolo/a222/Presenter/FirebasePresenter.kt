@@ -1,46 +1,72 @@
-package com.wolo.a222.Firebase
+package com.wolo.a222.Presenter
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.os.Handler
+import android.preference.PreferenceManager
 import android.util.Log
-
+import android.widget.TextView
 import com.google.firebase.FirebaseApp
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
+import com.google.gson.Gson
 import com.wolo.a222.Const
-import com.wolo.a222.IntroActivity
-import com.wolo.a222.MainActivity
+import com.wolo.a222.Model.Firebase.Packs
+import com.wolo.a222.Game
+import com.wolo.a222.Market.Billing
 import com.wolo.a222.R
 import com.wolo.a222.Staff.SaveLoadDataJson
-import android.os.Handler
-import android.widget.TextView
-import com.wolo.a222.Market.Billing
-
+import com.wolo.a222.View.Activity.IntroActivity
+import com.wolo.a222.View.Activity.MainActivity
 import io.reactivex.Observable
-import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
-class InitFB(context: Context) : ValueEventListener {
+open class FirebasePresenter: ValueEventListener {
 
+    var view: IntroActivity? = null
+    var game: Game? = null
+    private lateinit var sPref: SharedPreferences
     private lateinit var mFirebaseDatabase: FirebaseDatabase
     private lateinit var mDatabaseReference: DatabaseReference
     internal lateinit var myObserver: Observer<Packs>
     internal lateinit var pack: Packs
 
-    init {
-
-        initFirebase(context)
+    fun bindView(view: IntroActivity){
+        this.view = view
     }
 
-    fun initFirebase(context: Context) {
+    fun unbindView(view: IntroActivity){
+        if (this.view == view){
+            this.view = null
+        }
+    }
+
+    fun startGame(){
+        if(game == null){
+            game = Game()
+        }
+    }
+
+    fun saveData(){
+        val gson = Gson()
+        val json = gson.toJson(game)
+        sPref = PreferenceManager.getDefaultSharedPreferences(view)
+        val ed = sPref.edit()
+        ed.putString(Const.GAME, json)
+        ed.commit()
+    }
+
+    fun loadData(){
+
+    }
+
+    fun init(context: Context){
         FirebaseApp.initializeApp(context)
         mFirebaseDatabase = FirebaseDatabase.getInstance()
         mDatabaseReference = mFirebaseDatabase!!.reference
+
 
         mDatabaseReference!!.child("packs").addValueEventListener(this)
 
@@ -90,17 +116,16 @@ class InitFB(context: Context) : ValueEventListener {
                     context.finish()
                     //overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     //contextfinish();
-                }, 500)
+                }, 1000)
             }
         }
         myObservable.subscribe(myObserver)
     }
 
-    override fun onDataChange(dataSnapshot: DataSnapshot) {
-
+    override fun onCancelled(p0: DatabaseError) {
+        //TODO("not implemented")
     }
-
-    override fun onCancelled(databaseError: DatabaseError) {
-
+    override fun onDataChange(p0: DataSnapshot) {
+        //TODO("not implemented")
     }
 }

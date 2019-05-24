@@ -4,14 +4,10 @@ package com.wolo.a222.Market
  import android.content.Context
  import android.content.SharedPreferences
  import android.preference.PreferenceManager
- import com.android.billingclient.*
  import com.android.billingclient.api.*
  import com.google.gson.Gson
  import com.wolo.a222.Const
  import com.wolo.a222.Game
- import com.wolo.a222.ShopActivity
- import io.reactivex.Flowable
- import io.reactivex.FlowableOnSubscribe
  import io.reactivex.Observable
  import io.reactivex.ObservableOnSubscribe
 
@@ -29,6 +25,18 @@ class Billing(): PurchasesUpdatedListener {
     private lateinit var game: Game
     private lateinit var sPref: SharedPreferences
 
+    data class Deck(val skuType: String, val name: String, val price: String, val imageName: String)
+
+    data class BillingState(val messageType: Int = MessageTypes.UNKNOWN_SERVER_MESSAGE, val skuList: List<Deck> = emptyList())
+
+    object MessageTypes {
+        // server side
+        const val DATA_UPDATED = 1
+        const val UNKNOWN_SERVER_MESSAGE = 0
+        const val LOGOUT = 7
+        const val CONNECT = -500
+        const val DISCONNECT = -501
+    }
 
     fun createBilling(context: Context): Observable<String> {
 
@@ -42,23 +50,34 @@ class Billing(): PurchasesUpdatedListener {
 
             billingClient.startConnection(object : BillingClientStateListener {
                 override fun onBillingServiceDisconnected() {
-
+                    //emitter.onNext(BillingState(MessageTypes.DISCONNECT))
+                    emitter.onNext("Ok")
                 }
 
                 override fun onBillingSetupFinished(billingResult: BillingResult?) {
+                    //emitter.onNext(BillingState())
                     emitter.onNext("Ok")
                     emitter.onComplete()
 
-                    val skuList = listOf("000003", "000007", "000005", "000006")
+//                    val skuList = listOf("000003", "000007", "000005", "000006")
                     params = SkuDetailsParams
                             .newBuilder()
-                            .setSkusList(skuList)
+                            .setSkusList(listOf("000003", "000007", "000005", "000006"))
                             .setType(BillingClient.SkuType.INAPP)
                             .build()
 
 
                     billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
-                        for (skuDetails in skuDetailsList) {
+
+                       // val skuList: List<Deck> = skuDetailsList.map {
+                        //    Deck(it.sku, "", it.price, "")
+                        //}
+
+
+                       // var skuList = mutableListOf<Deck>()
+                       for (skuDetails in skuDetailsList) {
+                            //skuList.add(Deck())
+
                             val sku = skuDetails.sku
                             val price = skuDetails.price
                             if (Const.sportSKU == sku) {
@@ -72,6 +91,7 @@ class Billing(): PurchasesUpdatedListener {
                             }
 
                         }
+                        //emitter.onNext(BillingState(MessageTypes.DATA_UPDATED, skuList))
                     }
                 }
             })

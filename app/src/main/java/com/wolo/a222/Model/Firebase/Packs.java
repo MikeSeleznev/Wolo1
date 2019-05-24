@@ -1,15 +1,14 @@
-package com.wolo.a222.Firebase;
+package com.wolo.a222.Model.Firebase;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Packs {
+ public class Packs {
 
-    private List<String> usuall = null;
-    private List<String> extreme = null;
-    private List<String> sport = null;
-    private List<String> erotic = null;
-    private List<String> ohfuck = null;
+    public List<String> usuall = null;
+    public List<String> extreme = null;
+    public List<String> sport = null;
+    public List<String> erotic = null;
+    public List<String> ohfuck = null;
 
     public List<String> getExtreme() {
         return extreme;

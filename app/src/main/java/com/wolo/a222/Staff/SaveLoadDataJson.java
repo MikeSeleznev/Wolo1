@@ -5,9 +5,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
-import com.wolo.a222.Firebase.Packs;
-import com.wolo.a222.Game;
-import com.wolo.a222.MainActivity;
 
 public class SaveLoadDataJson <T> {
 

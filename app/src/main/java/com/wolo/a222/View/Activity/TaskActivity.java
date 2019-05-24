@@ -1,4 +1,4 @@
-package com.wolo.a222;
+package com.wolo.a222.View.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.wolo.a222.Game;
+import com.wolo.a222.R;
 
 import java.util.Random;
 

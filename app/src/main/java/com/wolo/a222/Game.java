@@ -9,7 +9,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 public class Game {
-    Players[] players;
+    public Players[] players;
     Cards[] cards;
     private Players selectedPlayer;
     private Boolean startGame;

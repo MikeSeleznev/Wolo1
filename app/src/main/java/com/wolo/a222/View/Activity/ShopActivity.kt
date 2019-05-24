@@ -1,27 +1,23 @@
-package com.wolo.a222
+package com.wolo.a222.View.Activity
 
 
-import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.preference.PreferenceManager
 import android.view.View
-import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
 
-import com.android.billingclient.api.BillingClient
-import com.android.billingclient.api.SkuDetails
-import com.android.billingclient.api.SkuDetailsParams
 import com.google.gson.Gson
+import com.wolo.a222.Const
+import com.wolo.a222.Game
 import com.wolo.a222.Market.Billing
 import com.wolo.a222.Market.ButtonOnClick
+import com.wolo.a222.R
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
-
-import java.util.ArrayList
 
 
 class ShopActivity : AppCompatActivity() {

@@ -11,29 +11,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Market.MarketActivity"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".View.Activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ShopActivity"
+            android:name=".View.Activity.ShopActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".InfoActivity"
+            android:name=".View.Activity.InfoActivity"
             android:label="@string/title_activity_info"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".TaskActivity"
+            android:name=".View.Activity.TaskActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SelectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".GamezoneActivity"
+            android:name=".View.Activity.GamezoneActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".IntroActivity"
+            android:name=".View.Activity.IntroActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

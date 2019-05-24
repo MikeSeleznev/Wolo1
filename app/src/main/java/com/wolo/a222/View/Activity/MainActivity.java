@@ -1,4 +1,4 @@
-package com.wolo.a222;
+package com.wolo.a222.View.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +20,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.wolo.a222.Firebase.Packs;
+import com.wolo.a222.Cards;
+import com.wolo.a222.Const;
+import com.wolo.a222.Model.Firebase.Packs;
+import com.wolo.a222.Game;
+import com.wolo.a222.Players;
+import com.wolo.a222.R;
 
 
 import java.util.ArrayList;
@@ -80,21 +85,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Gson gsonS = new Gson();
-                String jsonS = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).getString(Const.PACKS, "");
+                String jsonS = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).getString(Const.INSTANCE.getPACKS(), "");
                 Packs packs = gsonS.fromJson(jsonS, Packs.class);
 
                 if (!(packs == null)){
                     cards = new Cards[5];
                     packs.getUsuallStringArray();
-                    cards[0] = new Cards(Const.USUAL, packs.getUsuallStringArray());
-                    cards[1] = new Cards(Const.EXTREME, packs.getExtremeStringArray());
-                    cards[2] = new Cards(Const.SPORT, packs.getSportStringArray());
-                    cards[3] = new Cards(Const.EROTIC, packs.getEroticStringArray());
-                    cards[4] = new Cards(Const.OHFUCK, packs.getOhfuckStringArray());
+                    cards[0] = new Cards(Const.INSTANCE.getUSUAL(), packs.getUsuallStringArray());
+                    cards[1] = new Cards(Const.INSTANCE.getEXTREME(), packs.getExtremeStringArray());
+                    cards[2] = new Cards(Const.INSTANCE.getSPORT(), packs.getSportStringArray());
+                    cards[3] = new Cards(Const.INSTANCE.getEROTIC(), packs.getEroticStringArray());
+                    cards[4] = new Cards(Const.INSTANCE.getOHFUCK(), packs.getOhfuckStringArray());
                 } else {
                     cards = new Cards[2];
-                    cards[0] = new Cards(Const.USUAL, getResources().getStringArray(R.array.usuall));
-                    cards[1] = new Cards(Const.EXTREME, getResources().getStringArray(R.array.extreme));}
+                    cards[0] = new Cards(Const.INSTANCE.getUSUAL(), getResources().getStringArray(R.array.usuall));
+                    cards[1] = new Cards(Const.INSTANCE.getEXTREME(), getResources().getStringArray(R.array.extreme));}
 
                 players = new Players[gamersArray.size()];
                 for (int i = 0; i < gamersArray.size(); i++) {
@@ -113,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 ed.putString("game", json);
                 ed.commit();
 
-                Intent intent = new Intent(MainActivity.this,GamezoneActivity.class);
+                Intent intent = new Intent(MainActivity.this, GamezoneActivity.class);
                 startActivity(intent);
             }
         });
