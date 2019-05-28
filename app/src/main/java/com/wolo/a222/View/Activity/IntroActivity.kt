@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import com.wolo.a222.Presenter.FirebasePresenter
 import com.wolo.a222.R
+import com.wolo.a222.Repositorie.App
 
 class IntroActivity : AppCompatActivity() {
 
@@ -24,12 +25,13 @@ class IntroActivity : AppCompatActivity() {
         super.onStart()
         presenter.bindView(this)
         presenter.startGame()
+        var db = App.getDataBase(this)
 
     }
 
     override fun onStop() {
         super.onStop()
-        presenter.saveData()
+        //presenter.saveData()
         presenter.unbindView(this)
     }
 }

@@ -96,10 +96,11 @@ public class Game {
         for (Cards c : cards) {
             if (c.getName().equals(pack) == true) {
                 text = c.getRandomQuestion();
+                c.setLeftCards();
             }
         }
-        String txt = text.replaceAll("1", player1.getFullName());
-        String txt2 = txt.replaceAll("2", player2.getFullName());
+        String txt = text.replaceAll("!1", player1.getFullName());
+        String txt2 = txt.replaceAll("!2", player2.getFullName());
         return txt2;
     }
 

@@ -12,6 +12,7 @@ import android.widget.CheckedTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.wolo.a222.View.Activity.ShopActivity;
@@ -72,10 +73,15 @@ public class SelectActivity extends AppCompatActivity {
         usual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
-                taskIntent.putExtra("pack", Const.INSTANCE.getUSUAL());
-                startActivity(taskIntent);
-                finish();
+                if (game.cards[0].getLeftCards() == 0){
+                    Toast toast = Toast.makeText(getApplicationContext(), "В колоде закончились карты", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    Intent taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
+                    taskIntent.putExtra("pack", Const.USUAL);
+                    startActivity(taskIntent);
+                    finish();
+                }
             }
         });
 
@@ -83,11 +89,15 @@ public class SelectActivity extends AppCompatActivity {
         extreme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (game.cards[1].getLeftCards() == 0){
+                    Toast toast = Toast.makeText(getApplicationContext(), "В колоде закончились карты", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
                 Intent taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
-                taskIntent.putExtra("pack", Const.INSTANCE.getEXTREME());
+                taskIntent.putExtra("pack", Const.EXTREME);
                 startActivity(taskIntent);
                 finish();
-            }
+            }}
         });
 
         topMenu.setOnClickListener(new View.OnClickListener() {
@@ -173,36 +183,58 @@ public class SelectActivity extends AppCompatActivity {
         sport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (game.cards[2].getLeftCards() == 0){
+                    Toast toast = Toast.makeText(getApplicationContext(), "В колоде закончились карты", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+
+
                 if (game.paidSport){
                     taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
                 }else taskIntent = new Intent(SelectActivity.this, ShopActivity.class);
 
-                taskIntent.putExtra("pack", Const.INSTANCE.getSPORT());
+                //taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
+
+                taskIntent.putExtra("pack", Const.SPORT);
                 startActivity(taskIntent);
-            }
+            }}
         });
 
         erotic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (game.cards[3].getLeftCards() == 0){
+                    Toast toast = Toast.makeText(getApplicationContext(), "В колоде закончились карты", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
                 if (game.paidErotic){
                     taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
                 }else taskIntent = new Intent(SelectActivity.this, ShopActivity.class);
-                taskIntent.putExtra("pack", Const.INSTANCE.getEROTIC());
+
+                //taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
+
+                taskIntent.putExtra("pack", Const.EROTIC);
                 startActivity(taskIntent);
-            }
+            }}
         });
 
         ohfuck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (game.cards[4].getLeftCards() == 0){
+                    Toast toast = Toast.makeText(getApplicationContext(), "В колоде закончились карты", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
                 if (game.paidOhfuck) {
                     taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
                 }else taskIntent = new Intent(SelectActivity.this, ShopActivity.class);
 
-                taskIntent.putExtra("pack", Const.INSTANCE.getOHFUCK());
+                //taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
+
+                taskIntent.putExtra("pack", Const.OHFUCK);
                 startActivity(taskIntent);
-            }
+            }}
         });
     }
 }

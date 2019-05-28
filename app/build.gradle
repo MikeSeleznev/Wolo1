@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     signingConfigs {
@@ -17,7 +18,7 @@ android {
         applicationId "com.wolo.a222"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 8
+        versionCode 13
         versionName "1.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -33,6 +34,12 @@ android {
         checkReleaseBuilds false
         abortOnError false
         ignoreWarnings true //false
+    }
+    allprojects {
+        repositories {
+            jcenter()
+            google()
+        }
     }
 }
 
@@ -54,6 +61,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.1.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.android.billingclient:billing:2.0.0'
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    kapt  'android.arch.persistence.room:compiler:1.1.1'
 
 }
 repositories {

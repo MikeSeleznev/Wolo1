@@ -92,8 +92,8 @@ import java.util.List;
     public String[] getEroticStringArray() {
 
         int n = 0;
-        String[] str = new String[sport.size() - 1];
-        for (String s: sport) {
+        String[] str = new String[erotic.size() - 1];
+        for (String s: erotic) {
             if (!(s==null)){
                 str[n] = s.toString();
                 n+=1;}
@@ -104,8 +104,8 @@ import java.util.List;
     public String[] getOhfuckStringArray() {
 
         int n = 0;
-        String[] str = new String[sport.size() - 1];
-        for (String s: sport) {
+        String[] str = new String[ohfuck.size() - 1];
+        for (String s: ohfuck) {
             if (!(s==null)){
                 str[n] = s.toString();
                 n+=1;}

@@ -54,7 +54,7 @@ public class TaskActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "");
         game = gson.fromJson(json, Game.class);
-        game.minusOneCard(pack);
+        //game.minusOneCard(pack);
 
 
         leftCards.setText(game.leftCardsText(pack));

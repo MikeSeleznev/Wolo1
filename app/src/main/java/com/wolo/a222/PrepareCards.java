@@ -9,7 +9,7 @@ public class PrepareCards extends Activity {
 
 
     public PrepareCards(Context context){
-        mCardsUsual = new Cards(Const.INSTANCE.getUSUAL(), context.getResources().getStringArray(R.array.usuall));
+        mCardsUsual = new Cards(Const.USUAL, context.getResources().getStringArray(R.array.usuall));
 
     }
 

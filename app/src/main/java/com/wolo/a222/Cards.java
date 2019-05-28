@@ -32,7 +32,10 @@ public class Cards {
     public String getRandomQuestion(){
         Random number = new Random();
         int r1 = number.nextInt(leftCards);
-        return cards.get(r1);
+        String s = cards.get(r1);
+        cards.remove(r1);
+        return s;
+
     }
 
     public void minusOneCard(){
@@ -64,5 +67,9 @@ public class Cards {
 
     public void setLeftCards(){
         leftCards -= 1;
+    }
+
+    public int getLeftCards(){
+        return leftCards;
     }
 }

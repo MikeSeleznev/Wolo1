@@ -34,25 +34,63 @@ class ShopActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.shop)
 
-        var observableBilling: Billing = Billing();
-
         closeMenuImageButton = findViewById<View>(R.id.closeMenuImageButtonShopActivity) as ImageButton
         closeMenuImageButton.setOnClickListener { finish() }
 
         imageButtonSport = findViewById(R.id.SPORT)
-        imageButtonSport.setOnClickListener(ButtonOnClick(imageButtonSport, this, observableBilling, this@ShopActivity, Const.SPORT))
+        //imageButtonSport.setOnClickListener(ButtonOnClick(imageButtonSport, this, observableBilling, this@ShopActivity, Const.SPORT))
 
         imageButtonOHFUCK = findViewById(R.id.OHFUCK)
-        imageButtonOHFUCK.setOnClickListener(ButtonOnClick(imageButtonOHFUCK, this, observableBilling, this@ShopActivity, Const.OHFUCK))
+        //imageButtonOHFUCK.setOnClickListener(ButtonOnClick(imageButtonOHFUCK, this, observableBilling, this@ShopActivity, Const.OHFUCK))
 
         imageButtonEROTIC = findViewById(R.id.EROTIC)
-        imageButtonEROTIC.setOnClickListener(ButtonOnClick(imageButtonEROTIC, this, observableBilling, this@ShopActivity, Const.EROTIC))
+        //imageButtonEROTIC.setOnClickListener(ButtonOnClick(imageButtonEROTIC, this, observableBilling, this@ShopActivity, Const.EROTIC))
 
         imageButtonAlldeck = findViewById(R.id.alldeck)
-        imageButtonAlldeck.setOnClickListener(ButtonOnClick(imageButtonAlldeck, this, observableBilling, this@ShopActivity, Const.ALLDECK))
+        //imageButtonAlldeck.setOnClickListener(ButtonOnClick(imageButtonAlldeck, this, observableBilling, this@ShopActivity, Const.ALLDECK))
 
         frameLayoutLoading = findViewById(R.id.frameLayoutLoading)
         loadingText2 = findViewById(R.id.loadingText2)
+
+
+
+    }
+
+    @Override
+    override fun onStart() {
+        super.onStart()
+        val gson = Gson()
+        val json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "")
+        var  game = gson.fromJson(json, Game::class.java)
+
+        var observableBilling: Billing = Billing();
+
+        if (game.getPaidErotic() == true){
+            imageButtonEROTIC.setImageResource(R.drawable.eroticclose)
+        } else {
+            imageButtonEROTIC.setOnClickListener(ButtonOnClick(imageButtonEROTIC, this, observableBilling, this@ShopActivity, Const.EROTIC))
+        }
+
+        if (game.getPaidOhfuck() == true){
+            imageButtonOHFUCK.setImageResource(R.drawable.ohfuckclose)
+        } else {
+            imageButtonOHFUCK.setOnClickListener(ButtonOnClick(imageButtonOHFUCK, this, observableBilling, this@ShopActivity, Const.OHFUCK))
+        }
+
+        if (game.getPaidSport() == true){
+            imageButtonSport.setImageResource(R.drawable.sportclose)
+        } else {
+            imageButtonSport.setOnClickListener(ButtonOnClick(imageButtonSport, this, observableBilling, this@ShopActivity, Const.SPORT))
+
+        }
+        if (game.getPaidAlldecks() == true){
+            imageButtonAlldeck.setImageResource(R.drawable.alldecksclose)
+            imageButtonSport.setImageResource(R.drawable.sportclose)
+            imageButtonOHFUCK.setImageResource(R.drawable.ohfuckclose)
+            imageButtonEROTIC.setImageResource(R.drawable.eroticclose)
+        } else {
+            imageButtonAlldeck.setOnClickListener(ButtonOnClick(imageButtonAlldeck, this, observableBilling, this@ShopActivity, Const.ALLDECK))
+        }
 
         //market
         val observerBilling: Observer<String> = object: Observer<String> {
@@ -84,26 +122,5 @@ class ShopActivity : AppCompatActivity() {
 
         observableBilling.createBilling(this).subscribe(observerBilling)
 
-    }
-
-    @Override
-    override fun onStart() {
-        super.onStart()
-        val gson = Gson()
-        val json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "")
-        var  game = gson.fromJson(json, Game::class.java)
-
-        if (game.getPaidErotic() == true){
-            imageButtonEROTIC.setImageResource(R.drawable.eroticclose)
-        }
-        if (game.getPaidOhfuck() == true){
-            imageButtonOHFUCK.setImageResource(R.drawable.ohfuckclose)
-        }
-        if (game.getPaidSport() == true){
-            imageButtonSport.setImageResource(R.drawable.sportclose)
-        }
-        if (game.getPaidAlldecks() == true){
-            imageButtonAlldeck.setImageResource(R.drawable.alldecksclose)
-        }
     }
 }

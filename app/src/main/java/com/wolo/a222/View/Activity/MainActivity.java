@@ -85,21 +85,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Gson gsonS = new Gson();
-                String jsonS = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).getString(Const.INSTANCE.getPACKS(), "");
+                String jsonS = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).getString(Const.PACKS, "");
                 Packs packs = gsonS.fromJson(jsonS, Packs.class);
 
                 if (!(packs == null)){
                     cards = new Cards[5];
                     packs.getUsuallStringArray();
-                    cards[0] = new Cards(Const.INSTANCE.getUSUAL(), packs.getUsuallStringArray());
-                    cards[1] = new Cards(Const.INSTANCE.getEXTREME(), packs.getExtremeStringArray());
-                    cards[2] = new Cards(Const.INSTANCE.getSPORT(), packs.getSportStringArray());
-                    cards[3] = new Cards(Const.INSTANCE.getEROTIC(), packs.getEroticStringArray());
-                    cards[4] = new Cards(Const.INSTANCE.getOHFUCK(), packs.getOhfuckStringArray());
+                    cards[0] = new Cards(Const.USUAL, packs.getUsuallStringArray());
+                    cards[1] = new Cards(Const.EXTREME, packs.getExtremeStringArray());
+                    cards[2] = new Cards(Const.SPORT, packs.getSportStringArray());
+                    cards[3] = new Cards(Const.EROTIC, packs.getEroticStringArray());
+                    cards[4] = new Cards(Const.OHFUCK, packs.getOhfuckStringArray());
                 } else {
                     cards = new Cards[2];
-                    cards[0] = new Cards(Const.INSTANCE.getUSUAL(), getResources().getStringArray(R.array.usuall));
-                    cards[1] = new Cards(Const.INSTANCE.getEXTREME(), getResources().getStringArray(R.array.extreme));}
+                    cards[0] = new Cards(Const.USUAL, getResources().getStringArray(R.array.usuall));
+                    cards[1] = new Cards(Const.EXTREME, getResources().getStringArray(R.array.extreme));}
 
                 players = new Players[gamersArray.size()];
                 for (int i = 0; i < gamersArray.size(); i++) {

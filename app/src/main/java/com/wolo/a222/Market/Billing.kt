@@ -57,7 +57,7 @@ class Billing(): PurchasesUpdatedListener {
                 override fun onBillingSetupFinished(billingResult: BillingResult?) {
                     //emitter.onNext(BillingState())
                     emitter.onNext("Ok")
-                    emitter.onComplete()
+                    //emitter.onComplete()
 
 //                    val skuList = listOf("000003", "000007", "000005", "000006")
                     params = SkuDetailsParams
@@ -91,8 +91,10 @@ class Billing(): PurchasesUpdatedListener {
                             }
 
                         }
+
                         //emitter.onNext(BillingState(MessageTypes.DATA_UPDATED, skuList))
                     }
+                    emitter.onComplete()
                 }
             })
 
@@ -190,6 +192,7 @@ class Billing(): PurchasesUpdatedListener {
                     } else if (purchase.sku == Const.ohfuckSKU) {
                         game.setPaidOhfuck()
                     } else if (purchase.sku == Const.alldecksSKU) {
+                        game.setPaidAlldecks()
                         game.setPaidSport()
                         game.setPaidErotic()
                         game.setPaidOhfuck()

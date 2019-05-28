@@ -14,6 +14,7 @@ import com.wolo.a222.Const
 import com.wolo.a222.Model.Firebase.Packs
 import com.wolo.a222.Game
 import com.wolo.a222.Market.Billing
+import com.wolo.a222.Model.Firebase.InitFB
 import com.wolo.a222.R
 import com.wolo.a222.Staff.SaveLoadDataJson
 import com.wolo.a222.View.Activity.IntroActivity
@@ -46,6 +47,7 @@ open class FirebasePresenter: ValueEventListener {
     fun startGame(){
         if(game == null){
             game = Game()
+            saveData()
         }
     }
 
@@ -90,6 +92,14 @@ open class FirebasePresenter: ValueEventListener {
                             })
                 }
         )
+
+        /*InitFB().FlowableInitFB(context)
+                .doOnNext {
+                    var a = "f"
+                }
+                .doOnComplete {
+                    var a = "f"
+                }.subscribe()*/
 
         myObserver = object : Observer<Packs> {
             override fun onSubscribe(d: Disposable) {
