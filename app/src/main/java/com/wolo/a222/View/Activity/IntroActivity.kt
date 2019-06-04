@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import com.wolo.a222.Presenter.FirebasePresenter
 import com.wolo.a222.R
-import com.wolo.a222.Repositorie.App
+
 
 class IntroActivity : AppCompatActivity() {
 
@@ -17,15 +17,16 @@ class IntroActivity : AppCompatActivity() {
         setContentView(R.layout.activity_intro)
         loadingText = findViewById(R.id.loadingText)
         presenter = FirebasePresenter()
-        presenter.init(this)
+
 
     }
 
     override fun onStart() {
         super.onStart()
-        presenter.bindView(this)
+        presenter.bindView(this, this)
+        presenter.init(this)
         presenter.startGame()
-        var db = App.getDataBase(this)
+        var connection = presenter.hasConnection()
 
     }
 

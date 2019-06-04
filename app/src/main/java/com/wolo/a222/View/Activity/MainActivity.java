@@ -90,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!(packs == null)){
                     cards = new Cards[5];
-                    packs.getUsuallStringArray();
+                    //packs.getUsuallStringArray();
+                    cards[0] = new Cards(Const.USUAL, packs.getUsuallStringArray());
                     cards[0] = new Cards(Const.USUAL, packs.getUsuallStringArray());
                     cards[1] = new Cards(Const.EXTREME, packs.getExtremeStringArray());
                     cards[2] = new Cards(Const.SPORT, packs.getSportStringArray());

@@ -24,7 +24,7 @@ class Billing(): PurchasesUpdatedListener {
     private lateinit var byingPack: String
     private lateinit var game: Game
     private lateinit var sPref: SharedPreferences
-
+    var skuReady: Boolean = false
     data class Deck(val skuType: String, val name: String, val price: String, val imageName: String)
 
     data class BillingState(val messageType: Int = MessageTypes.UNKNOWN_SERVER_MESSAGE, val skuList: List<Deck> = emptyList())
@@ -75,6 +75,8 @@ class Billing(): PurchasesUpdatedListener {
 
 
                        // var skuList = mutableListOf<Deck>()
+                        if (skuDetailsList!= null){
+                            skuReady = true
                        for (skuDetails in skuDetailsList) {
                             //skuList.add(Deck())
 
@@ -90,6 +92,7 @@ class Billing(): PurchasesUpdatedListener {
                                 alldecksSKU = skuDetails
                             }
 
+                        }
                         }
 
                         //emitter.onNext(BillingState(MessageTypes.DATA_UPDATED, skuList))
@@ -144,6 +147,7 @@ class Billing(): PurchasesUpdatedListener {
 
     fun startConnection(activity: Activity, pack: String) {
         //var sku: SkuDetails? = null
+        if (skuReady){
         byingPack = pack
         if (pack == Const.SPORT) {
             sku = sportSku
@@ -159,6 +163,7 @@ class Billing(): PurchasesUpdatedListener {
                     .setSkuDetails(sku)
                     .build()
             val responseCode = billingClient.launchBillingFlow(activity, flowParams)
+        }
         }
     }
 
@@ -181,28 +186,33 @@ class Billing(): PurchasesUpdatedListener {
 
             override fun onBillingSetupFinished(billingResult: BillingResult?) {
                 val purchasesResult: Purchase.PurchasesResult = billingClient.queryPurchases(BillingClient.SkuType.INAPP)
-                val gson = Gson()
-                val json = PreferenceManager.getDefaultSharedPreferences(context).getString("game", "")
-                game = gson.fromJson(json, Game::class.java)
-                for (purchase in purchasesResult.purchasesList) {
-                    if (purchase.sku == Const.sportSKU) {
-                        game.setPaidSport()
-                    } else if (purchase.sku == Const.eroticSKU) {
-                        game.setPaidErotic()
-                    } else if (purchase.sku == Const.ohfuckSKU) {
-                        game.setPaidOhfuck()
-                    } else if (purchase.sku == Const.alldecksSKU) {
-                        game.setPaidAlldecks()
-                        game.setPaidSport()
-                        game.setPaidErotic()
-                        game.setPaidOhfuck()
+                if (billingResult != null) {
+                    if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                        val gson = Gson()
+                        val json = PreferenceManager.getDefaultSharedPreferences(context).getString("game", "")
+                        game = gson.fromJson(json, Game::class.java)
+
+                        for (purchase in purchasesResult.purchasesList) {
+                            if (purchase.sku == Const.sportSKU) {
+                                game.setPaidSport()
+                            } else if (purchase.sku == Const.eroticSKU) {
+                                game.setPaidErotic()
+                            } else if (purchase.sku == Const.ohfuckSKU) {
+                                game.setPaidOhfuck()
+                            } else if (purchase.sku == Const.alldecksSKU) {
+                                game.setPaidAlldecks()
+                                game.setPaidSport()
+                                game.setPaidErotic()
+                                game.setPaidOhfuck()
+                            }
+                        }
+                        val jsonT = gson.toJson(game)
+                        sPref = PreferenceManager.getDefaultSharedPreferences(context)
+                        val ed = sPref.edit()
+                        ed.putString("game", jsonT)
+                        ed.commit()
                     }
                 }
-                val jsonT = gson.toJson(game)
-                sPref = PreferenceManager.getDefaultSharedPreferences(context)
-                val ed = sPref.edit()
-                ed.putString("game", jsonT)
-                ed.commit()
             }
         })
 

@@ -1,9 +1,15 @@
 package com.wolo.a222.Model.Firebase;
 
+import android.content.Context;
+
+import com.wolo.a222.R;
+
+import java.util.ArrayList;
 import java.util.List;
 
  public class Packs {
 
+    public Boolean loadedFromInternet = false;
     public List<String> usuall = null;
     public List<String> extreme = null;
     public List<String> sport = null;
@@ -56,60 +62,67 @@ import java.util.List;
 
 
     public String[] getUsuallStringArray() {
-        int n = 0;
-        String[] str = new String[usuall.size() - 1];
-        for (String s: usuall) {
-            if (!(s==null)){
-                str[n] = s.toString();
-            n+=1;}
-        }
-        return str;
-    };
+        deleteNull(usuall);
+        return fromStringToArray(usuall);
+    }
+
+     private void deleteNull(List<String> name) {
+         for (int i = 0; i < name.size(); i++){
+             if (name.get(i)==null){
+                 name.remove(i);
+             }}
+     }
+
+     private String[] fromStringToArray(List<String> name){
+         String[] str = new String[name.size()];
+         for (int i = 0; i < name.size(); i++){
+             if (name.get(i)!=null){
+                 str[i] = name.get(i);
+             }}
+         return str;
+     }
 
     public String[] getExtremeStringArray() {
-        int n = 0;
-        String[] str = new String[extreme.size() - 1];
-        for (String s: extreme) {
-            if (!(s==null)){
-                str[n] = s.toString();
-                n+=1;}
-        }
-        return str;
+        deleteNull(extreme);
+        return fromStringToArray(extreme);
     }
 
     public String[] getSportStringArray() {
-
-        int n = 0;
-        String[] str = new String[sport.size() - 1];
-        for (String s: sport) {
-            if (!(s==null)){
-                str[n] = s.toString();
-                n+=1;}
-        }
-        return str;
+        deleteNull(sport);
+        return fromStringToArray(sport);
     }
 
     public String[] getEroticStringArray() {
-
-        int n = 0;
-        String[] str = new String[erotic.size() - 1];
-        for (String s: erotic) {
-            if (!(s==null)){
-                str[n] = s.toString();
-                n+=1;}
-        }
-        return str;
+        deleteNull(erotic);
+        return fromStringToArray(erotic);
     }
 
     public String[] getOhfuckStringArray() {
+        deleteNull(ohfuck);
+        return fromStringToArray(ohfuck);
+    }
 
-        int n = 0;
-        String[] str = new String[ohfuck.size() - 1];
-        for (String s: ohfuck) {
-            if (!(s==null)){
-                str[n] = s.toString();
-                n+=1;}
+    public void setCards(Context context){
+        String[] usuall = context.getResources().getStringArray(R.array.usuall);
+        String[] extreme = context.getResources().getStringArray(R.array.extreme);
+        String[] erotic = context.getResources().getStringArray(R.array.erotic);
+        String[] ohfuck = context.getResources().getStringArray(R.array.ohfuck);
+        String[] sport = context.getResources().getStringArray(R.array.sport);
+
+        this.usuall = returnArrayList(usuall);
+        this.extreme = returnArrayList(extreme);
+        this.erotic = returnArrayList(erotic);
+        this.ohfuck = returnArrayList(ohfuck);
+        this.sport = returnArrayList(sport);
+
+
+    }
+
+    private ArrayList<String> returnArrayList(String[] name){
+        ArrayList<String> list = new ArrayList<>();
+        for (String s: name) {
+            list.add(s);
         }
-        return str;
+        return list;
     }
 }

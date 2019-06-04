@@ -90,7 +90,7 @@
         android:layout_height="17dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif"
-        android:text="Вы можете купить 3 колоды, по цене 2!"
+        android:text="Вы можете выгодно приобрести сразу все колоды!"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
