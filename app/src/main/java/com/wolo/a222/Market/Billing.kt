@@ -8,6 +8,9 @@ package com.wolo.a222.Market
  import com.google.gson.Gson
  import com.wolo.a222.Const
  import com.wolo.a222.Game
+ import com.wolo.a222.Model.SKU.SkuDeck
+ import io.reactivex.BackpressureStrategy
+ import io.reactivex.Flowable
  import io.reactivex.Observable
  import io.reactivex.ObservableOnSubscribe
 
@@ -25,9 +28,9 @@ class Billing(): PurchasesUpdatedListener {
     private lateinit var game: Game
     private lateinit var sPref: SharedPreferences
     var skuReady: Boolean = false
-    data class Deck(val skuType: String, val name: String, val price: String, val imageName: String)
 
-    data class BillingState(val messageType: Int = MessageTypes.UNKNOWN_SERVER_MESSAGE, val skuList: List<Deck> = emptyList())
+
+    //data class BillingState(val messageType: Int = MessageTypes.UNKNOWN_SERVER_MESSAGE, val skuList: List<Deck> = emptyList())
 
     object MessageTypes {
         // server side
@@ -38,11 +41,11 @@ class Billing(): PurchasesUpdatedListener {
         const val DISCONNECT = -501
     }
 
-    fun createBilling(context: Context): Observable<String> {
+    fun createBilling(context: Context): Flowable<List<SkuDeck>> = Flowable.create({ emitter ->
 
         mcontext = context
 
-        val billingObservable: Observable<String> = Observable.create(ObservableOnSubscribe { emitter ->
+
             billingClient = BillingClient.newBuilder(context)
                     .enablePendingPurchases()
                     .setListener(this)
@@ -51,12 +54,12 @@ class Billing(): PurchasesUpdatedListener {
             billingClient.startConnection(object : BillingClientStateListener {
                 override fun onBillingServiceDisconnected() {
                     //emitter.onNext(BillingState(MessageTypes.DISCONNECT))
-                    emitter.onNext("Ok")
+                    //emitter.onNext("Ok")
                 }
 
                 override fun onBillingSetupFinished(billingResult: BillingResult?) {
                     //emitter.onNext(BillingState())
-                    emitter.onNext("Ok")
+                    //emitter.onNext(SkuDeck)
                     //emitter.onComplete()
 
 //                    val skuList = listOf("000003", "000007", "000005", "000006")
@@ -69,14 +72,12 @@ class Billing(): PurchasesUpdatedListener {
 
                     billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
 
-                       // val skuList: List<Deck> = skuDetailsList.map {
-                        //    Deck(it.sku, "", it.price, "")
-                        //}
-
-
-                       // var skuList = mutableListOf<Deck>()
                         if (skuDetailsList!= null){
+                            val skuList: List<SkuDeck> = skuDetailsList.map {
+                                SkuDeck(it.sku, it.title, it.price, "")
+                            }
                             skuReady = true
+                            emitter.onNext(skuList)
                        for (skuDetails in skuDetailsList) {
                             //skuList.add(Deck())
 
@@ -93,18 +94,15 @@ class Billing(): PurchasesUpdatedListener {
                             }
 
                         }
+                            //emitter.doOnNext(SkuDeck)
                         }
 
+                        emitter.onComplete()
                         //emitter.onNext(BillingState(MessageTypes.DATA_UPDATED, skuList))
                     }
-                    emitter.onComplete()
                 }
             })
-
-        })
-
-        return billingObservable
-    }
+    }, BackpressureStrategy.LATEST)
 
     override fun onPurchasesUpdated(billingResult: BillingResult?, purchases: MutableList<Purchase>?) {
         if (billingResult?.responseCode == 0 && purchases != null) {
