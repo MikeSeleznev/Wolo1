@@ -63,7 +63,7 @@ open class FirebasePresenter {
 
         if (connection == true){
             InitFB().FlowableInitFB(context)
-                    .observeOn(Schedulers.io())
+                    //.observeOn(Schedulers.io())
                     .doOnNext {
                         SaveLoadDataJson<Packs>().saveData(it, context, Const.PACKS)
                     }
