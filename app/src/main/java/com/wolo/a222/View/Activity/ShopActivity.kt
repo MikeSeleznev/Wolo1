@@ -4,8 +4,10 @@ package com.wolo.a222.View.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.preference.PreferenceManager
 import android.view.View
+import android.widget.CheckedTextView
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
@@ -15,9 +17,14 @@ import com.wolo.a222.Const
 import com.wolo.a222.Game
 import com.wolo.a222.Market.Billing
 import com.wolo.a222.Market.ButtonOnClick
+import com.wolo.a222.Model.SKU.SkuDeck
 import com.wolo.a222.R
 import io.reactivex.Observer
+import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import java.util.*
+import kotlin.collections.Map as Map1
 
 
 class ShopActivity : AppCompatActivity() {
@@ -29,6 +36,10 @@ class ShopActivity : AppCompatActivity() {
     private lateinit var imageButtonOHFUCK: ImageButton
     private lateinit var imageButtonEROTIC: ImageButton
     private lateinit var imageButtonAlldeck: ImageButton
+    private lateinit var kolodanumcards3: CheckedTextView//Sport
+    private lateinit var kolodanumcards5: CheckedTextView//Erotic
+    private lateinit var kolodanumcards6: CheckedTextView//OhFuck
+    private lateinit var kolodanumcards7: CheckedTextView//AllDeck
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,35 +103,37 @@ class ShopActivity : AppCompatActivity() {
             imageButtonAlldeck.setOnClickListener(ButtonOnClick(imageButtonAlldeck, this, observableBilling, this@ShopActivity, Const.ALLDECK))
         }
 
+        kolodanumcards3 = findViewById(R.id.kolodanumcards3)
+        kolodanumcards5 = findViewById(R.id.kolodanumcards5)
+        kolodanumcards6 = findViewById(R.id.kolodanumcards6)
+        kolodanumcards7 = findViewById(R.id.kolodanumcards7)
         //market
-        val observerBilling: Observer<String> = object: Observer<String> {
-            override fun onComplete() {
 
-                var handler: Handler = Handler()
-                handler.postDelayed(Runnable {
-                    frameLayoutLoading.visibility = View.INVISIBLE
-                    loadingText2.visibility = View.INVISIBLE }, 2000)
+        observableBilling.createBilling(this)
+                .observeOn(Schedulers.io())
+                .doOnError {  }
+                .doOnNext {
+                    var listButtons = mutableMapOf<String, View>()
+                    listButtons.put("000003", kolodanumcards3)//Sport
+                    listButtons.put("000005", kolodanumcards5)//Erotic
+                    listButtons.put("000006", kolodanumcards6)//OhFuck
+                    listButtons.put("000007", kolodanumcards7)//AllDeck
 
-            }
-
-            override fun onSubscribe(d: Disposable) {
-                val a = "a"
-
-            }
-
-            override fun onNext(t: String) {
-                val a = "a"
-
-            }
-
-            override fun onError(e: Throwable) {
-
-            }
-
-        }
-
-
-        observableBilling.createBilling(this).subscribe(observerBilling)
+                    for (item in listButtons){
+                        for (s in it){
+                            if (s.skuType == item.key){
+                                (item.value as CheckedTextView).text = s.price
+                            }
+                        }
+                    }
+                }
+                .doOnComplete {
+                    var handler: Handler = Handler(Looper.getMainLooper())
+                    handler.postDelayed(Runnable {
+                        frameLayoutLoading.visibility = View.INVISIBLE
+                        loadingText2.visibility = View.INVISIBLE }, 2000)
+                }
+                .subscribe()
 
     }
 }
