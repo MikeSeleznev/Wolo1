@@ -110,7 +110,7 @@ class ShopActivity : AppCompatActivity() {
         //market
 
         observableBilling.createBilling(this)
-                .observeOn(Schedulers.io())
+                //.observeOn(Schedulers.io())
                 .doOnError {  }
                 .doOnNext {
                     var listButtons = mutableMapOf<String, View>()
