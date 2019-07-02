@@ -8,7 +8,7 @@ import com.wolo.a222.Market.Billing
 import io.reactivex.*
 import java.util.concurrent.Callable
 
-class InitFB: ValueEventListener   {
+class InitFB   {
 
     private lateinit var mFirebaseDatabase: FirebaseDatabase
     private lateinit var mDatabaseReference: DatabaseReference
@@ -17,7 +17,7 @@ class InitFB: ValueEventListener   {
     fun FlowableInitFB(context: Context): Flowable<Packs> = Flowable.create({emitter: FlowableEmitter<Packs> ->
 
 
-        FirebaseApp.initializeApp(context)
+        //FirebaseApp.initializeApp(context)
         mFirebaseDatabase = FirebaseDatabase.getInstance()
         mDatabaseReference = mFirebaseDatabase!!.reference
 
@@ -44,12 +44,5 @@ class InitFB: ValueEventListener   {
 
                 )
     }, BackpressureStrategy.LATEST)
-
-    override fun onCancelled(p0: DatabaseError) {
-        var a = "f"//TODO("not implemented")
-    }
-    override fun onDataChange(p0: DataSnapshot) {
-        var a = "f"//TODO("not implemented")
-    }
 
 }

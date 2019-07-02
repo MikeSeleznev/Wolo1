@@ -28,7 +28,6 @@ public class Game {
     Boolean paidAlldecks = false;
 
 
-
     public Game() {
       this.startGame = true;
     }
@@ -143,7 +142,6 @@ public class Game {
 
 
     public void calculateAngle() {
-
         float degreeForOnePlayer = 360 / numberOfPlayers;
         for (int i = 0; i < numberOfPlayers; i++) {
             if (i == 0) {
@@ -159,7 +157,6 @@ public class Game {
                 players[i].setToDegree(players[i - 1].getToDegreeForPlayer() + degreeForOnePlayer);
                 players[i].setCenterDegree(degreeForOnePlayer / 2 * (i + 1));
             }
-
         }
     }
 
@@ -186,7 +183,6 @@ public class Game {
                 if (degree > players[i].getFromDegreeForPlayer() && degree <= players[i].getToDegreeForPlayer()) {
                     choosedPlayer = players[i];
                     break;
-
                 }
             }
         }

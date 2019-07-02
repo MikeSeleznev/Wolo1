@@ -25,6 +25,7 @@ import com.wolo.a222.Const;
 import com.wolo.a222.Model.Firebase.Packs;
 import com.wolo.a222.Game;
 import com.wolo.a222.Players;
+import com.wolo.a222.Presenter.MainActivityPresenter;
 import com.wolo.a222.R;
 
 
@@ -45,12 +46,14 @@ public class MainActivity extends AppCompatActivity {
     ImageButton topMenu;
     Boolean openFragment;
     ImageButton closeMenuImageButton;
+    MainActivityPresenter presenter;
 
     final ArrayList<String> gamersArray = new ArrayList<>();
 
     @Override
     protected void onStart() {
         super.onStart();
+        presenter.bindView(this, this);
         Gson gson = new Gson();
         String json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "");
         game = gson.fromJson(json, Game.class);
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_main);
+        presenter = new MainActivityPresenter();
         openFragment = false;
 
         gamersListView = (ListView) findViewById(R.id.gamers);
@@ -84,40 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Gson gsonS = new Gson();
-                String jsonS = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).getString(Const.PACKS, "");
-                Packs packs = gsonS.fromJson(jsonS, Packs.class);
-
-                if (!(packs == null)){
-                    cards = new Cards[5];
-                    //packs.getUsuallStringArray();
-                    cards[0] = new Cards(Const.USUAL, packs.getUsuallStringArray());
-                    cards[0] = new Cards(Const.USUAL, packs.getUsuallStringArray());
-                    cards[1] = new Cards(Const.EXTREME, packs.getExtremeStringArray());
-                    cards[2] = new Cards(Const.SPORT, packs.getSportStringArray());
-                    cards[3] = new Cards(Const.EROTIC, packs.getEroticStringArray());
-                    cards[4] = new Cards(Const.OHFUCK, packs.getOhfuckStringArray());
-                } else {
-                    cards = new Cards[2];
-                    cards[0] = new Cards(Const.USUAL, getResources().getStringArray(R.array.usuall));
-                    cards[1] = new Cards(Const.EXTREME, getResources().getStringArray(R.array.extreme));}
-
-                players = new Players[gamersArray.size()];
-                for (int i = 0; i < gamersArray.size(); i++) {
-                    players[i] = new Players(gamersArray.get(i), i+1);
-                }
-
-                game.addCards(cards);
-                game.addPlayers(players);
-
-                game.setSelectedPlayer(players[0]);
-                game.calculateAngle();
-                Gson gson = new Gson();
-                String json = gson.toJson(game);
-                sPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-                SharedPreferences.Editor ed = sPref.edit();
-                ed.putString("game", json);
-                ed.commit();
+                presenter.setData(MainActivity.this, gamersArray);
 
                 Intent intent = new Intent(MainActivity.this, GamezoneActivity.class);
                 startActivity(intent);
@@ -130,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String inputString = newUser.getText().toString();
                 if (!inputString.equals("")) {
-                    game.addPlayer(inputString, gamersArray);
+                    gamersArray.add(inputString);
+                    //game.addPlayer(inputString, gamersArray);
                     myListAdapter.notifyDataSetChanged();
                     newUser.setText("");
                 }
@@ -257,5 +229,8 @@ public class MainActivity extends AppCompatActivity {
         ImageButton button;
     }
 
-
+    protected void onStop() {
+        super.onStop();
+        presenter.unbindView(this);
+    }
 }

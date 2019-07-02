@@ -59,7 +59,7 @@ open class FirebasePresenter {
 
     fun init(context: Context){
 
-        var connection = hasConnection()
+        var connection = hasConnection(context)
 
         if (connection == true){
             InitFB().FlowableInitFB(context)
@@ -95,7 +95,7 @@ open class FirebasePresenter {
         }
     }
 
-    fun hasConnection(): Boolean {
+    fun hasConnection(context: Context): Boolean {
         var cm: ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         var networkInfo = cm.activeNetworkInfo
 
