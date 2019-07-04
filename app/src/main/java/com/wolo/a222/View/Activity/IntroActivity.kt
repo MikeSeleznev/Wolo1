@@ -3,6 +3,8 @@ package com.wolo.a222.View.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+//import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.wolo.a222.Presenter.FirebasePresenter
 import com.wolo.a222.Presenter.IntroActivityPresenter
 import com.wolo.a222.R
@@ -20,6 +22,7 @@ class IntroActivity : AppCompatActivity() {
         setContentView(R.layout.activity_intro)
 
         init()
+        //val db = FirebaseFirestore.getInstance().document("packs")
         loadingText = findViewById(R.id.loadingText)
         presenter = FirebasePresenter()
 

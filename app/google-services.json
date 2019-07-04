@@ -8,9 +8,83 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:848816670042:android:86d47ac401509cd9",
+        "mobilesdk_app_id": "1:848816670042:android:5ad630506834158e",
+        "android_client_info": {
+          "package_name": "com.example.myrx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848816670042-m6dbrsi5eduikgq875n2g2itt1fvi9cj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myrx",
+            "certificate_hash": "dbea03edbf2503e47c63c415230463f13cab8177"
+          }
+        },
+        {
+          "client_id": "848816670042-g46r7q2nfvjb6k47hk4g7q70grn6fv51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFPDbn8IuX3F7fMo_OrEyziAdKt7IYp0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848816670042-g46r7q2nfvjb6k47hk4g7q70grn6fv51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848816670042:android:4dd6b51a141062a0",
         "android_client_info": {
           "package_name": "com.wolo.a222"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848816670042-bkkvikqc736hah0hvo2lfit4q7g5ofqi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wolo.a222",
+            "certificate_hash": "7b7d221ef4129b50a3ed1982f28877d8167478e2"
+          }
+        },
+        {
+          "client_id": "848816670042-g46r7q2nfvjb6k47hk4g7q70grn6fv51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFPDbn8IuX3F7fMo_OrEyziAdKt7IYp0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848816670042-g46r7q2nfvjb6k47hk4g7q70grn6fv51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848816670042:android:86d47ac401509cd9",
+        "android_client_info": {
+          "package_name": "com.wolo.wolo"
         }
       },
       "oauth_client": [
@@ -18,7 +92,7 @@
           "client_id": "848816670042-0dgnc76gsksace8h8r4v2rch40mm55fu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.wolo.a222",
+            "package_name": "com.wolo.wolo",
             "certificate_hash": "dbea03edbf2503e47c63c415230463f13cab8177"
           }
         },

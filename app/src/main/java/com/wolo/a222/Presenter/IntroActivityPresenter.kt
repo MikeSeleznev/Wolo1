@@ -33,10 +33,10 @@ class IntroActivityPresenter {
                 .map { it ->  it.getValue(Packs::class.java)!!}
                 .doOnNext {
                     view?.setLoadingText("Загрузка карт")
-                    var packsDB = PacksDB()
-                    packsDB.name = "cards"
-                    packsDB.packs = setOf<String>(it.erotic.toSet())
-                    App.getComponent().packsDatabase().packsDao().insert(packsDB)
+                    //var packsDB = PacksDB()
+                    //packsDB.name = "cards"
+                    //packsDB.packs = setOf<String>(it.erotic.toSet())
+                    //App.getComponent().packsDatabase().packsDao().insert(packsDB)
                      }
                 .subscribe()
 
