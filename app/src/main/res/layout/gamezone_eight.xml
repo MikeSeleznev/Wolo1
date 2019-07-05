@@ -23,9 +23,7 @@
 
     <Button
         android:id="@+id/user1"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonPlayer"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -43,9 +41,7 @@
 
     <Button
         android:id="@+id/user2"
-        style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonPlayer"
         android:background="@drawable/circle"
         android:ellipsize="start"
         android:maxWidth="@dimen/fab_margin"
@@ -66,9 +62,7 @@
 
     <Button
         android:id="@+id/user3"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonPlayer"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -86,9 +80,7 @@
 
     <Button
         android:id="@+id/user4"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonPlayer"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -106,9 +98,7 @@
 
     <Button
         android:id="@+id/user5"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonPlayer"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -126,9 +116,7 @@
 
     <Button
         android:id="@+id/user6"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonPlayer"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -146,9 +134,7 @@
 
     <Button
         android:id="@+id/user7"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonPlayer"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -166,9 +152,7 @@
 
     <Button
         android:id="@+id/user8"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/buttonPlayer"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -241,8 +225,8 @@
     <TextView
         android:id="@+id/startGamePlayer"
         style="@style/QueuePlayer"
-        android:layout_width="236dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"

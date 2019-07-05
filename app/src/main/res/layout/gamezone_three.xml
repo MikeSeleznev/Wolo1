@@ -24,9 +24,7 @@
 
     <Button
         android:id="@+id/user1"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        style="@style/buttonPlayer"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -37,16 +35,14 @@
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.305" />
 
     <Button
         android:id="@+id/user2"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        style="@style/buttonPlayer"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -63,9 +59,7 @@
 
     <Button
         android:id="@+id/user3"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        style="@style/buttonPlayer"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
@@ -75,27 +69,28 @@
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="@+id/frameLayout2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.625" />
 
     <ImageView
         android:id="@+id/bottle"
-        android:layout_width="210dp"
-        android:layout_height="185dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:scaleType="centerInside"
         android:src="@drawable/bottle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/user2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/user3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.521" />
+        app:layout_constraintBottom_toBottomOf="@+id/user3"
+        app:layout_constraintEnd_toEndOf="@+id/fragment"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="@+id/fragment"
+        app:layout_constraintTop_toBottomOf="@+id/user1"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/closeMenuImageButton3"
@@ -136,8 +131,8 @@
     <TextView
         android:id="@+id/startGamePlayer"
         style="@style/QueuePlayer"
-        android:layout_width="236dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
