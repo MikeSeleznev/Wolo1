@@ -11,7 +11,8 @@ open class PacksDB {
     @PrimaryKey
     var name: String = ""
 
+    var id: String = ""
 
-    lateinit var packs: Set<String>
+    lateinit var card: ArrayList<String>
 
 }

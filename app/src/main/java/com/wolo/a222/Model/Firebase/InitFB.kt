@@ -10,7 +10,7 @@ import java.util.concurrent.Callable
 
 class InitFB   {
 
-    private lateinit var mFirebaseDatabase: FirebaseDatabase
+    /*private lateinit var mFirebaseDatabase: FirebaseDatabase
     private lateinit var mDatabaseReference: DatabaseReference
     internal lateinit var pack: Packs
 
@@ -43,6 +43,6 @@ class InitFB   {
                 }
 
                 )
-    }, BackpressureStrategy.LATEST)
+    }, BackpressureStrategy.LATEST)*/
 
 }

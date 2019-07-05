@@ -62,7 +62,7 @@ open class FirebasePresenter {
         var connection = hasConnection(context)
 
         if (connection == true){
-            InitFB().FlowableInitFB(context)
+           /* InitFB().FlowableInitFB(context)
                     //.observeOn(Schedulers.io())
                     .doOnNext {
                         SaveLoadDataJson<Packs>().saveData(it, context, Const.PACKS)
@@ -79,7 +79,7 @@ open class FirebasePresenter {
                         }, 1000)
 
                     }
-                    .subscribe()
+                    .subscribe()*/
         } else {
             var packs = Packs()
             packs.setCards(context)

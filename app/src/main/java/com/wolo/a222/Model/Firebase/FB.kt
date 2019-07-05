@@ -1,31 +1,28 @@
 package com.wolo.a222.Model.Firebase
 
-import com.google.firebase.FirebaseApp
-import com.google.firebase.FirebaseException
-import com.google.firebase.database.*
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
+import com.wolo.a222.Const
 import io.reactivex.*
 
-class FB() {
+class FB{
 
-    var mFirebaseDatabase = FirebaseDatabase.getInstance().reference.child("packs")
+    fun initFB():Flowable<DocumentSnapshot>{
 
-    fun flowableFB():Flowable<DataSnapshot> {
+        val db = FirebaseFirestore.getInstance()
+        val dbCollection = db.collection(Const.FBCollection)
 
-        return Flowable.create({emitter: FlowableEmitter<DataSnapshot> ->
-
-            mFirebaseDatabase.addValueEventListener(object : ValueEventListener{
-                override fun onCancelled(p0: DatabaseError) {
+        return Flowable.create({emitter: FlowableEmitter<DocumentSnapshot> ->
+            dbCollection.get().addOnSuccessListener {
+               var listOfPacks = it.documents
+                for (p in listOfPacks) {
+                    emitter.onNext(p)
                 }
+                emitter.onComplete()
 
-                override fun onDataChange(datasnapShot: DataSnapshot) {
-                    emitter.onNext(datasnapShot)
-                    emitter.onComplete()
-                }
-            })
-
-
+            }
         }, BackpressureStrategy.LATEST)
+
     }
-
-
 }

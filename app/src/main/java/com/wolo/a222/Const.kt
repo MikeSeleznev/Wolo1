@@ -15,4 +15,5 @@ object Const {
     const val ohfuckSKU = "000006"
     const val alldecksSKU = "000007"
     const val GAME = "game"
+    const val FBCollection = "packs"
 }

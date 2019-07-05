@@ -8,7 +8,7 @@ import java.util.stream.Collectors
 class PacksConvertor {
 
     @TypeConverter
-    fun fromPacks(packs: Set<String>): String{
+    fun fromPacks(packs: ArrayList<String>): String{
         //val gson = Gson()
         //val json = gson.toJson(packs)
         //return  json
@@ -16,8 +16,8 @@ class PacksConvertor {
     }
 
     @TypeConverter
-    fun toPacks(data: String):Set<String>{
-       return setOf(data)
+    fun toPacks(data: String):ArrayList<String>{
+       return arrayListOf(data)
 
     }
 }

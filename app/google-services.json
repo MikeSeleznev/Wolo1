@@ -52,6 +52,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "848816670042-561mdvgrdv8h6g2p61ghil3b92ff26f3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wolo.a222",
+            "certificate_hash": "dbea03edbf2503e47c63c415230463f13cab8177"
+          }
+        },
+        {
           "client_id": "848816670042-bkkvikqc736hah0hvo2lfit4q7g5ofqi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -24,8 +24,8 @@
     <Button
         android:id="@+id/user1"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -43,29 +43,32 @@
 
     <Button
         android:id="@+id/user2"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/circle"
+        android:ellipsize="start"
+        android:maxWidth="@dimen/fab_margin"
+        android:maxHeight="@dimen/fab_margin"
+        android:minWidth="@dimen/fab_margin"
         android:text="U"
         android:textColor="#17171c"
         android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/user5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.869"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.337" />
+        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintStart_toEndOf="@+id/user1"
+        app:layout_constraintTop_toBottomOf="@+id/startGamePlayer"
+        app:layout_constraintVertical_bias="0.337"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_min="wrap"
+        app:layout_constraintWidth_percent="10" />
 
     <Button
         android:id="@+id/user3"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -84,8 +87,8 @@
     <Button
         android:id="@+id/user4"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -104,8 +107,8 @@
     <Button
         android:id="@+id/user5"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -124,8 +127,8 @@
     <Button
         android:id="@+id/user6"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -144,8 +147,8 @@
     <Button
         android:id="@+id/user7"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -164,8 +167,8 @@
     <Button
         android:id="@+id/user8"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -183,20 +186,21 @@
 
     <ImageView
         android:id="@+id/bottle"
-        android:layout_width="210dp"
-        android:layout_height="185dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="40dp"
         android:rotation="18"
         android:scaleType="centerInside"
         android:src="@drawable/bottle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.525" />
-
+        app:layout_constraintBottom_toTopOf="@+id/user5"
+        app:layout_constraintEnd_toStartOf="@+id/user3"
+        app:layout_constraintStart_toEndOf="@+id/user7"
+        app:layout_constraintTop_toBottomOf="@+id/user1" />
 
 
     <ImageButton
@@ -219,8 +223,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/topmenu8"
@@ -260,7 +263,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/frameLayout2"
         app:layout_constraintStart_toStartOf="@+id/frameLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
 
     <FrameLayout
         android:id="@+id/fragment"
