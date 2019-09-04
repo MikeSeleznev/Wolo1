@@ -1,9 +1,9 @@
 package com.wolo.a222.View.Activity
 
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import com.wolo.a222.Presenter.FirebasePresenter
 import org.junit.Rule
 import org.junit.Test

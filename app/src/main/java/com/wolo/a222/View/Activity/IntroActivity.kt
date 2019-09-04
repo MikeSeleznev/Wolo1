@@ -1,6 +1,6 @@
 package com.wolo.a222.View.Activity
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import com.wolo.a222.Presenter.IntroActivityPresenter

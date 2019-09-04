@@ -1,9 +1,7 @@
 package com.wolo.a222.Storage.Packs
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
-import android.arch.persistence.room.TypeConverter
-import com.wolo.a222.Cards
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
 open class PacksDB {

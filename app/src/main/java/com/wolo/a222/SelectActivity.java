@@ -2,10 +2,10 @@ package com.wolo.a222;
 
 import android.content.Intent;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckedTextView;
@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.wolo.a222.View.Activity.ShopActivity;
 import com.wolo.a222.View.Activity.TaskActivity;
 import com.wolo.a222.View.Activity.TopMenuActivity;
+import com.wolo.a222.feature.common.model.Game;
 
 
 public class SelectActivity extends AppCompatActivity {
@@ -25,10 +26,10 @@ public class SelectActivity extends AppCompatActivity {
     TextView user;
     ImageButton usual;
     ImageButton extreme;
-    CheckedTextView kolodanumcards;
     ImageButton closeMenuImageButton;
     ImageButton topMenu;
     Boolean openFragment;
+    CheckedTextView numCardsUsuall;
     CheckedTextView kolodanumcards2;
     CheckedTextView kolodanumcards3; //sport
     CheckedTextView kolodanumcards5; //erotic
@@ -60,8 +61,8 @@ public class SelectActivity extends AppCompatActivity {
         ohfuck = findViewById(R.id.OHFUCK);
         closedOhFuck = findViewById(R.id.closedOhFuck);
 
-        kolodanumcards = (CheckedTextView) findViewById(R.id.kolodanumcards);
-        kolodanumcards2 = (CheckedTextView) findViewById(R.id.kolodanumcards2);
+        numCardsUsuall = (CheckedTextView) findViewById(R.id.numCardsUsuall);
+        kolodanumcards2 = (CheckedTextView) findViewById(R.id.numCardsExtreme);
         kolodanumcards3 = (CheckedTextView) findViewById(R.id.kolodanumcards3);
         kolodanumcards5 = (CheckedTextView) findViewById(R.id.kolodanumcards5);
         kolodanumcards6 = (CheckedTextView) findViewById(R.id.kolodanumcards6);
@@ -156,7 +157,7 @@ public class SelectActivity extends AppCompatActivity {
         String json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "");
         game = gson.fromJson(json, Game.class);
 
-        kolodanumcards.setText(game.cards[0].leftCardsInt());
+        numCardsUsuall.setText(game.cards[0].leftCardsInt());
         kolodanumcards2.setText(game.cards[1].leftCardsInt());
         kolodanumcards3.setText(game.cards[2].leftCardsInt());
         kolodanumcards5.setText(game.cards[3].leftCardsInt());

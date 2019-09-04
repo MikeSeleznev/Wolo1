@@ -1,7 +1,7 @@
 package com.wolo.a222.View.Activity
 
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,17 +14,10 @@ import android.widget.TextView
 
 import com.google.gson.Gson
 import com.wolo.a222.Const
-import com.wolo.a222.Game
+import com.wolo.a222.feature.common.model.Game
 import com.wolo.a222.Market.Billing
 import com.wolo.a222.Market.ButtonOnClick
-import com.wolo.a222.Model.SKU.SkuDeck
 import com.wolo.a222.R
-import io.reactivex.Observer
-import io.reactivex.Scheduler
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-import java.util.*
-import kotlin.collections.Map as Map1
 
 
 class ShopActivity : AppCompatActivity() {

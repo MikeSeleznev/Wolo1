@@ -1,6 +1,6 @@
 package com.wolo.a222.Storage.Packs
 
-import android.arch.persistence.room.TypeConverter
+import androidx.room.TypeConverter
 import com.google.gson.Gson
 import java.util.stream.Collectors
 

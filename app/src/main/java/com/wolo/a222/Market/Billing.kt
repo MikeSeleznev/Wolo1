@@ -7,12 +7,10 @@ package com.wolo.a222.Market
  import com.android.billingclient.api.*
  import com.google.gson.Gson
  import com.wolo.a222.Const
- import com.wolo.a222.Game
+ import com.wolo.a222.feature.common.model.Game
  import com.wolo.a222.Model.SKU.SkuDeck
  import io.reactivex.BackpressureStrategy
  import io.reactivex.Flowable
- import io.reactivex.Observable
- import io.reactivex.ObservableOnSubscribe
 
 class Billing(): PurchasesUpdatedListener {
 

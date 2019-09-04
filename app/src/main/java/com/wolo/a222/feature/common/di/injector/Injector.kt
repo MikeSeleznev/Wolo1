@@ -1,0 +1,41 @@
+package com.wolo.a222.feature.common.di.injector
+
+
+import com.wolo.a222.feature.common.di.component.AppComponent
+import com.wolo.a222.feature.gamezone.di.component.GameZoneFeatureComponent
+import com.wolo.a222.feature.gamezone.di.component.GameZoneScreenComponent
+import com.wolo.a222.feature.selecttask.di.component.SelectTaskFeatureComponent
+import com.wolo.a222.feature.selecttask.di.component.SelectTaskScreenComponent
+import ru.ireca.kitchen.feature.auth.di.component.AuthFeatureComponent
+import ru.ireca.kitchen.feature.auth.di.component.AuthScreenComponent
+import ru.ireca.kitchen.feature.auth.di.component.SplashScreenFeatureComponent
+import ru.ireca.kitchen.feature.auth.di.component.SplashScreenScreenComponent
+
+interface Injector {
+
+    fun getAppComponent(): AppComponent
+
+    fun getAuthScreen(): AuthScreenComponent
+    fun releaseAuthScreen()
+
+    fun getAuthFeature(): AuthFeatureComponent
+    fun releaseAuthFeature()
+
+    fun getSplashScreenFeature(): SplashScreenFeatureComponent
+    fun releaseSplashScreenFeature()
+
+    fun getSplashScreenScreen(): SplashScreenScreenComponent
+    fun releaseSplashScreenScreen()
+
+    fun getGameZoneFeature(): GameZoneFeatureComponent
+    fun releaseGameZoneFeature()
+
+    fun getGameZoneScreen(): GameZoneScreenComponent
+    fun releaseGameZoneScreen()
+
+    fun getSelectTaskFeature(): SelectTaskFeatureComponent
+    fun releaseSelectTaskFeature()
+
+    fun getSelectTaskScreen(): SelectTaskScreenComponent
+    fun releaseSelectTaskScreen()
+}

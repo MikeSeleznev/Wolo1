@@ -4,4 +4,15 @@
     <string name="title_activity_info">InfoActivity</string>
     <string name="loadingText_success">Карты загружены</string>
 
+    <string name="welcome_text">ДОБРО ПОЖАЛОВАТЬ В ИГРУ</string>
+    <string name="weOnlyLiveOnce_Text">«We Only Live Once»</string>
+    <string name="enter_names_text">Пожалуйста, впишите все имена участников.</string>
+    <string name="max_quantity_players_text">Максимальное количество участников: 8 человек</string>
+    <string name="startGame_button_text">НАЧАТЬ ИГРУ</string>
+    <string name="newUser_text">Имя участника</string>
+    <string name="addPlayer_text">+</string>
+
+    <string name="loading_start_text">Загрузка карт</string>
+    <string name="loading_finish_text">Загрузка карт</string>
+
 </resources>

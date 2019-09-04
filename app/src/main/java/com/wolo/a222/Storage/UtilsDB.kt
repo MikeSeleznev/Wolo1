@@ -2,18 +2,18 @@ package com.wolo.a222.Storage
 
 import android.util.Log
 import com.wolo.a222.Storage.Packs.PacksDB
-import com.wolo.a222.di.App
+import com.wolo.a222.WoloApp
 
 class UtilsDB {
 
     fun addPacksToDB(it: MutableMap<String, Any>?){
-        var packDB = getPackDB(it)
+       /* var packDB = getPackDB(it)
         try{
-        App.getComponent().packsDatabase().packsDao().insert(packDB)}
+        //WoloApp.getComponent().packsDatabase().packsDao().insert(packDB)}
         catch (e: Exception){
             Log.d("ERROR", e.toString())
         }
-
+*/
 
     }
 

@@ -17,7 +17,7 @@
         android:layout_marginTop="5dp"/>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/title_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#040404"
@@ -28,7 +28,7 @@
         />
 
     <ImageButton
-        android:id="@+id/DeleteUser"
+        android:id="@+id/delete_user"
         android:layout_width="22dp"
         android:layout_height="19dp"
         android:layout_alignParentTop="true"

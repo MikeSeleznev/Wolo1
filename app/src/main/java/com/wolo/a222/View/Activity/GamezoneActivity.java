@@ -9,11 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -21,12 +18,11 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.wolo.a222.Game;
+import com.wolo.a222.feature.common.model.Game;
 import com.wolo.a222.Players;
 import com.wolo.a222.R;
 import com.wolo.a222.SelectActivity;
@@ -46,8 +42,6 @@ public class GamezoneActivity extends AppCompatActivity {
     private int selectedUser = 0;
     private Game game;
     private SharedPreferences sPref;
-    private ImageButton closeMenuImageButton;
-    private ImageView topMenu;
     private Boolean openFragment;
     private TextView startGamePlayer;
     private String textQueue;
@@ -70,30 +64,22 @@ public class GamezoneActivity extends AppCompatActivity {
 
         if (numberOfPlayers == 2){
             setContentView(R.layout.gamezone_two);
-            topMenu = (ImageView) findViewById(R.id.topmenu2);
-            closeMenuImageButton = (ImageButton) findViewById(R.id.closeMenuImageButton2);
             user1 = findViewById(R.id.user1);
             user2 = findViewById(R.id.user2);
 
         } else if(numberOfPlayers == 3){
             setContentView(R.layout.gamezone_three);
-            topMenu = (ImageButton) findViewById(R.id.topmenu3);
-            closeMenuImageButton = (ImageButton) findViewById(R.id.closeMenuImageButton3);
             user1 = findViewById(R.id.user1);
             user2 = findViewById(R.id.user2);
             user3 = findViewById(R.id.user3);
         }else if(numberOfPlayers == 4){
             setContentView(R.layout.gamezone_four);
-            topMenu = (ImageButton) findViewById(R.id.topmenu4);
-            closeMenuImageButton = (ImageButton) findViewById(R.id.closeMenuImageButton4);
             user1 = findViewById(R.id.user1);
             user2 = findViewById(R.id.user2);
             user3 = findViewById(R.id.user3);
             user4 = findViewById(R.id.user4);}
         else if(numberOfPlayers == 5){
             setContentView(R.layout.gamezone_five);
-            topMenu = (ImageButton) findViewById(R.id.topmenu5);
-            closeMenuImageButton = (ImageButton) findViewById(R.id.closeMenuImageButton5);
             user1 = findViewById(R.id.user1);
             user2 = findViewById(R.id.user2);
             user3 = findViewById(R.id.user3);
@@ -101,8 +87,6 @@ public class GamezoneActivity extends AppCompatActivity {
             user5 = findViewById(R.id.user5);}
         else if(numberOfPlayers == 6){
             setContentView(R.layout.gamezone_six);
-            topMenu = (ImageButton) findViewById(R.id.topmenu6);
-            closeMenuImageButton = (ImageButton) findViewById(R.id.closeMenuImageButton6);
             user1 = findViewById(R.id.user1);
             user2 = findViewById(R.id.user2);
             user3 = findViewById(R.id.user3);
@@ -111,8 +95,6 @@ public class GamezoneActivity extends AppCompatActivity {
             user6 = findViewById(R.id.user6);}
         else if(numberOfPlayers == 7){
             setContentView(R.layout.gamezone_seven);
-            topMenu = (ImageButton) findViewById(R.id.topmenu7);
-            closeMenuImageButton = (ImageButton) findViewById(R.id.closeMenuImageButton7);
             user1 = findViewById(R.id.user1);
             user2 = findViewById(R.id.user2);
             user3 = findViewById(R.id.user3);
@@ -122,8 +104,6 @@ public class GamezoneActivity extends AppCompatActivity {
             user7 = findViewById(R.id.user7);}
         else{
             setContentView(R.layout.gamezone_eight);
-            topMenu = (ImageButton) findViewById(R.id.topmenu8);
-            closeMenuImageButton = (ImageButton) findViewById(R.id.closeMenuImageButton8);
             user1 = findViewById(R.id.user1);
             user2 = findViewById(R.id.user2);
             user3 = findViewById(R.id.user3);
@@ -149,7 +129,7 @@ public class GamezoneActivity extends AppCompatActivity {
         startGamePlayer.setText(textQueue);
         startGamePlayer.setVisibility(View.VISIBLE);
 
-        closeMenuImageButton.setVisibility(View.INVISIBLE);
+
 
         setVisibleGamers(game.players);
 
@@ -167,55 +147,6 @@ public class GamezoneActivity extends AppCompatActivity {
         ImageView fragmentToSpin = (ImageView) findViewById(R.id.fragmentToSpin);
         fragmentToSpin.setOnTouchListener(touchListener);
 
-
-
-        topMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(MainActivity.this,TopMenuActivity.class);
-                // startActivity(intent);
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                Fragment fragment = fragmentManager.findFragmentById(R.id.fragment);
-                if (openFragment == false){
-                    TopMenuActivity frag = new TopMenuActivity();
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    //ft.replace(R.id.fragment, frag);
-                    ft.add(R.id.fragment, frag);
-                    ft.addToBackStack(null);
-                    ft.commit();
-                    openFragment = true;
-                    topMenu.setVisibility(View.INVISIBLE);
-                    closeMenuImageButton.setVisibility(View.VISIBLE);
-                } else {
-                    FragmentManager manager = getSupportFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    manager.getBackStackEntryCount();
-                    transaction.remove(fragment);
-                    transaction.commit();
-                    openFragment = false;
-                    //topMenu.setPressed(false);
-                    //closeMenuImageButton.setVisibility(View.VISIBLE);
-                }
-
-            }
-        });
-        closeMenuImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (openFragment == true){
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    Fragment fragment = fragmentManager.findFragmentById(R.id.fragment);
-                    FragmentManager manager = getSupportFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    manager.getBackStackEntryCount();
-                    transaction.remove(fragment);
-                    transaction.commit();
-                    openFragment = false;
-                    topMenu.setVisibility(View.VISIBLE);
-                    closeMenuImageButton.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
 
 
         String jsonT = gson.toJson(game);

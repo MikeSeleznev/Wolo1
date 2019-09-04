@@ -6,8 +6,9 @@ import com.google.gson.Gson
 import com.wolo.a222.*
 import com.wolo.a222.Model.Firebase.Packs
 import com.wolo.a222.Staff.SaveLoadDataJson
-import com.wolo.a222.View.Activity.MainActivity
-import java.util.zip.CheckedInputStream
+import com.wolo.a222.feature.common.model.Cards
+import com.wolo.a222.feature.common.model.Game
+import com.wolo.a222.feature.common.view.MainActivity
 
 open class MainActivityPresenter(){
 
@@ -45,16 +46,6 @@ open class MainActivityPresenter(){
         val packs = gsonS.fromJson(jsonS, Packs::class.java)
 
         var cards = arrayOfNulls<Cards>(5)
-        if (packs != null) {
-            cards[0] = Cards(Const.USUAL, packs.usuallStringArray)
-            cards[1] = Cards(Const.EXTREME, packs.extremeStringArray)
-            cards[2] = Cards(Const.SPORT, packs.sportStringArray)
-            cards[3] = Cards(Const.EROTIC, packs.eroticStringArray)
-            cards[4] = Cards(Const.OHFUCK, packs.ohfuckStringArray)
-        } else {
-            cards[0] = Cards(Const.USUAL, context.resources.getStringArray(R.array.usuall))
-            cards[1] = Cards(Const.EXTREME, context.resources.getStringArray(R.array.extreme))
-        }
 
         game.addCards(cards)
 

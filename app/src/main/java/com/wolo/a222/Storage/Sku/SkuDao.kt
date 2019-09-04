@@ -1,6 +1,6 @@
 package com.wolo.a222.Storage.Sku
 
-import android.arch.persistence.room.*
+import androidx.room.*
 
 @Dao
 interface SkuDao {
