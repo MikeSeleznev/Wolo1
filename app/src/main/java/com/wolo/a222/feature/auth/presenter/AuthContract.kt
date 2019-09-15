@@ -14,10 +14,12 @@ interface AuthPresenter : Presenter<AuthView>{
 
     fun onClickStartPlay(gamers: List<String>)
 
+    fun addNewPlayer(name: String, gamersArray: MutableList<String>)
 }
 
 interface AuthView : View
 
 data class AuthState(
-        val loaded: Boolean
+        val gamersArray: MutableList<String> ,
+        val reverseGamersArray: MutableList<String>
 )

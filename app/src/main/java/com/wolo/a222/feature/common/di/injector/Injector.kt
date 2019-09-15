@@ -6,6 +6,8 @@ import com.wolo.a222.feature.gamezone.di.component.GameZoneFeatureComponent
 import com.wolo.a222.feature.gamezone.di.component.GameZoneScreenComponent
 import com.wolo.a222.feature.selecttask.di.component.SelectTaskFeatureComponent
 import com.wolo.a222.feature.selecttask.di.component.SelectTaskScreenComponent
+import com.wolo.a222.feature.task.di.component.TaskFeatureComponent
+import com.wolo.a222.feature.task.di.component.TaskScreenComponent
 import ru.ireca.kitchen.feature.auth.di.component.AuthFeatureComponent
 import ru.ireca.kitchen.feature.auth.di.component.AuthScreenComponent
 import ru.ireca.kitchen.feature.auth.di.component.SplashScreenFeatureComponent
@@ -38,4 +40,10 @@ interface Injector {
 
     fun getSelectTaskScreen(): SelectTaskScreenComponent
     fun releaseSelectTaskScreen()
+
+    fun getTaskFeature(): TaskFeatureComponent
+    fun releaseTaskFeature()
+
+    fun getTaskScreen(): TaskScreenComponent
+    fun releaseTaskScreen()
 }

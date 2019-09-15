@@ -11,34 +11,28 @@
         android:id="@+id/user1"
         style="@style/buttonPlayer"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/circle"
-        android:text="U"
-        android:textColor="#17171c"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/user2"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentToSpin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086" />
+        app:layout_constraintVertical_bias="0.217"
+        tools:text="1" />
 
     <Button
         android:id="@+id/user2"
         style="@style/buttonPlayer"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/circle"
-        android:text="U"
-        android:textColor="#17171c"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="@+id/fragmentToSpin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.696"
+        tools:text="2" />
 
     <ImageView
         android:id="@+id/bottle"
@@ -46,9 +40,8 @@
         android:layout_height="0dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
-
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:scaleType="centerInside"
         android:src="@drawable/bottle"
         app:layout_constraintBottom_toTopOf="@+id/user2"
@@ -68,8 +61,9 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/user1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragmentToSpin"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/fragmentToSpin"
@@ -78,8 +72,10 @@
         android:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

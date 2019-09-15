@@ -22,6 +22,7 @@ import com.wolo.a222.feature.gamezone.presenter.GameZonePresenter
 import com.wolo.a222.feature.gamezone.presenter.GameZoneState
 import com.wolo.a222.feature.gamezone.presenter.GameZoneView
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.fragment_select_task.*
 import javax.inject.Inject
 
 class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
@@ -52,7 +53,7 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
 
     init {
         numberOfPlayers = game.numberOfPlayers()
-        layoutResId = when (game.numberOfPlayers()) {
+        layoutResId = when (numberOfPlayers) {
             2 -> R.layout.gamezone_two
             3 -> R.layout.gamezone_three
             4 -> R.layout.gamezone_four
@@ -92,36 +93,64 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
 
     private fun init() {
 
-        fragmentToSpin = activity?.findViewById<ImageView>(R.id.fragmentToSpin)
-        startGamePlayer = activity?.findViewById<TextView>(R.id.startGamePlayer)
+        fragmentToSpin = activity?.findViewById(R.id.fragmentToSpin)
+        startGamePlayer = activity?.findViewById(R.id.startGamePlayer)
 
-        bottle = activity?.findViewById<ImageView>(R.id.bottle)
-        user1 = activity?.findViewById<Button>(R.id.user1)
-        user2 = activity?.findViewById<Button>(R.id.user2)
+        var text = ""
+        if (game.startGame){text = presenter.whoStartGame()}
+        else {text = game.whoContinueGame()}
+        startGamePlayer?.text = text
+
+        bottle = activity?.findViewById(R.id.bottle)
+        user1 = activity?.findViewById(R.id.user1)
+        user1?.text = game.players[0].shortName
+        user2 = activity?.findViewById(R.id.user2)
+        user2?.text = game.players[1].shortName
 
         when (numberOfPlayers) {
-            3 -> user3 = activity?.findViewById<Button>(R.id.user3)
+            3 -> {
+                user3 = activity?.findViewById(R.id.user3)
+                user3?.text = game.players[2].shortName
+            }
             4 -> {
-                user3 = activity?.findViewById<Button>(R.id.user3)
-                user4 = activity?.findViewById<Button>(R.id.user4)
+                user3 = activity?.findViewById(R.id.user3)
+                user4 = activity?.findViewById(R.id.user4)
+
+                user3?.text = game.players[2].shortName
+                user4?.text = game.players[3].shortName
             }
             5 -> {
-                user3 = activity?.findViewById<Button>(R.id.user3)
-                user4 = activity?.findViewById<Button>(R.id.user4)
-                user5 = activity?.findViewById<Button>(R.id.user5)
+                user3 = activity?.findViewById(R.id.user3)
+                user4 = activity?.findViewById(R.id.user4)
+                user5 = activity?.findViewById(R.id.user5)
+
+                user3?.text = game.players[2].shortName
+                user4?.text = game.players[3].shortName
+                user5?.text = game.players[4].shortName
             }
             6 -> {
-                user3 = activity?.findViewById<Button>(R.id.user3)
-                user4 = activity?.findViewById<Button>(R.id.user4)
-                user5 = activity?.findViewById<Button>(R.id.user5)
-                user6 = activity?.findViewById<Button>(R.id.user6)
+                user3 = activity?.findViewById(R.id.user3)
+                user4 = activity?.findViewById(R.id.user4)
+                user5 = activity?.findViewById(R.id.user5)
+                user6 = activity?.findViewById(R.id.user6)
+
+                user3?.text = game.players[2].shortName
+                user4?.text = game.players[3].shortName
+                user5?.text = game.players[4].shortName
+                user6?.text = game.players[5].shortName
             }
             7 -> {
-                user3 = activity?.findViewById<Button>(R.id.user3)
-                user4 = activity?.findViewById<Button>(R.id.user4)
-                user5 = activity?.findViewById<Button>(R.id.user5)
-                user6 = activity?.findViewById<Button>(R.id.user6)
-                user7 = activity?.findViewById<Button>(R.id.user7)
+                user3 = activity?.findViewById(R.id.user3)
+                user4 = activity?.findViewById(R.id.user4)
+                user5 = activity?.findViewById(R.id.user5)
+                user6 = activity?.findViewById(R.id.user6)
+                user7 = activity?.findViewById(R.id.user7)
+
+                user3?.text = game.players[2].shortName
+                user4?.text = game.players[3].shortName
+                user5?.text = game.players[4].shortName
+                user6?.text = game.players[5].shortName
+                user7?.text = game.players[6].shortName
             }
             else -> {
 
@@ -130,8 +159,9 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
     }
 
     fun startGame() {
-        //setBackgroundColor()
-        game.startOnePlay()
+        setBackgroundColor()
+        startGamePlayer?.text = ""
+        presenter.startOnePlay()
         val pointWidth = (bottle!!.width / 2).toFloat()
         val pointHeight = (bottle!!.height / 2).toFloat()
         val rotation = RotateAnimation(game.last_dir, game.new_dir, pointWidth, pointHeight)
@@ -143,7 +173,7 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
             }
 
             override fun onAnimationEnd(animation: Animation?) {
-                when (game.numberChoosedPlayer) {
+                when (presenter.numberChoosedPlayer()) {
                     1 -> paintGamer(user1, 1)
                     2 -> paintGamer(user2, 2)
                     3 -> paintGamer(user3, 3)
@@ -160,7 +190,7 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
                     val handler = Handler()
                     handler.postDelayed({
                        presenter.showDecks()
-                        //game.setSelectedPlayer(game.players[selectedUser-1]);
+                        //game.selectedPlayer = game.players[selectedUser-1];
                         //val intent = Intent(this@GamezoneActivity, SelectActivity::class.java)
                         //startActivity(intent)
                         //finish()
@@ -182,11 +212,9 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
 
     private fun paintGamer(user: Button?, selectUser: Int) {
         if (user != null) {
-            val image = resources.getDrawable(R.drawable.circleactive) as Drawable
-            user.background = image
-            user.setTextColor(Color.WHITE)
+            user.isEnabled = false
         }
-        //selectedUser = selectUser
+        var selectedUser = selectUser
     }
 
 
@@ -239,5 +267,59 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
         }
     }
 
+    private fun setBackgroundColor() {
 
+        when (numberOfPlayers) {
+            2 -> {
+                user1?.isEnabled = true
+                user2?.isEnabled = true
+            }
+            3 -> {
+                user1?.isEnabled = true
+                user2?.isEnabled = true
+                user3?.isEnabled = true
+            }
+            4 -> {
+                user1?.isEnabled = true
+                user2?.isEnabled = true
+                user3?.isEnabled = true
+                user4?.isEnabled = true
+            }
+            5 -> {
+                user1?.isEnabled = true
+                user2?.isEnabled = true
+                user3?.isEnabled = true
+                user4?.isEnabled = true
+                user5?.isEnabled = true
+            }
+            6 -> {
+                user1?.isEnabled = true
+                user2?.isEnabled = true
+                user3?.isEnabled = true
+                user4?.isEnabled = true
+                user5?.isEnabled = true
+                user6?.isEnabled = true
+            }
+            7 -> {
+                user1?.isEnabled = true
+                user2?.isEnabled = true
+                user3?.isEnabled = true
+                user4?.isEnabled = true
+                user5?.isEnabled = true
+                user6?.isEnabled = true
+                user7?.isEnabled = true
+            }
+            else -> {
+                user1?.isEnabled = true
+                user2?.isEnabled = true
+                user3?.isEnabled = true
+                user4?.isEnabled = true
+                user5?.isEnabled = true
+                user6?.isEnabled = true
+                user7?.isEnabled = true
+                user8?.isEnabled = true
+
+            }
+        }
+    }
 }

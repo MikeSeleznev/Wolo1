@@ -6,12 +6,14 @@ import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.transaction
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.wolo.a222.R
 import com.wolo.a222.feature.auth.view.AuthFragment
 import com.wolo.a222.feature.common.di.Scope.PerApplication
 import com.wolo.a222.feature.gamezone.view.GameZoneFragment
 import com.wolo.a222.feature.selecttask.view.SelectTaskFragment
 import com.wolo.a222.feature.splashscreen.view.SplashScreenFragment
+import com.wolo.a222.feature.task.view.TaskFragment
 import javax.inject.Inject
 
 
@@ -19,11 +21,12 @@ import javax.inject.Inject
 class NavigatorImpl
     @Inject constructor(): Navigator {
 
+    private var fragment: Fragment? = null
+
     private var activity: AppCompatActivity? = null
 
     private val fragmentManager
         get() = activity?.supportFragmentManager
-
 
 
     private val currentFragment
@@ -102,7 +105,16 @@ class NavigatorImpl
         replaceFragment(SelectTaskFragment.newInstance(), false)
     }
 
-    override fun showTask() {
+    override fun showSelectTask() {
         replaceFragment(SelectTaskFragment.newInstance(), false)
+    }
+
+    override fun showTask() {
+        replaceFragment(TaskFragment.newInstance(), false)
+    }
+
+    override fun doneTask(){
+        fragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        showGameZone()
     }
 }

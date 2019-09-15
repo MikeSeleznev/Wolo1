@@ -26,5 +26,9 @@ interface Navigator {
 
     fun showDecks()
 
+    fun showSelectTask()
+
     fun showTask()
+
+    fun doneTask()
 }

@@ -15,7 +15,7 @@ public class Game {
     public Players[] players;
     public Cards[] cards;
     private Players selectedPlayer;
-    private Boolean startGame;
+    public Boolean startGame;
     private float degree;
     private float last_dir = 0f;
     private float new_dir = 0f;
@@ -29,6 +29,7 @@ public class Game {
     public Boolean paidErotic = false;
     public Boolean paidOhfuck = false;
     public Boolean paidAlldecks = false;
+    private Cards ChoosedPack;
 
 
     public Game() {
@@ -108,7 +109,7 @@ public class Game {
 
 
     public Players getFirstPlayer() {
-        return this.choosedPlayer;
+        return this.players[0];
     }
 
     public Boolean isStartGame() {
@@ -130,8 +131,8 @@ public class Game {
     public String whoContinueGame() {
         StringBuilder str = new StringBuilder();
         str.append("Теперь очередь игрока ");
-        str.append(getFirstPlayer().getFullName());
-        setPlayer1(getFirstPlayer());
+        str.append(previsiousPlayer.getFullName());
+        setPlayer1(previsiousPlayer);
         return str.toString();
     }
 
@@ -340,5 +341,13 @@ public class Game {
         this.choosedPlayer = players[0];
         calculateAngle();
 
+    }
+
+    public void setChoosedPack(Cards choosedPack) {
+        ChoosedPack = choosedPack;
+    }
+
+    public Cards getChoosedPack() {
+        return ChoosedPack;
     }
 }

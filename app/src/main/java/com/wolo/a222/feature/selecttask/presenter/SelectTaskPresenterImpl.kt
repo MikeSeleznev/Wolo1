@@ -3,24 +3,30 @@ package com.wolo.a222.feature.selecttask.presenter
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.Presenter.BasePresenter
 import com.wolo.a222.WoloApp.Companion.game
+import com.wolo.a222.feature.common.model.Cards
 import com.wolo.a222.feature.common.navigation.Navigator
+import com.wolo.a222.feature.selecttask.model.Interactor.SelectTaskInteractor
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+import kotlin.Any as Any1
 
 class SelectTaskPresenterImpl
     @Inject constructor(
-           val navigator: Navigator
+           val navigator: Navigator,
+           val interactor: SelectTaskInteractor
     ): BasePresenter<SelectTaskView>, SelectTaskPresenter{
     private val compositeDisposable = CompositeDisposable()
 
-    private val gameZoneSubject = BehaviorRelay.createDefault(SelectTaskState())
+    private val selectTaskSubject = BehaviorRelay.createDefault(SelectTaskState())
 
     private var state: SelectTaskState
-        set(value) = gameZoneSubject.accept(value)
-        get() = gameZoneSubject.value!!
+        set(value) = selectTaskSubject.accept(value)
+        get() = selectTaskSubject.value!!
+
+    private lateinit var pack: Cards
 
     override fun initState() {
         state = SelectTaskState()
@@ -31,7 +37,7 @@ class SelectTaskPresenterImpl
     }
 
     override fun viewState(): Flowable<SelectTaskState> {
-        return gameZoneSubject.toFlowable(BackpressureStrategy.LATEST)
+        return selectTaskSubject.toFlowable(BackpressureStrategy.LATEST)
                 .onBackpressureBuffer(3)
                 .subscribeOn(Schedulers.io())
     }
@@ -47,7 +53,18 @@ class SelectTaskPresenterImpl
         state = state.copy(selectTask = selectTaskV)
     }
 
-    override fun showTask(){
+    override fun showSelectTask(){
+        navigator.showSelectTask()
+    }
+
+    override fun showTask(namePack: String) {
+
+        for (p in game.cards){
+            if (namePack == p.name){
+                pack = p
+            }
+        }
+        interactor.setChoosedPack(pack)
         navigator.showTask()
     }
 }

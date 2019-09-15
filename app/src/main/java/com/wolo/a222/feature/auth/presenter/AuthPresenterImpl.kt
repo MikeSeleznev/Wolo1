@@ -9,6 +9,7 @@ import com.wolo.a222.feature.common.di.Scope.PerScreen
 import com.wolo.a222.feature.common.navigation.Navigator
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -21,14 +22,16 @@ class AuthPresenterImpl
 
     private val compositeDisposable = CompositeDisposable()
 
-    private val authSubject = BehaviorRelay.createDefault<AuthState>(AuthState(true))
+    private val authSubject = BehaviorRelay.createDefault<AuthState>(AuthState(mutableListOf(), mutableListOf()))
 
     private var state: AuthState
         set(value) = authSubject.accept(value)
         get() = authSubject.value!!
 
+    private var reverseGamersArray: MutableList<String> = mutableListOf()
+
     override fun initState() {
-        state = AuthState(true)
+        state = AuthState(mutableListOf(), mutableListOf())
     }
 
     override fun onStartAuth() {
@@ -37,6 +40,8 @@ class AuthPresenterImpl
 
     override fun viewState(): Flowable<AuthState> {
         return authSubject.toFlowable(BackpressureStrategy.LATEST)
+                .onBackpressureBuffer()
+                .subscribeOn(AndroidSchedulers.mainThread())
     }
 
     override fun onFinish() {
@@ -47,11 +52,18 @@ class AuthPresenterImpl
         var players = mutableListOf<Players>()
         var num = 1
         for (g in gamers){
-            players.add(Players(g.toString(), num))
+            players.add(Players(g, num))
             num+=1
         }
 
         if (players.size > 0)  game.initDate(players.toTypedArray())
             navigator.showGameZone()
+    }
+
+    override fun addNewPlayer(name: String, gamersArray: MutableList<String>) {
+        gamersArray.add(name)
+        reverseGamersArray = gamersArray.toMutableList()
+        //reverseGamersArray.reverse()
+        state = state.copy(gamersArray = gamersArray, reverseGamersArray = reverseGamersArray)
     }
 }

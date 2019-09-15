@@ -2,6 +2,7 @@ package com.wolo.a222.feature.gamezone.presenter
 
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.Presenter.BasePresenter
+import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.navigation.Navigator
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
@@ -36,5 +37,21 @@ class GameZonePresenterImpl
 
     override fun showDecks() {
         navigator.showDecks()
+    }
+
+    override fun whoStartGame(): String {
+        return game.whoStartGame()
+    }
+
+    override fun numberChoosedPlayer(): Int {
+       return game.numberChoosedPlayer
+    }
+
+    override fun numberOfPlayers(): Int {
+        return game.numberOfPlayers()
+    }
+
+    override fun startOnePlay() {
+        game.startOnePlay()
     }
 }

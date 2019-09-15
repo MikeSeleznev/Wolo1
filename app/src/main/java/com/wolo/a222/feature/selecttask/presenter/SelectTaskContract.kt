@@ -12,7 +12,9 @@ interface SelectTaskPresenter: Presenter<SelectTaskView>{
 
     fun setIntLeftCards()
 
-    fun showTask()
+    fun showSelectTask()
+
+    fun showTask(pack : String)
 }
 
 interface SelectTaskView: View

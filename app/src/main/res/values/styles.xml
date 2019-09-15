@@ -43,6 +43,10 @@
     <style name="buttonPlayer" parent="Widget.AppCompat.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/selector_circle</item>
+        <item name="android:textColor">@drawable/selector_circle_text_color</item>
+        <item name="android:enabled">true</item>
     </style>
+
 
 </resources>

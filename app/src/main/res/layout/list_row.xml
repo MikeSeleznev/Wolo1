@@ -1,46 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:orientation="horizontal">
 
     <Button
-        android:id="@+id/User"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/circle"
+        android:id="@+id/newUser"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/ic_lens_grey_24dp"
         android:text="U"
-        tools:layout_editor_absoluteX="59dp"
-        tools:layout_editor_absoluteY="233dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"/>
+        tools:text="U" />
 
     <TextView
         android:id="@+id/title_row"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="5dp"
+        android:layout_weight="0.2"
+        android:gravity="center_vertical"
         android:textColor="#040404"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:typeface="sans"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="5dp"
-        />
+        tools:text="имя игрока" />
 
     <ImageButton
         android:id="@+id/delete_user"
-        android:layout_width="22dp"
-        android:layout_height="19dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
         android:background="@null"
-        android:padding="0px"
-        android:scaleType="centerInside"
-        android:src="@drawable/deleteuser"
-        tools:layout_editor_absoluteX="345dp"
-        tools:layout_editor_absoluteY="243dp" />
+        android:src="@drawable/ic_delete_forever_black_24dp"
+        tools:ignore="ContentDescription" />
 
-</RelativeLayout>
+</LinearLayout>

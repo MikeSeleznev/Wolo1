@@ -4,6 +4,7 @@ package com.wolo.a222.feature.auth.view
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wolo.a222.R
@@ -44,14 +45,14 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView {
         gamers_lists.adapter = adapter
 
         val addPlayerOnClick = View.OnClickListener {
-           if (new_user.text.toString() !== "")
-            gamersArray.add(new_user.text.toString())
-            adapter.notifyDataSetChanged()
-            new_user.setText("")
+            if (new_user.text.toString() != "") {
+                presenter.addNewPlayer(new_user.text.toString(), gamersArray)
+            }
         }
         add_player.setOnClickListener(addPlayerOnClick)
 
         val startGameOnClick = View.OnClickListener {
+            //gamersArray.reverse()
             presenter.onClickStartPlay(gamersArray)
         }
         start_game_button.setOnClickListener(startGameOnClick)
@@ -63,6 +64,16 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView {
     }
 
     private fun handleState(state: AuthState) {
-
+        gamersArray.clear()
+        for (i in state.reverseGamersArray) {
+            gamersArray.add(i)
+        }
+        adapter.notifyDataSetChanged()
+        new_user.setText("")
+        if (gamersArray.size == 8 ){
+            Toast.makeText(context, "Набрано максимальное количество игроков(8)", Toast.LENGTH_LONG).show()
+            add_player.isEnabled = false
+            new_user.isEnabled = false
+        }
     }
 }

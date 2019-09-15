@@ -11,6 +11,14 @@ interface GameZonePresenter: Presenter<GameZoneView>{
     fun viewState(): Flowable<GameZoneState>
 
     fun showDecks()
+
+    fun whoStartGame(): String
+
+    fun numberChoosedPlayer(): Int
+
+    fun numberOfPlayers(): Int
+
+    fun startOnePlay()
 }
 
 interface GameZoneView: View

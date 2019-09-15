@@ -8,6 +8,8 @@ import com.wolo.a222.feature.gamezone.di.component.GameZoneFeatureComponent
 import com.wolo.a222.feature.gamezone.di.component.GameZoneScreenComponent
 import com.wolo.a222.feature.selecttask.di.component.SelectTaskFeatureComponent
 import com.wolo.a222.feature.selecttask.di.component.SelectTaskScreenComponent
+import com.wolo.a222.feature.task.di.component.TaskFeatureComponent
+import com.wolo.a222.feature.task.di.component.TaskScreenComponent
 import ru.ireca.kitchen.feature.auth.di.component.AuthFeatureComponent
 import ru.ireca.kitchen.feature.auth.di.component.AuthScreenComponent
 import ru.ireca.kitchen.feature.auth.di.component.SplashScreenFeatureComponent
@@ -31,6 +33,8 @@ class AppInjector(context: Context): Injector {
     private var gameZoneScreenComponent: GameZoneScreenComponent? = null
     private var selectTaskFeatureComponent: SelectTaskFeatureComponent? = null
     private var selectTaskScreenComponent: SelectTaskScreenComponent? = null
+    private var taskFeatureComponent: TaskFeatureComponent? = null
+    private var taskScreenComponent: TaskScreenComponent? = null
 
 
     override fun getAuthScreen(): AuthScreenComponent {
@@ -119,5 +123,27 @@ class AppInjector(context: Context): Injector {
 
     override fun releaseSelectTaskScreen() {
         selectTaskScreenComponent = null
+    }
+
+    override fun getTaskFeature(): TaskFeatureComponent {
+        return taskFeatureComponent ?: let {
+            getAppComponent().plusTaskFeature()
+                    .also { newComponent -> taskFeatureComponent = newComponent }
+        }
+    }
+
+    override fun releaseTaskFeature() {
+        taskFeatureComponent = null
+    }
+
+    override fun getTaskScreen(): TaskScreenComponent {
+        return taskScreenComponent ?: let {
+            getTaskFeature().plusTaskScreen()
+                    .also { newComponent -> taskScreenComponent = newComponent }
+        }
+    }
+
+    override fun releaseTaskScreen() {
+        taskScreenComponent = null
     }
 }
