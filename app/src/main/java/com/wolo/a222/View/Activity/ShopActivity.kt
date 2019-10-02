@@ -1,22 +1,13 @@
 package com.wolo.a222.View.Activity
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.preference.PreferenceManager
 import android.view.View
 import android.widget.CheckedTextView
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
-
-import com.google.gson.Gson
-import com.wolo.a222.Const
-import com.wolo.a222.feature.common.model.Game
-import com.wolo.a222.Market.Billing
-import com.wolo.a222.Market.ButtonOnClick
+import androidx.appcompat.app.AppCompatActivity
 import com.wolo.a222.R
 
 
@@ -57,52 +48,52 @@ class ShopActivity : AppCompatActivity() {
         loadingText2 = findViewById(R.id.loadingText2)
 
 
-
     }
 
     @Override
     override fun onStart() {
         super.onStart()
-        val gson = Gson()
-        val json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "")
-        var  game = gson.fromJson(json, Game::class.java)
+    }
+}   /*    val gson = Gson()
+           val json = PreferenceManager.getDefaultSharedPreferences(this).getString("game", "")
+           var  game = gson.fromJson(json, Game::class.java)
 
-        var observableBilling: Billing = Billing();
+           var observableBilling: Billing = Billing();
 
-        if (game.getPaidErotic() == true){
-            imageButtonEROTIC.setImageResource(R.drawable.eroticclose)
-        } else {
-            imageButtonEROTIC.setOnClickListener(ButtonOnClick(imageButtonEROTIC, this, observableBilling, this@ShopActivity, Const.EROTIC))
-        }
+           if (game.getPaidErotic() == true){
+               imageButtonEROTIC.setImageResource(R.drawable.eroticclose)
+           } else {
+               imageButtonEROTIC.setOnClickListener(ButtonOnClick(imageButtonEROTIC, this, observableBilling, this@ShopActivity, Const.EROTIC))
+           }
 
-        if (game.getPaidOhfuck() == true){
-            imageButtonOHFUCK.setImageResource(R.drawable.ohfuckclose)
-        } else {
-            imageButtonOHFUCK.setOnClickListener(ButtonOnClick(imageButtonOHFUCK, this, observableBilling, this@ShopActivity, Const.OHFUCK))
-        }
+           if (game.getPaidOhFuck() == true){
+               imageButtonOHFUCK.setImageResource(R.drawable.ohfuckclose)
+           } else {
+               imageButtonOHFUCK.setOnClickListener(ButtonOnClick(imageButtonOHFUCK, this, observableBilling, this@ShopActivity, Const.OHFUCK))
+           }
 
-        if (game.getPaidSport() == true){
-            imageButtonSport.setImageResource(R.drawable.sportclose)
-        } else {
-            imageButtonSport.setOnClickListener(ButtonOnClick(imageButtonSport, this, observableBilling, this@ShopActivity, Const.SPORT))
+           if (game.getPaidSport() == true){
+               imageButtonSport.setImageResource(R.drawable.sportclose)
+           } else {
+               imageButtonSport.setOnClickListener(ButtonOnClick(imageButtonSport, this, observableBilling, this@ShopActivity, Const.SPORT))
 
-        }
-        if (game.getPaidAlldecks() == true){
-            imageButtonAlldeck.setImageResource(R.drawable.alldecksclose)
-            imageButtonSport.setImageResource(R.drawable.sportclose)
-            imageButtonOHFUCK.setImageResource(R.drawable.ohfuckclose)
-            imageButtonEROTIC.setImageResource(R.drawable.eroticclose)
-        } else {
-            imageButtonAlldeck.setOnClickListener(ButtonOnClick(imageButtonAlldeck, this, observableBilling, this@ShopActivity, Const.ALLDECK))
-        }
+           }
+           if (game.getPaidAlldecks() == true){
+               imageButtonAlldeck.setImageResource(R.drawable.alldecksclose)
+               imageButtonSport.setImageResource(R.drawable.sportclose)
+               imageButtonOHFUCK.setImageResource(R.drawable.ohfuckclose)
+               imageButtonEROTIC.setImageResource(R.drawable.eroticclose)
+           } else {
+               imageButtonAlldeck.setOnClickListener(ButtonOnClick(imageButtonAlldeck, this, observableBilling, this@ShopActivity, Const.ALLDECK))
+           }
 
-        kolodanumcards3 = findViewById(R.id.kolodanumcards3)
-        kolodanumcards5 = findViewById(R.id.kolodanumcards5)
-        kolodanumcards6 = findViewById(R.id.kolodanumcards6)
-        kolodanumcards7 = findViewById(R.id.kolodanumcards7)
+           kolodanumcards3 = findViewById(R.id.numCardsSport)
+           kolodanumcards5 = findViewById(R.id.numCardsErotic)
+           kolodanumcards6 = findViewById(R.id.numCardsOhFuck)
+           kolodanumcards7 = findViewById(R.id.kolodanumcards7)*/
         //market
 
-        observableBilling.createBilling(this)
+      /*  observableBilling.createBilling(this)
                 //.observeOn(Schedulers.io())
                 .doOnError {  }
                 .doOnNext {
@@ -128,5 +119,4 @@ class ShopActivity : AppCompatActivity() {
                 }
                 .subscribe()
 
-    }
-}
+    }*/

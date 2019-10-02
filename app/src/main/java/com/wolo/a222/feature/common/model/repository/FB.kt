@@ -2,10 +2,11 @@ package com.wolo.a222.feature.common.model.repository
 
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.wolo.a222.feature.common.model.Cards
 import com.wolo.a222.Const
 import com.wolo.a222.WoloApp.Companion.game
-import io.reactivex.*
+import com.wolo.a222.feature.common.model.Cards
+import io.reactivex.Single
+import io.reactivex.SingleEmitter
 
 class FB constructor(private val fbFirestore: FirebaseFirestore) {
 

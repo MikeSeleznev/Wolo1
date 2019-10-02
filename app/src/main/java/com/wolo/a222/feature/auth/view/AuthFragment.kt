@@ -13,9 +13,9 @@ import com.wolo.a222.feature.auth.presenter.AuthState
 import com.wolo.a222.feature.auth.presenter.AuthView
 import com.wolo.a222.feature.auth.view.Adapter.GamersAdapter
 import com.wolo.a222.feature.common.view.PresenterFragment
-import javax.inject.Inject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_auth.*
+import javax.inject.Inject
 
 
 class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView {
@@ -74,6 +74,9 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView {
             Toast.makeText(context, "Набрано максимальное количество игроков(8)", Toast.LENGTH_LONG).show()
             add_player.isEnabled = false
             new_user.isEnabled = false
+        } else {
+            add_player.isEnabled = true
+            new_user.isEnabled = true
         }
     }
 }

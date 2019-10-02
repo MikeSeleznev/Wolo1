@@ -2,15 +2,12 @@ package com.wolo.a222.View.Activity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-
+import androidx.fragment.app.Fragment
 import com.wolo.a222.R
-import com.wolo.a222.View.Activity.InfoActivity
-import com.wolo.a222.View.Activity.ShopActivity
 
 class TopMenuActivity : Fragment() {
     private lateinit var buttonRules: Button

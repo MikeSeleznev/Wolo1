@@ -11,10 +11,10 @@ import android.widget.TextView
 import com.google.gson.Gson
 import com.wolo.a222.Const
 import com.wolo.a222.Model.Firebase.Packs
-import com.wolo.a222.feature.common.model.Game
 import com.wolo.a222.R
 import com.wolo.a222.Staff.SaveLoadDataJson
 import com.wolo.a222.View.Activity.IntroActivity
+import com.wolo.a222.feature.common.model.Game
 import com.wolo.a222.feature.common.view.MainActivity
 
 open class FirebasePresenter {

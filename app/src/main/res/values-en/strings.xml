@@ -17,4 +17,7 @@
 
     <string name="you_choosed_theme">ВЫ ВЫБРАЛИ ТЕМАТИКУ:</string>
 
+    <string name="shop">Shop</string>
+    <string name="delete_gamer">Delete players</string>
+    <string name="rules">Правила</string>
 </resources>

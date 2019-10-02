@@ -229,7 +229,7 @@
         app:layout_constraintTop_toBottomOf="@+id/SPORT" />
 
     <CheckedTextView
-        android:id="@+id/kolodanumcards3"
+        android:id="@+id/numCardsSport"
         android:layout_width="134dp"
         android:layout_height="14dp"
         android:layout_marginBottom="8dp"
@@ -263,7 +263,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kolodanumcards3"
+        app:layout_constraintTop_toBottomOf="@+id/numCardsSport"
         app:layout_constraintVertical_bias="0.15" />
 
     <CheckedTextView
@@ -281,7 +281,7 @@
         app:layout_constraintTop_toBottomOf="@+id/EROTIC" />
 
     <CheckedTextView
-        android:id="@+id/kolodanumcards5"
+        android:id="@+id/numCardsErotic"
         android:layout_width="134dp"
         android:layout_height="14dp"
         android:fontFamily="sans-serif"
@@ -329,7 +329,7 @@
         app:layout_constraintTop_toBottomOf="@+id/OHFUCK" />
 
     <CheckedTextView
-        android:id="@+id/kolodanumcards6"
+        android:id="@+id/numCardsOhFuck"
         android:layout_width="134dp"
         android:layout_height="14dp"
         android:fontFamily="sans-serif"
@@ -349,7 +349,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/kolodanumcards3"
+        app:layout_constraintBottom_toBottomOf="@+id/numCardsSport"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.367"
         app:layout_constraintStart_toStartOf="parent"
@@ -365,7 +365,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/kolodanumcards5"
+        app:layout_constraintBottom_toBottomOf="@+id/numCardsErotic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.367"
         app:layout_constraintStart_toStartOf="parent"
@@ -381,7 +381,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/kolodanumcards6"
+        app:layout_constraintBottom_toBottomOf="@+id/numCardsOhFuck"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.82"
         app:layout_constraintStart_toStartOf="parent"

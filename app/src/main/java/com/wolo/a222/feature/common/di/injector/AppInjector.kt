@@ -8,6 +8,8 @@ import com.wolo.a222.feature.gamezone.di.component.GameZoneFeatureComponent
 import com.wolo.a222.feature.gamezone.di.component.GameZoneScreenComponent
 import com.wolo.a222.feature.selecttask.di.component.SelectTaskFeatureComponent
 import com.wolo.a222.feature.selecttask.di.component.SelectTaskScreenComponent
+import com.wolo.a222.feature.shop.di.component.ShopFeatureComponent
+import com.wolo.a222.feature.shop.di.component.ShopScreenComponent
 import com.wolo.a222.feature.task.di.component.TaskFeatureComponent
 import com.wolo.a222.feature.task.di.component.TaskScreenComponent
 import ru.ireca.kitchen.feature.auth.di.component.AuthFeatureComponent
@@ -35,6 +37,8 @@ class AppInjector(context: Context): Injector {
     private var selectTaskScreenComponent: SelectTaskScreenComponent? = null
     private var taskFeatureComponent: TaskFeatureComponent? = null
     private var taskScreenComponent: TaskScreenComponent? = null
+    private var shopFeatureComponent: ShopFeatureComponent? = null
+    private var shopScreenComponent: ShopScreenComponent? = null
 
 
     override fun getAuthScreen(): AuthScreenComponent {
@@ -145,5 +149,29 @@ class AppInjector(context: Context): Injector {
 
     override fun releaseTaskScreen() {
         taskScreenComponent = null
+    }
+
+
+    override fun getShopFeature(): ShopFeatureComponent {
+        return shopFeatureComponent ?: let {
+            getAppComponent().plusShopFeature()
+                    .also { newComponent -> shopFeatureComponent = newComponent }
+        }
+    }
+
+    override fun releaseShopFeature() {
+        shopFeatureComponent = null
+    }
+
+
+    override fun getShopScreen(): ShopScreenComponent {
+        return shopScreenComponent ?: let {
+            getShopFeature().plusShopScreen()
+                    .also { newComponent -> shopScreenComponent = newComponent }
+        }
+    }
+
+    override fun releaseShopScreen() {
+        shopScreenComponent = null
     }
 }

@@ -8,8 +8,8 @@ import com.wolo.a222.feature.common.di.Scope.PerScreen
 import com.wolo.a222.feature.common.navigation.Navigator
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @PerScreen

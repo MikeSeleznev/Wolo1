@@ -2,17 +2,18 @@ package com.wolo.a222.Market
 
  import android.app.Activity
  import android.content.Context
- import android.content.SharedPreferences
  import android.preference.PreferenceManager
  import com.android.billingclient.api.*
  import com.google.gson.Gson
  import com.wolo.a222.Const
- import com.wolo.a222.feature.common.model.Game
  import com.wolo.a222.Model.SKU.SkuDeck
- import io.reactivex.BackpressureStrategy
- import io.reactivex.Flowable
+ import com.wolo.a222.WoloApp.Companion.game
+ import com.wolo.a222.feature.common.model.Game
+ import io.reactivex.Completable
+ import io.reactivex.Single
+ import io.reactivex.SingleEmitter
 
-class Billing(): PurchasesUpdatedListener {
+class Billing : PurchasesUpdatedListener {
 
     private lateinit var billingClient: BillingClient
     private lateinit var params: SkuDetailsParams
@@ -23,44 +24,24 @@ class Billing(): PurchasesUpdatedListener {
     private lateinit var mcontext: Context
     var sku: SkuDetails? = null
     private lateinit var byingPack: String
-    private lateinit var game: Game
-    private lateinit var sPref: SharedPreferences
     var skuReady: Boolean = false
 
 
-    //data class BillingState(val messageType: Int = MessageTypes.UNKNOWN_SERVER_MESSAGE, val skuList: List<Deck> = emptyList())
+    fun createBilling(context: Context): Single<List<SkuDeck>> = Single.create{emitter: SingleEmitter<List<SkuDeck>> ->
 
-    object MessageTypes {
-        // server side
-        const val DATA_UPDATED = 1
-        const val UNKNOWN_SERVER_MESSAGE = 0
-        const val LOGOUT = 7
-        const val CONNECT = -500
-        const val DISCONNECT = -501
-    }
-
-    fun createBilling(context: Context): Flowable<List<SkuDeck>> = Flowable.create({ emitter ->
-
-        mcontext = context
-
-
-            billingClient = BillingClient.newBuilder(context)
+        billingClient = BillingClient.newBuilder(context)
                     .enablePendingPurchases()
                     .setListener(this)
                     .build()
 
-            billingClient.startConnection(object : BillingClientStateListener {
+
+        billingClient.startConnection(object : BillingClientStateListener {
                 override fun onBillingServiceDisconnected() {
-                    //emitter.onNext(BillingState(MessageTypes.DISCONNECT))
-                    //emitter.onNext("Ok")
+
                 }
 
                 override fun onBillingSetupFinished(billingResult: BillingResult?) {
-                    //emitter.onNext(BillingState())
-                    //emitter.onNext(SkuDeck)
-                    //emitter.onComplete()
 
-//                    val skuList = listOf("000003", "000007", "000005", "000006")
                     params = SkuDetailsParams
                             .newBuilder()
                             .setSkusList(listOf("000003", "000007", "000005", "000006"))
@@ -75,7 +56,6 @@ class Billing(): PurchasesUpdatedListener {
                                 SkuDeck(it.sku, it.title, it.price, "")
                             }
                             skuReady = true
-                            emitter.onNext(skuList)
                        for (skuDetails in skuDetailsList) {
                             //skuList.add(Deck())
 
@@ -92,15 +72,14 @@ class Billing(): PurchasesUpdatedListener {
                             }
 
                         }
-                            //emitter.doOnNext(SkuDeck)
+                            emitter.onSuccess(skuList)
                         }
 
-                        emitter.onComplete()
-                        //emitter.onNext(BillingState(MessageTypes.DATA_UPDATED, skuList))
+
                     }
                 }
             })
-    }, BackpressureStrategy.LATEST)
+    }
 
     override fun onPurchasesUpdated(billingResult: BillingResult?, purchases: MutableList<Purchase>?) {
         if (billingResult?.responseCode == 0 && purchases != null) {
@@ -125,9 +104,9 @@ class Billing(): PurchasesUpdatedListener {
                 } else if (byingPack == Const.EROTIC) {
                     game.setPaidErotic()
                 } else if (byingPack == Const.OHFUCK) {
-                    game.setPaidOhfuck()
+                    game.setPaidOhFuck()
                 } else if (byingPack == Const.ALLDECK) {
-                    game.setPaidAlldecks()
+                    game.setPaidAllDecks()
                 }
 
             }
@@ -163,13 +142,7 @@ class Billing(): PurchasesUpdatedListener {
         }
     }
 
-    fun queryPurchases(context: Context) {
-        /*val flowablePurchases: Observable<String> = Observable.create(ObservableOnSubscribe  {emitter ->
-            val purchasesResult: Purchase.PurchasesResult = billingClient.queryPurchases(BillingClient.SkuType.INAPP)
-                    emitter.onNext("Ok")
-                    emitter.onComplete()
-        })
-        return flowablePurchases*/
+    fun queryPurchases(context: Context)  = Completable.create { completable ->
 
         billingClient = BillingClient.newBuilder(context)
                 .enablePendingPurchases()
@@ -179,40 +152,23 @@ class Billing(): PurchasesUpdatedListener {
             override fun onBillingServiceDisconnected() {
 
             }
-
             override fun onBillingSetupFinished(billingResult: BillingResult?) {
                 val purchasesResult: Purchase.PurchasesResult = billingClient.queryPurchases(BillingClient.SkuType.INAPP)
                 if (billingResult != null) {
                     if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                        val gson = Gson()
-                        val json = PreferenceManager.getDefaultSharedPreferences(context).getString("game", "")
-                        game = gson.fromJson(json, Game::class.java)
-
-                        for (purchase in purchasesResult.purchasesList) {
-                            if (purchase.sku == Const.sportSKU) {
-                                game.setPaidSport()
-                            } else if (purchase.sku == Const.eroticSKU) {
-                                game.setPaidErotic()
-                            } else if (purchase.sku == Const.ohfuckSKU) {
-                                game.setPaidOhfuck()
-                            } else if (purchase.sku == Const.alldecksSKU) {
-                                game.setPaidAlldecks()
-                                game.setPaidSport()
-                                game.setPaidErotic()
-                                game.setPaidOhfuck()
+                        purchasesResult.purchasesList.forEach {
+                            when (it.sku)  {
+                                Const.sportSKU -> game.setPaidSport()
+                                Const.eroticSKU -> game.setPaidErotic()
+                                Const.ohfuckSKU -> game.setPaidOhFuck()
+                                Const.alldecksSKU -> game.setPaidAllDecks()
                             }
                         }
-                        val jsonT = gson.toJson(game)
-                        sPref = PreferenceManager.getDefaultSharedPreferences(context)
-                        val ed = sPref.edit()
-                        ed.putString("game", jsonT)
-                        ed.commit()
                     }
                 }
+                completable.onComplete()
             }
         })
-
-
     }
 }
 

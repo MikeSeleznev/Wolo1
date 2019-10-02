@@ -1,9 +1,7 @@
 package com.wolo.a222.feature.common.model
 
 import com.wolo.a222.Model.Firebase.Packs
-
-import java.util.Arrays
-import java.util.Random
+import java.util.*
 
 
 class Cards(val name: String, cards: ArrayList<String>) {

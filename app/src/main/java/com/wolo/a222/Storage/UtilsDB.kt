@@ -1,8 +1,6 @@
 package com.wolo.a222.Storage
 
-import android.util.Log
 import com.wolo.a222.Storage.Packs.PacksDB
-import com.wolo.a222.WoloApp
 
 class UtilsDB {
 

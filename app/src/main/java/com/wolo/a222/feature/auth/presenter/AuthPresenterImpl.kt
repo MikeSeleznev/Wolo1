@@ -3,6 +3,7 @@ package com.wolo.a222.feature.auth.presenter
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.Players
 import com.wolo.a222.Presenter.BasePresenter
+import com.wolo.a222.R
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.auth.model.interactor.AuthInteractor
 import com.wolo.a222.feature.common.di.Scope.PerScreen
@@ -57,7 +58,16 @@ class AuthPresenterImpl
         }
 
         if (players.size > 0)  game.initDate(players.toTypedArray())
-            navigator.showGameZone()
+        var layoutResId = when (players.size) {
+            2 -> R.layout.gamezone_two
+            3 -> R.layout.gamezone_three
+            4 -> R.layout.gamezone_four
+            5 -> R.layout.gamezone_five
+            6 -> R.layout.gamezone_six
+            7 -> R.layout.gamezone_seven
+            8 -> R.layout.gamezone_eight
+            else -> R.layout.fragment_auth}
+            navigator.showGameZone(layoutResId)
     }
 
     override fun addNewPlayer(name: String, gamersArray: MutableList<String>) {

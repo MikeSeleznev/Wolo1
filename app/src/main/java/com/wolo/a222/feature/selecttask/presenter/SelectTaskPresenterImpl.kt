@@ -11,7 +11,6 @@ import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import kotlin.Any as Any1
 
 class SelectTaskPresenterImpl
     @Inject constructor(
@@ -43,11 +42,12 @@ class SelectTaskPresenterImpl
     }
 
     override fun setIntLeftCards() {
-        val selectTaskV = SelectTaskVM(kolodaNumCards1 = game.cards[0].leftCardsInt(),
+        val selectTaskV = SelectTaskVM(
+                kolodaNumCards1 = game.cards[0].leftCardsInt(),
                 kolodaNumCards2 = game.cards[1].leftCardsInt(),
                 kolodaNumCards3 = game.cards[2].leftCardsInt(),
-                kolodaNumCards4 = game.cards[3].leftCardsInt()
-                //kolodaNumCards5 = game.cards[4].leftCardsText()
+                kolodaNumCards4 = game.cards[3].leftCardsInt(),
+                kolodaNumCards5 = game.cards[4].leftCardsInt()
         )
 
         state = state.copy(selectTask = selectTaskV)

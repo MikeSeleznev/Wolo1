@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_shop"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
+            android:title="@string/shop"/>
+        <item
+            android:id="@+id/nav_delete_gamer"
+            android:title="@string/delete_gamer"
+            android:icon="@drawable/ic_delete_forever_black_24dp"/>
+        <item
+            android:id="@+id/nav_rules"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/rules" />
+    </group>
+
+</menu>

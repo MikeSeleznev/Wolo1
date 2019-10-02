@@ -2,8 +2,6 @@ package com.wolo.a222.feature.gamezone.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -22,14 +20,16 @@ import com.wolo.a222.feature.gamezone.presenter.GameZonePresenter
 import com.wolo.a222.feature.gamezone.presenter.GameZoneState
 import com.wolo.a222.feature.gamezone.presenter.GameZoneView
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.fragment_select_task.*
 import javax.inject.Inject
 
 class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
 
     companion object {
-        fun newInstance() = GameZoneFragment()
-    }
+        fun newInstance(id: Int) = GameZoneFragment().apply {
+            arguments = Bundle().apply {
+                putInt("id", id)
+            }
+    }}
 
     @Inject
     override lateinit var presenter: GameZonePresenter
@@ -48,9 +48,9 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
     private lateinit var mDetector: GestureDetector
     private var startGamePlayer: TextView? = null
 
-    override var layoutResId: Int = 0
-    //get() = R.layout.fragment_auth
-
+    override val layoutResId: Int
+      get() = arguments?.getInt("id", 0) ?: 0
+    /*
     init {
         numberOfPlayers = game.numberOfPlayers()
         layoutResId = when (numberOfPlayers) {
@@ -63,12 +63,15 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
             8 -> R.layout.gamezone_eight
             else -> R.layout.fragment_auth
         }
-    }
-
+    }*/
 
     override fun onAttach(context: Context?) {
         injector.getGameZoneScreen().inject(this)
         super.onAttach(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -164,7 +167,7 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
         presenter.startOnePlay()
         val pointWidth = (bottle!!.width / 2).toFloat()
         val pointHeight = (bottle!!.height / 2).toFloat()
-        val rotation = RotateAnimation(game.last_dir, game.new_dir, pointWidth, pointHeight)
+        val rotation = RotateAnimation(game.lastDir, game.newDir, pointWidth, pointHeight)
         rotation.duration = 2700
         rotation.fillAfter = true
         val animationListener = object : Animation.AnimationListener {
@@ -184,7 +187,7 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
                     8 -> paintGamer(user8, 28)
                 }
 
-                game.setPrevisiousPlayer()
+                game.setPrevisionsPlayer()
 
                 if (!game.repeatPlayer) {
                     val handler = Handler()
@@ -198,7 +201,7 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
                     game.setNotStartGame()
                 } else {
                     startGamePlayer?.text = game.whoRepeat()
-                    game.setLast_dir()
+                    game.setLastDir()
                 }
             }
 

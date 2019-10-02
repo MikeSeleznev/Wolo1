@@ -9,8 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -21,11 +19,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
-import com.wolo.a222.feature.common.model.Game;
 import com.wolo.a222.Players;
 import com.wolo.a222.R;
 import com.wolo.a222.SelectActivity;
+import com.wolo.a222.feature.common.model.Game;
 
 public class GamezoneActivity extends AppCompatActivity {
 
@@ -119,7 +120,7 @@ public class GamezoneActivity extends AppCompatActivity {
         startGamePlayer = (TextView) findViewById(R.id.startGamePlayer);
         startGamePlayer.setVisibility(View.INVISIBLE);
 
-        game.setLast_dir(0f);
+        game.setLastDir(0f);
 
         if (game.isStartGame() == true) {
             textQueue = game.whoStartGame(); }
@@ -372,7 +373,7 @@ public class GamezoneActivity extends AppCompatActivity {
     protected void onResume() {
          super.onResume();
 
-        //    bottle.setRotation(game.getNew_dir());
+        //    bottle.setRotation(game.getNewDir());
 
     }
 
@@ -381,7 +382,7 @@ public class GamezoneActivity extends AppCompatActivity {
         game.startOnePlay();
         float pointWidth = bottle.getWidth() / 2;
         float pointHeight = bottle.getHeight() / 2;
-        final Animation rotation = new RotateAnimation(game.getLast_dir(), game.getNew_dir(), pointWidth, pointHeight);
+        final Animation rotation = new RotateAnimation(game.getLastDir(), game.getNewDir(), pointWidth, pointHeight);
         rotation.setDuration(2700);
         rotation.setFillAfter(true);
         rotation.setAnimationListener(new Animation.AnimationListener() {
@@ -415,8 +416,8 @@ public class GamezoneActivity extends AppCompatActivity {
                     paintGamer(user8, 28);
                 }
 
-                //game.setLast_dir();
-                game.setPrevisiousPlayer();
+                //game.setLastDir();
+                game.setPrevisionsPlayer();
 
                 if (!game.getRepeatPlayer()==true) {
                     Handler handler = new Handler();
@@ -444,7 +445,7 @@ public class GamezoneActivity extends AppCompatActivity {
                 else{
                     textQueue = game.whoRepeat();
                     startGamePlayer.setText(textQueue);
-                    game.setLast_dir();
+                    game.setLastDir();
                 }
             }
             //}

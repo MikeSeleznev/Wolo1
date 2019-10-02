@@ -1,11 +1,10 @@
 package com.wolo.a222.View.Activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.wolo.a222.Presenter.IntroActivityPresenter
 import com.wolo.a222.R
-import com.wolo.a222.Storage.Sku.SkuDB
 
 
 class IntroActivity : AppCompatActivity() {

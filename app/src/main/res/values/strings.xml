@@ -16,4 +16,8 @@
     <string name="loading_finish_text">Загрузка карт</string>
 
     <string name="you_choosed_theme">ВЫ ВЫБРАЛИ ТЕМАТИКУ:</string>
+
+    <string name="shop">Магазин</string>
+    <string name="delete_gamer">Удалить игрока</string>
+    <string name="rules">Правила</string>
 </resources>

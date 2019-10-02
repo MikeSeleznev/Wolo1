@@ -30,7 +30,7 @@
         app:srcCompat="@drawable/close" />
 
     <CheckedTextView
-        android:id="@+id/welcomeText"
+        android:id="@+id/welcome_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -38,7 +38,7 @@
         android:text="ДОБРО ПОЖАЛОВАТЬ В ИГРУ"
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/weOnlyLiveOnce_Text"
+        app:layout_constraintBottom_toTopOf="@+id/we_only_live_once_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <CheckedTextView
-        android:id="@+id/weOnlyLiveOnce_Text"
+        android:id="@+id/we_only_live_once_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"

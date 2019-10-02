@@ -1,9 +1,11 @@
 package com.wolo.a222.feature.common.di.module
 
 import android.content.Context
+import com.android.billingclient.api.BillingClient
 import com.google.firebase.firestore.FirebaseFirestore
-import com.wolo.a222.feature.common.model.repository.FB
+import com.wolo.a222.Market.Billing
 import com.wolo.a222.feature.common.di.Scope.PerApplication
+import com.wolo.a222.feature.common.model.repository.FB
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.navigation.NavigatorImpl
 import com.wolo.a222.feature.common.presenter.MainActivityPresenter
@@ -29,7 +31,13 @@ class AppModule(private val context: Context) {
     @Provides
     @PerApplication
     fun provideFirebase(): FB {
-        //FirebaseApp.initializeApp(context)
         return FB(FirebaseFirestore.getInstance())
     }
+
+    @Provides
+    @PerApplication
+    fun provideBilling(): Billing {
+        return Billing()
+    }
+
 }

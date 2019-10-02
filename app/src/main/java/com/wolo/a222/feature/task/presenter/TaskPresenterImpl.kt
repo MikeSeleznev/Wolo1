@@ -2,6 +2,7 @@ package com.wolo.a222.feature.task.presenter
 
 import android.annotation.SuppressLint
 import com.jakewharton.rxrelay2.BehaviorRelay
+import com.wolo.a222.R
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.task.model.Interactor.TaskInteractor
@@ -56,6 +57,16 @@ class TaskPresenterImpl @Inject constructor(
     }
 
     override fun doneButtonOnClick() {
-        navigator.doneTask()
+        game.minusOneCard(game.choosedPack.name)
+        var layoutResId = when (game.players.size) {
+            2 -> R.layout.gamezone_two
+            3 -> R.layout.gamezone_three
+            4 -> R.layout.gamezone_four
+            5 -> R.layout.gamezone_five
+            6 -> R.layout.gamezone_six
+            7 -> R.layout.gamezone_seven
+            8 -> R.layout.gamezone_eight
+            else -> R.layout.fragment_auth}
+        navigator.doneTask(layoutResId)
     }
 }

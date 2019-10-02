@@ -62,7 +62,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.android.billingclient:billing:2.0.0'
+    implementation 'com.android.billingclient:billing:2.0.3'
     implementation 'androidx.room:room-runtime:2.0.0'
     kapt 'androidx.room:room-compiler:2.0.0'
     androidTestImplementation 'androidx.test:rules:1.1.0'
@@ -84,6 +84,13 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.9.4.1'
 
     implementation 'com.github.bumptech.glide:glide:4.7.1'
+    implementation 'com.mikepenz.materialdrawer:library:0.9.5@aar'
+
+    implementation 'androidx.navigation:navigation-ui:2.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
 }
 repositories {

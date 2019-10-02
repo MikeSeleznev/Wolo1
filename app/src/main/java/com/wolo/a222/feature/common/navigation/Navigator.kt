@@ -1,8 +1,8 @@
 package com.wolo.a222.feature.common.navigation
 
-import androidx.fragment.app.Fragment
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 
 interface Navigator {
 
@@ -22,7 +22,7 @@ interface Navigator {
 
     fun startGame()
 
-    fun showGameZone()
+    fun showGameZone(id: Int)
 
     fun showDecks()
 
@@ -30,5 +30,7 @@ interface Navigator {
 
     fun showTask()
 
-    fun doneTask()
+    fun doneTask(id: Int)
+
+    fun showShop()
 }

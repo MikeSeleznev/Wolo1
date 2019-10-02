@@ -155,7 +155,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <CheckedTextView
-        android:id="@+id/kolodanumcards3"
+        android:id="@+id/numCardsSport"
         android:layout_width="134dp"
         android:layout_height="14dp"
         android:layout_marginTop="8dp"
@@ -208,7 +208,7 @@
         app:layout_constraintTop_toBottomOf="@+id/EROTIC" />
 
     <CheckedTextView
-        android:id="@+id/kolodanumcards5"
+        android:id="@+id/numCardsErotic"
         android:layout_width="134dp"
         android:layout_height="14dp"
         android:layout_marginBottom="8dp"
@@ -259,7 +259,7 @@
         app:layout_constraintTop_toBottomOf="@+id/OHFUCK" />
 
     <CheckedTextView
-        android:id="@+id/kolodanumcards6"
+        android:id="@+id/numCardsOhFuck"
         android:layout_width="134dp"
         android:layout_height="14dp"
         android:layout_marginBottom="8dp"

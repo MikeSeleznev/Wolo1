@@ -1,18 +1,19 @@
 package com.wolo.a222;
 
 import android.content.Intent;
-import android.preference.PreferenceManager;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.CheckedTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.gson.Gson;
 import com.wolo.a222.View.Activity.ShopActivity;
@@ -63,9 +64,9 @@ public class SelectActivity extends AppCompatActivity {
 
         numCardsUsuall = (CheckedTextView) findViewById(R.id.numCardsUsuall);
         kolodanumcards2 = (CheckedTextView) findViewById(R.id.numCardsExtreme);
-        kolodanumcards3 = (CheckedTextView) findViewById(R.id.kolodanumcards3);
-        kolodanumcards5 = (CheckedTextView) findViewById(R.id.kolodanumcards5);
-        kolodanumcards6 = (CheckedTextView) findViewById(R.id.kolodanumcards6);
+        kolodanumcards3 = (CheckedTextView) findViewById(R.id.numCardsSport);
+        kolodanumcards5 = (CheckedTextView) findViewById(R.id.numCardsErotic);
+        kolodanumcards6 = (CheckedTextView) findViewById(R.id.numCardsOhFuck);
 
         user = (TextView)findViewById(R.id.selectedUser);
 
@@ -176,7 +177,7 @@ public class SelectActivity extends AppCompatActivity {
             closedErotic.setVisibility(View.INVISIBLE);
         }
 
-        if (game.paidOhfuck){
+        if (game.paidOhFuck){
             ohfuck.setImageResource(R.drawable.ohfuck);
             closedOhFuck.setVisibility(View.INVISIBLE);
         }
@@ -227,7 +228,7 @@ public class SelectActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "В колоде закончились карты", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
-                if (game.paidOhfuck) {
+                if (game.paidOhFuck) {
                     taskIntent = new Intent(SelectActivity.this, TaskActivity.class);
                 }else taskIntent = new Intent(SelectActivity.this, ShopActivity.class);
 

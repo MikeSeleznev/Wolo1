@@ -1,53 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/header"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <CheckedTextView
-            android:id="@+id/welcomeText"
+            android:id="@+id/welcome_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:gravity="top|center"
             android:text="@string/welcome_text"
             android:textAlignment="center"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/newUser"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <CheckedTextView
-            android:id="@+id/weOnlyLiveOnce_Text"
+            android:id="@+id/we_only_live_once_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="center|top"
             android:text="@string/weOnlyLiveOnce_Text"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="32sp" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header">
+        android:paddingTop="10dp">
 
 
         <CheckedTextView
@@ -58,6 +52,7 @@
             android:fontFamily="sans-serif"
             android:text="@string/enter_names_text"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="13sp" />
 
         <CheckedTextView
@@ -71,9 +66,11 @@
             android:textColor="#d62121"
             android:textSize="13sp" />
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="66dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
 
@@ -82,16 +79,12 @@
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0.5"
                 android:background="@drawable/filed"
-                android:ems="10"
                 android:hint="@string/newUser_text"
                 android:inputType="text"
-                android:selectAllOnFocus="false"
                 android:singleLine="true"
                 android:textAlignment="viewStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -99,47 +92,51 @@
                 android:textSize="14sp"
                 android:typeface="sans"
                 android:visibility="visible"
-                tools:ignore="Autofill" />
+                tools:ignore="Autofill,NestedWeights,UnusedAttribute" />
 
             <Button
                 android:id="@+id/add_player"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="4dp"
-                android:layout_weight="0.20"
-                android:backgroundTint="#17171c"
-                android:padding="0dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/black"
                 android:text="@string/addPlayer_text"
                 android:textAlignment="center"
                 android:textColor="#Fff"
-                android:textSize="30sp"
-                app:layout_constraintBottom_toTopOf="@+id/gamers"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/newUser"
-                app:layout_constraintTop_toBottomOf="@+id/checkedTextView5"
-                tools:ignore="UnusedAttribute" />
+                android:textSize="32sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/gamers_lists"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="40dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="25dp"
-            android:layout_weight="1"
-            android:choiceMode="singleChoice"
+            android:clipToPadding="false"
+            android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newUser"
-            tools:listitem="@layout/list_row"/>
+            tools:listitem="@layout/list_row" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom">
 
         <Button
             android:id="@+id/start_game_button"
@@ -153,8 +150,7 @@
             android:text="@string/startGame_button_text"
             android:textColor="#ffffff"
             android:textSize="18sp" />
-
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

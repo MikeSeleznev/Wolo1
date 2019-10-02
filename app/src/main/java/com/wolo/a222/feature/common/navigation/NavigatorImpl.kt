@@ -1,17 +1,18 @@
 package com.wolo.a222.feature.common.navigation
 
 
-import androidx.fragment.app.Fragment
 import android.content.Context
 import android.content.Intent
-import androidx.fragment.app.transaction
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.transaction
 import com.wolo.a222.R
 import com.wolo.a222.feature.auth.view.AuthFragment
 import com.wolo.a222.feature.common.di.Scope.PerApplication
 import com.wolo.a222.feature.gamezone.view.GameZoneFragment
 import com.wolo.a222.feature.selecttask.view.SelectTaskFragment
+import com.wolo.a222.feature.shop.view.ShopFragment
 import com.wolo.a222.feature.splashscreen.view.SplashScreenFragment
 import com.wolo.a222.feature.task.view.TaskFragment
 import javax.inject.Inject
@@ -97,8 +98,8 @@ class NavigatorImpl
             remove(SplashScreenFragment.newInstance())}
     }
 
-    override fun showGameZone(){
-        replaceFragment(GameZoneFragment.newInstance(), false)
+    override fun showGameZone(id: Int){
+        replaceFragment(GameZoneFragment.newInstance(id), false)
     }
 
     override fun showDecks(){
@@ -113,8 +114,12 @@ class NavigatorImpl
         replaceFragment(TaskFragment.newInstance(), false)
     }
 
-    override fun doneTask(){
+    override fun doneTask(id: Int){
         fragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        showGameZone()
+        showGameZone(id)
+    }
+
+    override fun showShop() {
+        replaceFragment(ShopFragment.newInstance(), false)
     }
 }
