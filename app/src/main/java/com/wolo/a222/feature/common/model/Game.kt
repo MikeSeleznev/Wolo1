@@ -5,7 +5,7 @@ import com.wolo.a222.feature.common.entity.Pack
 import java.util.Random
 
 class Game {
-    var packs: Array<Pack>? = null
+    var packs: List<Pack> = emptyList()
     var players: List<Players> = emptyList()
     var cards: List<Cards> = emptyList()
     var selectedPlayer: Players? = null

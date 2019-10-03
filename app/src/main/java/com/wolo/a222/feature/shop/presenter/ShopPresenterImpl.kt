@@ -2,7 +2,8 @@ package com.wolo.a222.feature.shop.presenter
 
 import android.content.Context
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.wolo.a222.Market.Billing
+import com.wolo.a222.market.Billing
+import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.shop.model.interactor.ShopInteractor
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
@@ -14,7 +15,7 @@ class ShopPresenterImpl @Inject constructor(
         private val context: Context,
         private val billing: Billing,
         private val shopInteractor: ShopInteractor
-) : ShopPresenter {
+) : BasePresenter<ShopView>, ShopPresenter {
 
     private val compositeDisposable = CompositeDisposable()
     private val taskSubject = BehaviorRelay.createDefault(ShopState(false))
@@ -45,10 +46,17 @@ class ShopPresenterImpl @Inject constructor(
 
     private fun initialLoadSettings() {
 
-        shopInteractor.setPurchase()
-                .doOnComplete {
-                    var a = "a"
+        shopInteractor.getSkuInfo()
+                .flatMap {
+                    shopInteractor.getPurchase()
+                }
+                .onBackpressureBuffer(3)
+                .subscribeOn(Schedulers.io())
+                .map {
+                    var a = " a"
                 }
                 .subscribe()
+
+
     }
 }

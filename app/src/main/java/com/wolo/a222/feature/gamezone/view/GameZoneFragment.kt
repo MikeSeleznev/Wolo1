@@ -100,8 +100,12 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
         startGamePlayer = activity?.findViewById(R.id.startGamePlayer)
 
         var text = ""
-        if (game.startGame){text = presenter.whoStartGame()}
-        else {text = game.whoContinueGame()}
+        text = if (game.isStartGame!!){
+            presenter.whoStartGame()
+        }
+        else {
+            game.whoContinueGame()
+        }
         startGamePlayer?.text = text
 
         bottle = activity?.findViewById(R.id.bottle)

@@ -1,7 +1,7 @@
 package com.wolo.a222
 
 
-import com.wolo.a222.Presenter.FirebasePresenter
+import com.wolo.a222.presenter.FirebasePresenter
 import org.junit.jupiter.api.Test
 
 

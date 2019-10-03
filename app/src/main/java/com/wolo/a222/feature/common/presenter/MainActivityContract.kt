@@ -3,7 +3,7 @@ package com.wolo.a222.feature.common.presenter
 import io.reactivex.Flowable
 
 
-interface MainActivityPresenter: Presenter<MainActivityView> {
+interface MainActivityPresenter: BasePresenter<MainActivityView> {
     fun viewState(): Flowable<MainActivityState>
 }
 

@@ -4,7 +4,7 @@ package com.wolo.a222.View.Activity
 import androidx.test.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import com.wolo.a222.Presenter.FirebasePresenter
+import com.wolo.a222.presenter.FirebasePresenter
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

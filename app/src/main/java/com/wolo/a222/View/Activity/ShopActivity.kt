@@ -93,7 +93,7 @@ class ShopActivity : AppCompatActivity() {
            kolodanumcards7 = findViewById(R.id.kolodanumcards7)*/
         //market
 
-      /*  observableBilling.createBilling(this)
+      /*  observableBilling.getSkuInfo(this)
                 //.observeOn(Schedulers.io())
                 .doOnError {  }
                 .doOnNext {

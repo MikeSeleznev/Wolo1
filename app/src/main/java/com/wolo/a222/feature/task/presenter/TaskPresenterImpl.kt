@@ -5,6 +5,7 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.R
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.navigation.Navigator
+import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.task.model.Interactor.TaskInteractor
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
@@ -16,7 +17,7 @@ import javax.inject.Inject
 class TaskPresenterImpl @Inject constructor(
         val navigator: Navigator,
         val interactor: TaskInteractor
-) : TaskPresenter {
+) : BasePresenter<TaskView>, TaskPresenter {
 
     private val compositeDisposable = CompositeDisposable()
     private val taskSubject = BehaviorRelay.createDefault(TaskState())
@@ -47,18 +48,18 @@ class TaskPresenterImpl @Inject constructor(
     private fun getQuestion(){
         interactor.getQuestion()
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe{it ->
+                .subscribe{
                     setViewState(it)
                 }
     }
 
     private fun setViewState(task: String) {
-        state = state.copy(task = task, taskTheme = game.choosedPack.name)
+        state = state.copy(task = task, taskTheme = game.choosedPack!!.name)
     }
 
     override fun doneButtonOnClick() {
-        game.minusOneCard(game.choosedPack.name)
-        var layoutResId = when (game.players.size) {
+        game.choosedPack?.name?.let { game.minusOneCard(it) }
+        val layoutResId = when (game.players.size) {
             2 -> R.layout.gamezone_two
             3 -> R.layout.gamezone_three
             4 -> R.layout.gamezone_four

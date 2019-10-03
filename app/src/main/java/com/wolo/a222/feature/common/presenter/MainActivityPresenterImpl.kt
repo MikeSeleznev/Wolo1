@@ -14,7 +14,7 @@ class MainActivityPresenterImpl
 constructor(
         val navigator: Navigator
 )
-    : MainActivityPresenter {
+    : BasePresenter<MainActivityView>, MainActivityPresenter {
 
     companion object {
         private val INITIAL_STATE = MainActivityState(closeMenuIsVisible = true, topMenuIsVisible = false)

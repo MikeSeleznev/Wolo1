@@ -1,13 +1,10 @@
 package com.wolo.a222.feature.shop.view
 
 import android.content.Context
-import android.graphics.Color
-import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import com.wolo.a222.Market.Billing
 import com.wolo.a222.R
 import com.wolo.a222.feature.common.view.PresenterFragment
 import com.wolo.a222.feature.shop.presenter.ShopPresenter

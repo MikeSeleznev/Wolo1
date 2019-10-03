@@ -28,7 +28,7 @@ class FB constructor(private val fbFirestore: FirebaseFirestore) {
             var newCard = Cards(item.data?.get("name") as String, item.data?.get("cards") as ArrayList<String>)
             listCards.add(newCard)
         }
-        game.cards = listCards.toTypedArray()
+        game.cards = listCards
     }
 }
 

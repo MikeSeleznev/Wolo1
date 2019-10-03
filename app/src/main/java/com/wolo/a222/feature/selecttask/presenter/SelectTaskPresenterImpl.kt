@@ -1,10 +1,10 @@
 package com.wolo.a222.feature.selecttask.presenter
 
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.wolo.a222.Presenter.BasePresenter
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.model.Cards
 import com.wolo.a222.feature.common.navigation.Navigator
+import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.selecttask.model.Interactor.SelectTaskInteractor
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable

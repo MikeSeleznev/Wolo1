@@ -9,6 +9,6 @@ import javax.inject.Inject
 class TaskInteractorImpl @Inject constructor() : TaskInteractor{
 
     override fun getQuestion(): Flowable<String> {
-        return Flowable.just(game.getRandomQuestion(game.choosedPack.name) )
+        return Flowable.just(game.getRandomQuestion(game.choosedPack!!.name) )
     }
 }

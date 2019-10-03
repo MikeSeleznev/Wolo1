@@ -2,7 +2,7 @@ package com.wolo.a222.feature.auth.model.interactor
 
 
 import android.content.Context
-import com.wolo.a222.Market.Billing
+import com.wolo.a222.market.Billing
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.di.Scope.PerFeature
 import com.wolo.a222.feature.common.entity.Pack
@@ -35,17 +35,18 @@ constructor(
                                 "name" -> name = s.data?.get(i) as String
                                 "cards" -> cards = s.data?.get(i) as List<String>
                                 "paid" -> paid = s.data?.get(i) as Boolean
-                                "id" -> id = s.data?.get(i) as String
+                                "id" -> {id = s.data?.get(i) as String}
                             }
                         }
                         listPacks.add(Pack(id, name, cards,paid))
-                        game.packs = listPacks.toTypedArray()
                     }
+                    game.packs = listPacks
                 }
                /* .flatMap {
-                    billing.createBilling(context)
+                    billing.getSkuInfo(context)
                 }*/
                 .flatMapCompletable {
+
                     Completable.complete() }
     }
 }
@@ -55,7 +56,7 @@ constructor(
 return fB.getPacks()
 .subscribeOn(Schedulers.io())
 .flatMap {
-    billing.createBilling().first()
+    billing.getSkuInfo().first()
 }
 .flatMapCompletable {
     fB.addCardsToGame(it)

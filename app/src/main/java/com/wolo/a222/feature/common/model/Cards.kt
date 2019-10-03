@@ -1,6 +1,6 @@
 package com.wolo.a222.feature.common.model
 
-import com.wolo.a222.Model.Firebase.Packs
+import com.wolo.a222.model.Firebase.Packs
 import java.util.*
 
 

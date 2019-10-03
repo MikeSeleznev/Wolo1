@@ -1,10 +1,10 @@
 package com.wolo.a222.feature.auth.presenter
 
-import com.wolo.a222.feature.common.presenter.Presenter
+import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.common.presenter.View
 import io.reactivex.Flowable
 
-interface AuthPresenter : Presenter<AuthView>{
+interface AuthPresenter : BasePresenter<AuthView>{
 
     fun initState()
 

@@ -52,7 +52,7 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
         }
         extreme.setOnClickListener(numCardsExtremeClickListener)
 
-        selectedUser.text = game.choosedPlayer.fullName
+        selectedUser.text = game.choosedPlayer!!.fullName
 
     }
 

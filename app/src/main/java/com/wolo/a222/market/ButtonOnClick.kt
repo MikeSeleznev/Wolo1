@@ -1,4 +1,4 @@
-package com.wolo.a222.Market
+package com.wolo.a222.market
 
 import android.app.Activity
 import android.content.Context

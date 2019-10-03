@@ -2,9 +2,9 @@ package com.wolo.a222.feature.common.view
 
 import android.os.Bundle
 import android.view.View
-import com.wolo.a222.feature.common.presenter.Presenter
+import com.wolo.a222.feature.common.presenter.BasePresenter
 
-abstract class PresenterFragment<T : Presenter<*>> : InjectableFragment() {
+abstract class PresenterFragment<T : BasePresenter<*>> : InjectableFragment() {
 
     protected abstract val presenter: T
 
