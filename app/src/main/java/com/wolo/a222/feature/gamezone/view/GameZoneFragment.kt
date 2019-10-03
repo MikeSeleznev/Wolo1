@@ -65,10 +65,11 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
         }
     }*/
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         injector.getGameZoneScreen().inject(this)
         super.onAttach(context)
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

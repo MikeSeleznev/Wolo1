@@ -2,6 +2,7 @@ package com.wolo.a222.feature.shop.presenter
 
 import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.common.presenter.View
+import com.wolo.a222.model.sku.SkuDeck
 import io.reactivex.Flowable
 
 interface ShopPresenter: BasePresenter<ShopView> {
@@ -14,5 +15,6 @@ interface ShopView: View
 
 
 data class ShopState(
-        val loaded: Boolean
+        val loaded: Boolean,
+        val skuDeck: List<SkuDeck> = emptyList()
 )

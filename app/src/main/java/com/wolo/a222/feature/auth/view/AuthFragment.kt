@@ -33,10 +33,11 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView {
     private var gamersArray = mutableListOf<String>()
     private var adapter = GamersAdapter(gamersArray)
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         injector.getAuthScreen().inject(this)
         super.onAttach(context)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

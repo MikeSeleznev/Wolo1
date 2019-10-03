@@ -6,21 +6,22 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/image_pack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/alldecks" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/pack_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center"
         android:text="TextView"
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/price_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

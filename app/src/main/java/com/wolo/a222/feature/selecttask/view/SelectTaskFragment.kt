@@ -26,7 +26,7 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
     override val layoutResId: Int
         get() = R.layout.fragment_select_task
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         injector.getSelectTaskScreen().inject(this)
         super.onAttach(context)
     }

@@ -25,7 +25,7 @@ class ShopInteractorImpl @Inject constructor(
                    }
                    listPurchases.map {purchase ->
                        for (i in packs){
-                           if (i.toString() == purchase.sku){
+                           if (i == purchase.sku){
                                list.add(purchase)
                            }
                        }

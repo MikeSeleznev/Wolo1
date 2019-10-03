@@ -42,11 +42,7 @@ constructor(
                     }
                     game.packs = listPacks
                 }
-               /* .flatMap {
-                    billing.getSkuInfo(context)
-                }*/
                 .flatMapCompletable {
-
                     Completable.complete() }
     }
 }

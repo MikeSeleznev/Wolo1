@@ -26,7 +26,7 @@ class SplashScreenFragment : PresenterFragment<SplashScreenPresenter>(), SplashS
     override val layoutResId: Int
         get() = R.layout.fragment_splash_screen
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         injector.getSplashScreenScreen().inject(this)
         super.onAttach(context)
     }

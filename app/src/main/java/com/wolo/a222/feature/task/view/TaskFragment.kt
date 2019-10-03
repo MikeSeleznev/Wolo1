@@ -24,7 +24,7 @@ class TaskFragment : PresenterFragment<TaskPresenter>(), TaskView {
     override val layoutResId: Int
         get() = R.layout.fragment_task
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         injector.getTaskScreen().inject(this)
         super.onAttach(context)
     }

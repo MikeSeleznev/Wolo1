@@ -49,7 +49,7 @@ class Billing : PurchasesUpdatedListener {
 
                     if (skuDetailsList != null) {
                         val skuList: List<SkuDeck> = skuDetailsList.map {
-                            SkuDeck(it.sku, it.title, it.price, "")
+                            SkuDeck(it.sku, it.title, it.price, "", false)
                         }
                         emitter.onNext(skuList)
                     }
