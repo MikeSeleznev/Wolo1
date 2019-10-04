@@ -1,8 +1,5 @@
-package com.wolo.a222.feature.auth.model.interactor
+package com.wolo.a222.feature.splashscreen.model.interactor
 
-
-import android.content.Context
-import com.wolo.a222.market.Billing
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.di.Scope.PerFeature
 import com.wolo.a222.feature.common.entity.Pack
@@ -15,20 +12,19 @@ import javax.inject.Inject
 class SplashScreenInteractorImpl
 @Inject
 constructor(
-        private val fB: FB,
-        private val billing: Billing,
-        private val context: Context) : SplashScreenInteractor {
+        private val fB: FB) : SplashScreenInteractor {
 
     override fun loadPacks(): Completable {
         return fB.getPacks()
                 .subscribeOn(Schedulers.io())
                 .map {it ->
-                    var listPacks = mutableListOf<Pack>()
+                    val listPacks = mutableListOf<Pack>()
                     it.map { s->
                         var name = ""
                         var cards = emptyList<String>()
                         var paid = false
                         var id = ""
+                        var activeImage = ""
                         var keys = s.data?.keys
                         for (i in keys!!){
                             when (i){
@@ -36,9 +32,10 @@ constructor(
                                 "cards" -> cards = s.data?.get(i) as List<String>
                                 "paid" -> paid = s.data?.get(i) as Boolean
                                 "id" -> {id = s.data?.get(i) as String}
+                                "activeImage" -> activeImage = s.data?.get(i) as String
                             }
                         }
-                        listPacks.add(Pack(id, name, cards,paid))
+                        listPacks.add(Pack(id, name, cards,paid, activeImage))
                     }
                     game.packs = listPacks
                 }
@@ -48,13 +45,3 @@ constructor(
 }
 
 
-/*
-return fB.getPacks()
-.subscribeOn(Schedulers.io())
-.flatMap {
-    billing.getSkuInfo().first()
-}
-.flatMapCompletable {
-    fB.addCardsToGame(it)
-    Completable.complete() }
-*/

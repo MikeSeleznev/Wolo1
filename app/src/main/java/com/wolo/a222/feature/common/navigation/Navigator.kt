@@ -33,4 +33,6 @@ interface Navigator {
     fun doneTask(id: Int)
 
     fun showShop()
+
+    fun closeShop()
 }

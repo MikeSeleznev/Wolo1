@@ -54,7 +54,7 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView {
 
         val startGameOnClick = View.OnClickListener {
             //gamersArray.reverse()
-            presenter.onClickStartPlay(gamersArray)
+            if (gamersArray.size>1) presenter.onClickStartPlay(gamersArray)
         }
         start_game_button.setOnClickListener(startGameOnClick)
 

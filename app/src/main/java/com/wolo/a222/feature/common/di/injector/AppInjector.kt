@@ -10,12 +10,12 @@ import com.wolo.a222.feature.selecttask.di.component.SelectTaskFeatureComponent
 import com.wolo.a222.feature.selecttask.di.component.SelectTaskScreenComponent
 import com.wolo.a222.feature.shop.di.component.ShopFeatureComponent
 import com.wolo.a222.feature.shop.di.component.ShopScreenComponent
+import com.wolo.a222.feature.splashscreen.di.component.SplashScreenFeatureComponent
 import com.wolo.a222.feature.task.di.component.TaskFeatureComponent
 import com.wolo.a222.feature.task.di.component.TaskScreenComponent
 import ru.ireca.kitchen.feature.auth.di.component.AuthFeatureComponent
 import ru.ireca.kitchen.feature.auth.di.component.AuthScreenComponent
-import ru.ireca.kitchen.feature.auth.di.component.SplashScreenFeatureComponent
-import ru.ireca.kitchen.feature.auth.di.component.SplashScreenScreenComponent
+import com.wolo.a222.feature.splashscreen.di.component.SplashScreenScreenComponent
 
 class AppInjector(context: Context): Injector {
 

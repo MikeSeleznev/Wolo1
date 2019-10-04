@@ -23,6 +23,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        navigator.attachActivity(this)
     }
 
     override fun onStop() {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import com.android.billingclient.api.Purchase
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.WoloApp
+import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.shop.model.interactor.ShopInteractor
 import com.wolo.a222.model.sku.SkuDeck
@@ -15,6 +16,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class ShopPresenterImpl @Inject constructor(
+        private val navigator: Navigator,
         private val shopInteractor: ShopInteractor
 ) : BasePresenter<ShopView>, ShopPresenter {
 
@@ -61,12 +63,12 @@ class ShopPresenterImpl @Inject constructor(
                     }
                 }
         )
-                .map {
+                .map { it ->
                     val packs = WoloApp.game.packs
                     it.map { skuDeck ->
                         val a = packs.find { it.id == skuDeck.skuType }
                         if (a != null) {
-                            skuDeck.copy(name = a.name)
+                            skuDeck.copy(name = a.name, activeImage = a.activeImage)
                         } else skuDeck.copy()
                     }
                 }
@@ -74,7 +76,13 @@ class ShopPresenterImpl @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .subscribe {
                     setViewState(it)
+                }.also {
+                    compositeDisposable.add(it)
                 }
+    }
+
+    override fun closeShop() {
+        navigator.closeShop()
     }
 
     private fun setViewState(skuDeck: List<SkuDeck>){

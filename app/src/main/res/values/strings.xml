@@ -9,6 +9,7 @@
     <string name="enter_names_text">Пожалуйста, впишите все имена участников.</string>
     <string name="max_quantity_players_text">Максимальное количество участников: 8 человек</string>
     <string name="startGame_button_text">НАЧАТЬ ИГРУ</string>
+    <string name="close_button">Закрыть</string>
     <string name="newUser_text">Имя участника</string>
     <string name="addPlayer_text">+</string>
 
@@ -20,4 +21,6 @@
     <string name="shop">Магазин</string>
     <string name="delete_gamer">Удалить игрока</string>
     <string name="rules">Правила</string>
+
+    <string name="play_store">Игровой магазин</string>
 </resources>

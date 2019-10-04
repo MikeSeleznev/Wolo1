@@ -9,6 +9,8 @@ interface ShopPresenter: BasePresenter<ShopView> {
     fun viewState(): Flowable<ShopState>
 
     fun initState()
+
+    fun closeShop()
 }
 
 interface ShopView: View

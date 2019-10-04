@@ -4,4 +4,5 @@ data class Pack(
         val id: String,
         val name: String,
         val tasks: List<String>,
-        val paid: Boolean)
+        val paid: Boolean,
+        val activeImage: String)

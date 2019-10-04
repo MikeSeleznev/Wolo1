@@ -29,7 +29,6 @@ class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView {
     @Inject
     override lateinit var presenter: ShopPresenter
 
-
     override val layoutResId: Int
         get() = R.layout.fragment_shop
 
@@ -38,24 +37,31 @@ class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView {
         super.onAttach(context)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isFinishing) injector.releaseShopScreen()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         presenter.viewState()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleState)
                 .run { disposeOnDestroyView(this) }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        val onClickClose = View.OnClickListener {
+            presenter.closeShop()
+        }
+        close_shop_button.setOnClickListener(onClickClose)
     }
 
     private fun handleState(state: ShopState) {
 
-        grid_view.numColumns = 2
         grid_view.adapter = DataAdapter(activity!!.applicationContext, state.skuDeck)
 
         grid_view.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->

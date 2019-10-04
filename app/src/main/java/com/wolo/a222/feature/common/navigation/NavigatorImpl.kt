@@ -93,25 +93,25 @@ class NavigatorImpl
     }
 
     override fun startGame() {
-        replaceFragment(AuthFragment.newInstance(), false)
+        replaceFragment(AuthFragment.newInstance(), true)
         fragmentManager?.transaction {
             remove(SplashScreenFragment.newInstance())}
     }
 
     override fun showGameZone(id: Int){
-        replaceFragment(GameZoneFragment.newInstance(id), false)
+        replaceFragment(GameZoneFragment.newInstance(id), true)
     }
 
     override fun showDecks(){
-        replaceFragment(SelectTaskFragment.newInstance(), false)
+        replaceFragment(SelectTaskFragment.newInstance(), true)
     }
 
     override fun showSelectTask() {
-        replaceFragment(SelectTaskFragment.newInstance(), false)
+        replaceFragment(SelectTaskFragment.newInstance(), true)
     }
 
     override fun showTask() {
-        replaceFragment(TaskFragment.newInstance(), false)
+        replaceFragment(TaskFragment.newInstance(), true)
     }
 
     override fun doneTask(id: Int){
@@ -120,6 +120,10 @@ class NavigatorImpl
     }
 
     override fun showShop() {
-        replaceFragment(ShopFragment.newInstance(), false)
+        replaceFragment(ShopFragment.newInstance(), true)
+    }
+
+    override fun closeShop(){
+        fragmentManager?.popBackStack()
     }
 }

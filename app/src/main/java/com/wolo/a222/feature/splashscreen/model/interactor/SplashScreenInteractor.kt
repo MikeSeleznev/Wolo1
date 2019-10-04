@@ -1,4 +1,4 @@
-package com.wolo.a222.feature.auth.model.interactor
+package com.wolo.a222.feature.splashscreen.model.interactor
 
 import io.reactivex.Completable
 
