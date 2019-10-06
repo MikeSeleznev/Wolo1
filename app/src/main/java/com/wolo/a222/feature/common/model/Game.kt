@@ -1,11 +1,14 @@
 package com.wolo.a222.feature.common.model
 
+import com.android.billingclient.api.SkuDetails
 import com.wolo.a222.Players
 import com.wolo.a222.feature.common.entity.Pack
+import com.wolo.a222.model.sku.SkuDeck
 import java.util.Random
 
 class Game {
     var packs: List<Pack> = emptyList()
+    var skuDetailsList : List<SkuDetails> = emptyList()
     var players: List<Players> = emptyList()
     var cards: List<Cards> = emptyList()
     var selectedPlayer: Players? = null
@@ -152,6 +155,7 @@ class Game {
     }
 
     fun startOnePlay() {
+        this.isStartGame = false
         if (previsionsPlayer == null) {
             previsionsPlayer = firstPlayer
         }
@@ -223,6 +227,8 @@ class Game {
         this.numberOfPlayers = players.size
         this.players = players
         this.choosedPlayer = players[0]
+        this.previsionsPlayer = players[0]
+        this.isStartGame = true
         calculateAngle()
 
     }

@@ -11,15 +11,19 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import com.wolo.a222.R
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.view.PresenterFragment
 import com.wolo.a222.feature.gamezone.presenter.GameZonePresenter
 import com.wolo.a222.feature.gamezone.presenter.GameZoneState
 import com.wolo.a222.feature.gamezone.presenter.GameZoneView
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.gamezone_eight.*
+import kotlinx.android.synthetic.main.gamezone_three.user3
+import kotlinx.android.synthetic.main.gamezone_two.bottle
+import kotlinx.android.synthetic.main.gamezone_two.fragmentToSpin
+import kotlinx.android.synthetic.main.gamezone_two.startGamePlayer
+import kotlinx.android.synthetic.main.gamezone_two.user1
+import kotlinx.android.synthetic.main.gamezone_two.user2
 import javax.inject.Inject
 
 class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
@@ -34,36 +38,12 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
     @Inject
     override lateinit var presenter: GameZonePresenter
 
-    private var numberOfPlayers = 0
-    private var bottle: ImageView? = null
-    private var user1: Button? = null
-    private var user2: Button? = null
-    private var user3: Button? = null
-    private var user4: Button? = null
-    private var user5: Button? = null
-    private var user6: Button? = null
-    private var user7: Button? = null
-    private var user8: Button? = null
-    private var fragmentToSpin: ImageView? = null
     private lateinit var mDetector: GestureDetector
-    private var startGamePlayer: TextView? = null
+
 
     override val layoutResId: Int
       get() = arguments?.getInt("id", 0) ?: 0
-    /*
-    init {
-        numberOfPlayers = game.numberOfPlayers()
-        layoutResId = when (numberOfPlayers) {
-            2 -> R.layout.gamezone_two
-            3 -> R.layout.gamezone_three
-            4 -> R.layout.gamezone_four
-            5 -> R.layout.gamezone_five
-            6 -> R.layout.gamezone_six
-            7 -> R.layout.gamezone_seven
-            8 -> R.layout.gamezone_eight
-            else -> R.layout.fragment_auth
-        }
-    }*/
+
 
     override fun onAttach(context: Context) {
         injector.getGameZoneScreen().inject(this)
@@ -82,8 +62,9 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
         init()
 
         mDetector = GestureDetector(context, GestureListener())
-        val fragmentToSpinOnTouchListener = View.OnTouchListener { _, event -> mDetector.onTouchEvent(event) }
-        fragmentToSpin?.setOnTouchListener(fragmentToSpinOnTouchListener)
+        val fragmentToSpinOnTouchListener = View.OnTouchListener { _, event ->
+            mDetector.onTouchEvent(event) }
+        fragmentToSpin.setOnTouchListener(fragmentToSpinOnTouchListener)
 
         presenter.viewState()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -97,68 +78,36 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
 
     private fun init() {
 
-        fragmentToSpin = activity?.findViewById(R.id.fragmentToSpin)
-        startGamePlayer = activity?.findViewById(R.id.startGamePlayer)
+        startGamePlayer.text = presenter.whoTurn()
 
-        var text = ""
-        text = if (game.isStartGame!!){
-            presenter.whoStartGame()
-        }
-        else {
-            game.whoContinueGame()
-        }
-        startGamePlayer?.text = text
+        user1.text = game.players[0].shortName
+        user2.text = game.players[1].shortName
 
-        bottle = activity?.findViewById(R.id.bottle)
-        user1 = activity?.findViewById(R.id.user1)
-        user1?.text = game.players[0].shortName
-        user2 = activity?.findViewById(R.id.user2)
-        user2?.text = game.players[1].shortName
-
-        when (numberOfPlayers) {
+        when (presenter.numberOfPlayers()) {
             3 -> {
-                user3 = activity?.findViewById(R.id.user3)
-                user3?.text = game.players[2].shortName
+                user3.text = game.players[2].shortName
             }
             4 -> {
-                user3 = activity?.findViewById(R.id.user3)
-                user4 = activity?.findViewById(R.id.user4)
-
-                user3?.text = game.players[2].shortName
-                user4?.text = game.players[3].shortName
+                user3.text = game.players[2].shortName
+                user4.text = game.players[3].shortName
             }
             5 -> {
-                user3 = activity?.findViewById(R.id.user3)
-                user4 = activity?.findViewById(R.id.user4)
-                user5 = activity?.findViewById(R.id.user5)
-
-                user3?.text = game.players[2].shortName
-                user4?.text = game.players[3].shortName
-                user5?.text = game.players[4].shortName
+                user3.text = game.players[2].shortName
+                user4.text = game.players[3].shortName
+                user5.text = game.players[4].shortName
             }
             6 -> {
-                user3 = activity?.findViewById(R.id.user3)
-                user4 = activity?.findViewById(R.id.user4)
-                user5 = activity?.findViewById(R.id.user5)
-                user6 = activity?.findViewById(R.id.user6)
-
-                user3?.text = game.players[2].shortName
-                user4?.text = game.players[3].shortName
-                user5?.text = game.players[4].shortName
-                user6?.text = game.players[5].shortName
+                user3.text = game.players[2].shortName
+                user4.text = game.players[3].shortName
+                user5.text = game.players[4].shortName
+                user6.text = game.players[5].shortName
             }
             7 -> {
-                user3 = activity?.findViewById(R.id.user3)
-                user4 = activity?.findViewById(R.id.user4)
-                user5 = activity?.findViewById(R.id.user5)
-                user6 = activity?.findViewById(R.id.user6)
-                user7 = activity?.findViewById(R.id.user7)
-
-                user3?.text = game.players[2].shortName
-                user4?.text = game.players[3].shortName
-                user5?.text = game.players[4].shortName
-                user6?.text = game.players[5].shortName
-                user7?.text = game.players[6].shortName
+                user3.text = game.players[2].shortName
+                user4.text = game.players[3].shortName
+                user5.text = game.players[4].shortName
+                user6.text = game.players[5].shortName
+                user7.text = game.players[6].shortName
             }
             else -> {
 
@@ -182,14 +131,14 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
 
             override fun onAnimationEnd(animation: Animation?) {
                 when (presenter.numberChoosedPlayer()) {
-                    1 -> paintGamer(user1, 1)
-                    2 -> paintGamer(user2, 2)
-                    3 -> paintGamer(user3, 3)
-                    4 -> paintGamer(user4, 4)
-                    5 -> paintGamer(user5, 5)
-                    6 -> paintGamer(user6, 6)
-                    7 -> paintGamer(user7, 7)
-                    8 -> paintGamer(user8, 28)
+                    1 -> paintGamer(user1)
+                    2 -> paintGamer(user2)
+                    3 -> paintGamer(user3)
+                    4 -> paintGamer(user4)
+                    5 -> paintGamer(user5)
+                    6 -> paintGamer(user6)
+                    7 -> paintGamer(user7)
+                    8 -> paintGamer(user8)
                 }
 
                 game.setPrevisionsPlayer()
@@ -203,7 +152,6 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
                         //startActivity(intent)
                         //finish()
                     }, 500)
-                    game.setNotStartGame()
                 } else {
                     startGamePlayer?.text = game.whoRepeat()
                     game.setLastDir()
@@ -218,11 +166,10 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
         bottle!!.startAnimation(rotation)
     }
 
-    private fun paintGamer(user: Button?, selectUser: Int) {
+    private fun paintGamer(user: Button?) {
         if (user != null) {
             user.isEnabled = false
         }
-        var selectedUser = selectUser
     }
 
 
@@ -277,55 +224,55 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
 
     private fun setBackgroundColor() {
 
-        when (numberOfPlayers) {
+        when (presenter.numberOfPlayers()) {
             2 -> {
-                user1?.isEnabled = true
-                user2?.isEnabled = true
+                user1.isEnabled = true
+                user2.isEnabled = true
             }
             3 -> {
-                user1?.isEnabled = true
-                user2?.isEnabled = true
-                user3?.isEnabled = true
+                user1.isEnabled = true
+                user2.isEnabled = true
+                user3.isEnabled = true
             }
             4 -> {
-                user1?.isEnabled = true
-                user2?.isEnabled = true
-                user3?.isEnabled = true
-                user4?.isEnabled = true
+                user1.isEnabled = true
+                user2.isEnabled = true
+                user3.isEnabled = true
+                user4.isEnabled = true
             }
             5 -> {
-                user1?.isEnabled = true
-                user2?.isEnabled = true
-                user3?.isEnabled = true
-                user4?.isEnabled = true
-                user5?.isEnabled = true
+                user1.isEnabled = true
+                user2.isEnabled = true
+                user3.isEnabled = true
+                user4.isEnabled = true
+                user5.isEnabled = true
             }
             6 -> {
-                user1?.isEnabled = true
-                user2?.isEnabled = true
-                user3?.isEnabled = true
-                user4?.isEnabled = true
-                user5?.isEnabled = true
-                user6?.isEnabled = true
+                user1.isEnabled = true
+                user2.isEnabled = true
+                user3.isEnabled = true
+                user4.isEnabled = true
+                user5.isEnabled = true
+                user6.isEnabled = true
             }
             7 -> {
-                user1?.isEnabled = true
-                user2?.isEnabled = true
-                user3?.isEnabled = true
-                user4?.isEnabled = true
-                user5?.isEnabled = true
-                user6?.isEnabled = true
-                user7?.isEnabled = true
+                user1.isEnabled = true
+                user2.isEnabled = true
+                user3.isEnabled = true
+                user4.isEnabled = true
+                user5.isEnabled = true
+                user6.isEnabled = true
+                user7.isEnabled = true
             }
             else -> {
-                user1?.isEnabled = true
-                user2?.isEnabled = true
-                user3?.isEnabled = true
-                user4?.isEnabled = true
-                user5?.isEnabled = true
-                user6?.isEnabled = true
-                user7?.isEnabled = true
-                user8?.isEnabled = true
+                user1.isEnabled = true
+                user2.isEnabled = true
+                user3.isEnabled = true
+                user4.isEnabled = true
+                user5.isEnabled = true
+                user6.isEnabled = true
+                user7.isEnabled = true
+                user8.isEnabled = true
 
             }
         }

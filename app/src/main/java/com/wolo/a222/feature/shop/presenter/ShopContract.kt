@@ -11,6 +11,8 @@ interface ShopPresenter: BasePresenter<ShopView> {
     fun initState()
 
     fun closeShop()
+
+    fun buyDeck(i: Int)
 }
 
 interface ShopView: View

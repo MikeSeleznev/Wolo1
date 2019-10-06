@@ -4,7 +4,6 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.Players
 import com.wolo.a222.R
 import com.wolo.a222.WoloApp.Companion.game
-import com.wolo.a222.feature.auth.model.interactor.AuthInteractor
 import com.wolo.a222.feature.common.di.Scope.PerScreen
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
@@ -17,8 +16,7 @@ import javax.inject.Inject
 @PerScreen
 class AuthPresenterImpl
 @Inject constructor(
-        val navigator: Navigator,
-        val authInteractor: AuthInteractor
+        val navigator: Navigator
 ) : BasePresenter<AuthView>, AuthPresenter {
 
     private val compositeDisposable = CompositeDisposable()
@@ -36,7 +34,7 @@ class AuthPresenterImpl
     }
 
     override fun onStartAuth() {
-        var a = "a"
+
     }
 
     override fun viewState(): Flowable<AuthState> {
@@ -50,7 +48,7 @@ class AuthPresenterImpl
     }
 
     override fun onClickStartPlay(gamers: List<String>) {
-        var players = mutableListOf<Players>()
+        val players = mutableListOf<Players>()
         var num = 1
         for (g in gamers){
             players.add(Players(g, num))
@@ -58,7 +56,7 @@ class AuthPresenterImpl
         }
 
         if (players.size > 0)  game.initDate(players)
-        var layoutResId = when (players.size) {
+        val layoutResId = when (players.size) {
             2 -> R.layout.gamezone_two
             3 -> R.layout.gamezone_three
             4 -> R.layout.gamezone_four

@@ -39,8 +39,15 @@ class GameZonePresenterImpl
         navigator.showDecks()
     }
 
-    override fun whoStartGame(): String {
-        return game.whoStartGame()
+    override fun whoTurn(): String {
+
+        return if (game.isStartGame!!){
+            game.whoStartGame()
+        }
+        else {
+            game.whoContinueGame()
+        }
+
     }
 
     override fun numberChoosedPlayer(): Int {

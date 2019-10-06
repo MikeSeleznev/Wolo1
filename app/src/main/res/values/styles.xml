@@ -28,6 +28,7 @@
         <item name="android:text">Игру начинает Игрок1</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:visibility">visible</item>
     </style>
 

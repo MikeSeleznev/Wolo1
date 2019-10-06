@@ -5,4 +5,6 @@ data class Pack(
         val name: String,
         val tasks: List<String>,
         val paid: Boolean,
-        val activeImage: String)
+        val activeImage: String,
+        val nonActiveImage: String
+)

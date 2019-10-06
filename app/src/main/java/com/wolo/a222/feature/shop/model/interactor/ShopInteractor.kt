@@ -10,4 +10,6 @@ interface ShopInteractor{
     fun getPurchase(): Flowable<MutableList<Purchase>>
 
     fun getSkuInfo(): Flowable<List<SkuDeck>>
+
+    fun buyDeck(i: Int)
 }

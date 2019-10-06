@@ -12,7 +12,7 @@ interface GameZonePresenter: BasePresenter<GameZoneView>{
 
     fun showDecks()
 
-    fun whoStartGame(): String
+    fun whoTurn(): String
 
     fun numberChoosedPlayer(): Int
 

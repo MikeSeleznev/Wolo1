@@ -3,7 +3,8 @@ package com.wolo.a222.feature.shop.presenter
 import android.annotation.SuppressLint
 import com.android.billingclient.api.Purchase
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.wolo.a222.WoloApp
+import com.wolo.a222.Const
+import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.shop.model.interactor.ShopInteractor
@@ -64,11 +65,11 @@ class ShopPresenterImpl @Inject constructor(
                 }
         )
                 .map { it ->
-                    val packs = WoloApp.game.packs
+                    val packs = game.packs
                     it.map { skuDeck ->
                         val a = packs.find { it.id == skuDeck.skuType }
                         if (a != null) {
-                            skuDeck.copy(name = a.name, activeImage = a.activeImage)
+                            skuDeck.copy(name = a.name, activeImage = a.activeImage, nonActiveImage = a.nonActiveImage)
                         } else skuDeck.copy()
                     }
                 }
@@ -86,6 +87,16 @@ class ShopPresenterImpl @Inject constructor(
     }
 
     private fun setViewState(skuDeck: List<SkuDeck>){
-        state = state.copy(skuDeck = skuDeck)
+        val allDecksSKU = skuDeck.find { it.skuType == Const.alldecksSKU}
+        state = if (allDecksSKU != null){
+            val sku = skuDeck.map { it.copy(isBought = true) }
+            state.copy(skuDeck = sku)
+        } else{
+            state.copy(skuDeck = skuDeck)
+        }
+    }
+
+    override fun buyDeck(i: Int) {
+        shopInteractor.buyDeck(i)
     }
 }

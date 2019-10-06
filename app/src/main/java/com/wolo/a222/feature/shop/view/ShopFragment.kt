@@ -2,22 +2,18 @@ package com.wolo.a222.feature.shop.view
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.GridView
-import android.widget.TextView
+import com.android.billingclient.api.BillingFlowParams
 import com.wolo.a222.R
+import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.view.PresenterFragment
 import com.wolo.a222.feature.shop.presenter.ShopPresenter
 import com.wolo.a222.feature.shop.presenter.ShopState
 import com.wolo.a222.feature.shop.presenter.ShopView
 import com.wolo.a222.feature.shop.view.adapter.DataAdapter
-import com.wolo.a222.model.sku.SkuDeck
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_shop.*
-import kotlinx.android.synthetic.main.item_shop.*
 import javax.inject.Inject
 
 class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView {
@@ -65,7 +61,7 @@ class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView {
         grid_view.adapter = DataAdapter(activity!!.applicationContext, state.skuDeck)
 
         grid_view.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
-            var a = "a"
+          presenter.buyDeck(i)
         }
     }
 }

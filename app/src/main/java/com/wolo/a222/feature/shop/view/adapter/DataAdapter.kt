@@ -13,17 +13,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.CustomViewTarget
 import com.bumptech.glide.request.target.Target
 import com.wolo.a222.R
 import com.wolo.a222.model.sku.SkuDeck
 
-class DataAdapter(context: Context, skuDeck: List<SkuDeck>) : BaseAdapter() {
-    val context = context
-    private val skuDeck: List<SkuDeck> = skuDeck
+class DataAdapter(val context: Context, private val skuDeck: List<SkuDeck>) : BaseAdapter() {
 
     override fun getItem(position: Int): Any {
-        return skuDeck.get(position)
+        return skuDeck[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -34,7 +31,7 @@ class DataAdapter(context: Context, skuDeck: List<SkuDeck>) : BaseAdapter() {
         return skuDeck.size
     }
 
-    @SuppressLint("CheckResult")
+    @SuppressLint("CheckResult", "ViewHolder", "InflateParams")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         val view = LayoutInflater.from(context).inflate(R.layout.item_shop, null)
@@ -44,8 +41,25 @@ class DataAdapter(context: Context, skuDeck: List<SkuDeck>) : BaseAdapter() {
         packName.text = skuDeck[position].name
         val price = view.findViewById<TextView>(R.id.price_text)
         price.text = skuDeck[position].price
-        Glide.with(context).load(skuDeck[position].activeImage).into(image)
 
+        val setImage = if (skuDeck[position].isBought) {
+            skuDeck[position].nonActiveImage
+        } else {
+            skuDeck[position].activeImage
+        }
+
+        Glide.with(context).load(setImage)
+                .listener(object : RequestListener<Drawable>{
+                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        return false
+                    }
+
+                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        image.setImageDrawable(resource)
+                        return true
+                    }
+                })
+                .into(image)
         return view
     }
 

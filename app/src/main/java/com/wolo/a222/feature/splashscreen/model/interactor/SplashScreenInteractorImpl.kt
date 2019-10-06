@@ -25,17 +25,19 @@ constructor(
                         var paid = false
                         var id = ""
                         var activeImage = ""
-                        var keys = s.data?.keys
+                        var nonActiveImage = ""
+                        val keys = s.data?.keys
                         for (i in keys!!){
                             when (i){
                                 "name" -> name = s.data?.get(i) as String
                                 "cards" -> cards = s.data?.get(i) as List<String>
                                 "paid" -> paid = s.data?.get(i) as Boolean
-                                "id" -> {id = s.data?.get(i) as String}
+                                "id" -> id = s.data?.get(i) as String
                                 "activeImage" -> activeImage = s.data?.get(i) as String
+                                "nonActiveImage" -> nonActiveImage = s.data?.get(i).toString()
                             }
                         }
-                        listPacks.add(Pack(id, name, cards,paid, activeImage))
+                        listPacks.add(Pack(id, name, cards,paid, activeImage, nonActiveImage))
                     }
                     game.packs = listPacks
                 }

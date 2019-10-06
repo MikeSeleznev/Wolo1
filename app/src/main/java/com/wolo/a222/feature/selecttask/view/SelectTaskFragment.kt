@@ -42,12 +42,12 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var usualClickListener = View.OnClickListener {
+        val usualClickListener = View.OnClickListener {
             presenter.showTask(Const.USUAL)
         }
         usual.setOnClickListener(usualClickListener)
 
-        var numCardsExtremeClickListener = View.OnClickListener {
+        val numCardsExtremeClickListener = View.OnClickListener {
             presenter.showTask(Const.EXTREME)
         }
         extreme.setOnClickListener(numCardsExtremeClickListener)

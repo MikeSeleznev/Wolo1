@@ -48,6 +48,7 @@ class Billing : PurchasesUpdatedListener {
                 billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
 
                     if (skuDetailsList != null) {
+                        game.skuDetailsList = skuDetailsList
                         val skuList: List<SkuDeck> = skuDetailsList.map {
                             SkuDeck(it.sku, it.title, it.price, "", false)
                         }
@@ -136,5 +137,13 @@ class Billing : PurchasesUpdatedListener {
             }
         })
     }, BackpressureStrategy.BUFFER)
+
+    fun buyDeck(i: Int){
+        val flowParams = BillingFlowParams.newBuilder()
+                .setSkuDetails(game.skuDetailsList[i])
+                .build()
+
+        val responseCode = billingClient.launchBillingFlow(Activity(), flowParams)
+    }
 }
 
