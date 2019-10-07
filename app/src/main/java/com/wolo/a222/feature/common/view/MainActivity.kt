@@ -5,6 +5,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.wolo.a222.R
+import com.wolo.a222.feature.auth.view.AuthFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.navigation_layout.*
 
@@ -42,7 +43,14 @@ class MainActivity : BaseActivity(){
 
     }
 
-
-
-
+    override fun onBackPressed() {
+        val fragmentClass = supportFragmentManager.findFragmentById(R.id.content)!!::class
+        if (fragmentClass == AuthFragment::class){
+            var a ="a"
+        }else{
+            supportFragmentManager.popBackStack()
+            navigator.onStartMainActivity()
+        }
+        super.onBackPressed()
+    }
 }

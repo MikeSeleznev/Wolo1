@@ -54,7 +54,8 @@ class SplashScreenPresenterImpl
                 .doOnError {
                         //TODO
                 }
-                .subscribe().also { compositeDisposable.add(it) }
+                .subscribe()
+                .also { compositeDisposable.add(it) }
     }
 
 }

@@ -6,7 +6,7 @@ import com.wolo.a222.R
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
-import com.wolo.a222.feature.task.model.Interactor.TaskInteractor
+import com.wolo.a222.feature.task.model.interactor.TaskInteractor
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -54,11 +54,12 @@ class TaskPresenterImpl @Inject constructor(
     }
 
     private fun setViewState(task: String) {
-        state = state.copy(task = task, taskTheme = game.choosedPack!!.name)
+        val leftCards = game.choosedPack.restTasks.toString() + "/" + game.choosedPack.tasks.size
+        state = state.copy(task = task, taskTheme = game.choosedPack.name, leftCards = leftCards)
     }
 
     override fun doneButtonOnClick() {
-        game.choosedPack?.name?.let { game.minusOneCard(it) }
+       /* game.choosedPack?.name?.let { game.minusOneCard(it) }*/
         val layoutResId = when (game.players.size) {
             2 -> R.layout.gamezone_two
             3 -> R.layout.gamezone_three

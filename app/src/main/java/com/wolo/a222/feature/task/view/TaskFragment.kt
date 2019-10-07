@@ -50,5 +50,6 @@ class TaskFragment : PresenterFragment<TaskPresenter>(), TaskView {
     private fun handleState(state: TaskState) {
         quest.text = state.task
         theme.text = state.taskTheme
+        leftCards.text = state.leftCards
     }
 }

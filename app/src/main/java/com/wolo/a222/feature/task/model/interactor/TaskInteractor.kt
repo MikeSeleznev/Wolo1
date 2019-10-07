@@ -1,4 +1,4 @@
-package com.wolo.a222.feature.task.model.Interactor
+package com.wolo.a222.feature.task.model.interactor
 
 import io.reactivex.Flowable
 

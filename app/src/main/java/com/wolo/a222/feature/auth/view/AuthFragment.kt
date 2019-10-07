@@ -54,7 +54,11 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView {
 
         val startGameOnClick = View.OnClickListener {
             //gamersArray.reverse()
-            if (gamersArray.size>1) presenter.onClickStartPlay(gamersArray)
+            when (gamersArray.size) {
+                0 -> Toast.makeText(context, "Необходимо добавить минимум 2-х игроков!", Toast.LENGTH_LONG).show()
+                1 -> Toast.makeText(context, "Необходимо добавить минимум 1 игрока!", Toast.LENGTH_LONG).show()
+                else -> presenter.onClickStartPlay(gamersArray)
+            }
         }
         start_game_button.setOnClickListener(startGameOnClick)
 

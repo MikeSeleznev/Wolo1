@@ -10,8 +10,8 @@ class Game {
     var packs: List<Pack> = emptyList()
     var skuDetailsList : List<SkuDetails> = emptyList()
     var players: List<Players> = emptyList()
+    var choosedPack: Pack = Pack()
     var cards: List<Cards> = emptyList()
-    var selectedPlayer: Players? = null
     var isStartGame: Boolean? = null
     private var degree: Float = 0.toFloat()
     var lastDir = 0f
@@ -28,8 +28,6 @@ class Game {
     var paidErotic: Boolean? = false
     var paidOhFuck: Boolean? = false
     private var paidAllDecks: Boolean? = false
-    var choosedPack: Cards? = null
-
 
     private val firstPlayer: Players
         get() = this.players[0]
@@ -84,15 +82,19 @@ class Game {
         return text
     }
 
-    fun getRandomQuestion(pack: String): String {
-        var text = ""
-        for (c in cards) {
-            if (c.name == pack) {
-                text = c.randomQuestion
-                c.setLeftCards()
+    fun getRandomQuestion(pack: Pack): String {
+        var task = ""
+        val number = Random()
+        for (c in packs) {
+            if (c.id == pack.id) {
+                val r1 = number.nextInt(c.restTasks)
+                task = c.tasks[r1]
+
             }
         }
-        val txt: String = text.replace("!1".toRegex(), player1.fullName)
+        //cards.removeAt(r1)
+
+        val txt: String = task.replace("!1".toRegex(), player1.fullName)
         return txt.replace("!2".toRegex(), player2.fullName)
     }
 

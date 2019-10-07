@@ -18,5 +18,6 @@ interface TaskView: View
 
 data class TaskState(
         val task: String = "",
-        val taskTheme: String = ""
+        val taskTheme: String = "",
+        val leftCards: String = ""
 )

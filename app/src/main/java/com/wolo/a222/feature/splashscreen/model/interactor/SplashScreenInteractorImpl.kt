@@ -26,6 +26,7 @@ constructor(
                         var id = ""
                         var activeImage = ""
                         var nonActiveImage = ""
+                        var priority = 0L
                         val keys = s.data?.keys
                         for (i in keys!!){
                             when (i){
@@ -35,9 +36,10 @@ constructor(
                                 "id" -> id = s.data?.get(i) as String
                                 "activeImage" -> activeImage = s.data?.get(i) as String
                                 "nonActiveImage" -> nonActiveImage = s.data?.get(i).toString()
+                                "priority" -> priority = s.data?.get(i) as Long
                             }
                         }
-                        listPacks.add(Pack(id, name, cards,paid, activeImage, nonActiveImage))
+                        listPacks.add(Pack(id, name, cards,paid, activeImage, nonActiveImage, priority, cards.size))
                     }
                     game.packs = listPacks
                 }

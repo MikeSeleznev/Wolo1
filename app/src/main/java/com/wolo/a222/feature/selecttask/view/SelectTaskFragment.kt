@@ -3,15 +3,17 @@ package com.wolo.a222.feature.selecttask.view
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import com.wolo.a222.Const
+import android.widget.AdapterView
 import com.wolo.a222.R
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.view.PresenterFragment
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskPresenter
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskState
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskView
+import com.wolo.a222.feature.selecttask.view.adapter.SelectTaskAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_select_task.*
+import kotlinx.android.synthetic.main.fragment_select_task.grid_view
 import javax.inject.Inject
 
 class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskView{
@@ -33,24 +35,17 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter.viewState()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleState)
-                .run { disposeOnDestroyView(this) }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        presenter.viewState()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleState)
+                .run { disposeOnDestroyView(this) }
 
-        val usualClickListener = View.OnClickListener {
-            presenter.showTask(Const.USUAL)
-        }
-        usual.setOnClickListener(usualClickListener)
-
-        val numCardsExtremeClickListener = View.OnClickListener {
-            presenter.showTask(Const.EXTREME)
-        }
-        extreme.setOnClickListener(numCardsExtremeClickListener)
+        presenter.getPacks()
 
         selectedUser.text = game.choosedPlayer!!.fullName
 
@@ -62,10 +57,10 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
     }
 
     private fun handleState(state: SelectTaskState) {
-        numCardsUsuall.text = state.selectTask?.kolodaNumCards5
-        numCardsExtreme.text = state.selectTask?.kolodaNumCards2
-        numCardsSport.text = state.selectTask?.kolodaNumCards4
-        numCardsOhFuck.text = state.selectTask?.kolodaNumCards3
-        numCardsErotic.text = state.selectTask?.kolodaNumCards1
+        grid_view.adapter = SelectTaskAdapter(activity!!.applicationContext, state.taskList)
+
+        grid_view.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
+            presenter.showTask(state.taskList[i].id)
+        }
     }
 }
