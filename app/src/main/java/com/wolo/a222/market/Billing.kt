@@ -66,7 +66,7 @@ class Billing : PurchasesUpdatedListener {
                 val acknowledgePurchaseResponseListener: AcknowledgePurchaseResponseListener = AcknowledgePurchaseResponseListener {
 
                 }
-                purchase.purchaseState === Purchase.PurchaseState.PURCHASED
+                //purchase.purchaseState == Purchase.PurchaseState.PURCHASED
                 if (!purchase.isAcknowledged) {
                     val acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
                             .setPurchaseToken(purchase.purchaseToken)
