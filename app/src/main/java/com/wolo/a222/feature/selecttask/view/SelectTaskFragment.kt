@@ -60,7 +60,7 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
         grid_view.adapter = SelectTaskAdapter(activity!!.applicationContext, state.taskList)
 
         grid_view.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
-            presenter.showTask(state.taskList[i].id)
+            presenter.showTask(state.taskList[i])
         }
     }
 }

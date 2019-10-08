@@ -61,6 +61,8 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
 
         init()
 
+        //bottle.rotation = game.lastDir
+
         mDetector = GestureDetector(context, GestureListener())
         val fragmentToSpinOnTouchListener = View.OnTouchListener { _, event ->
             mDetector.onTouchEvent(event) }
@@ -153,7 +155,7 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
                         //finish()
                     }, 500)
                 } else {
-                    startGamePlayer?.text = game.whoRepeat()
+                    startGamePlayer.text = game.whoRepeat()
                     game.setLastDir()
                 }
             }

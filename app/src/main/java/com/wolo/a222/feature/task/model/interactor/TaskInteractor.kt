@@ -4,6 +4,7 @@ import io.reactivex.Flowable
 
 interface TaskInteractor{
 
-    fun getQuestion(): Flowable<String>
+    fun getQuestion(number: Int): Flowable<String>
 
+    fun deleteOneQuestion(packId: String, taskId: Int)
 }

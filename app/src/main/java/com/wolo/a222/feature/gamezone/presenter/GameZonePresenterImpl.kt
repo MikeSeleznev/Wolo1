@@ -8,6 +8,7 @@ import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 import javax.inject.Inject
 
 class GameZonePresenterImpl
@@ -60,5 +61,36 @@ class GameZonePresenterImpl
 
     override fun startOnePlay() {
         game.startOnePlay()
+            /*game.isStartGame = false
+            if (game.previsionsPlayer == null) {
+                game.previsionsPlayer = game.firstPlayer
+            }
+
+            val newDir = getRandomAngle(game.lastDir)
+            val degree = newDir % 360
+            for (i in 0 until game.numberOfPlayers) {
+                if (i == 0) {
+                    if (degree <= game.players[i].fromDegreeForPlayer || degree > game.players[i].toDegreeForPlayer) {
+                        game.choosedPlayer = game.players[i]
+                        break
+                    }
+                } else {
+                    if (degree > game.players[i].fromDegreeForPlayer && degree <= game.players[i].toDegreeForPlayer) {
+                        game.choosedPlayer = game.players[i]
+                        break
+                    }
+                }
+            }
+            game.repeatPlayer = if (game.previsionsPlayer == null) {
+                false
+            } else {
+                game.choosedPlayer!!.fullName == game.previsionsPlayer!!.fullName
+            }
+            game.choosedPlayer?.let { game.setPlayer2(it) }*/
+    }
+
+    private fun getRandomAngle(lD: Float): Float {
+        val random = Random()
+        return (random.nextInt(2160) + 1000 + lD.toInt()).toFloat()
     }
 }

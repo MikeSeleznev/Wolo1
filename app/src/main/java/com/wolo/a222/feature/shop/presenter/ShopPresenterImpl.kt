@@ -54,6 +54,7 @@ class ShopPresenterImpl @Inject constructor(
                 shopInteractor.getSkuInfo(),
                 shopInteractor.getPurchase(),
                 BiFunction { listSku: List<SkuDeck>, purchases: MutableList<Purchase> ->
+                    if (purchases.size > 0){
                     listSku.map { skuDeck ->
                         val a = purchases.find { it.sku == skuDeck.skuType }
                         if (a != null) {
@@ -61,6 +62,9 @@ class ShopPresenterImpl @Inject constructor(
                         } else {
                             skuDeck.copy()
                         }
+                    }
+                }else {
+                        listSku
                     }
                 }
         )
@@ -88,7 +92,7 @@ class ShopPresenterImpl @Inject constructor(
 
     private fun setViewState(skuDeck: List<SkuDeck>){
         val allDecksSKU = skuDeck.find { it.skuType == Const.alldecksSKU}
-        state = if (allDecksSKU != null){
+        state = if (allDecksSKU != null && allDecksSKU.isBought){
             val sku = skuDeck.map { it.copy(isBought = true) }
             state.copy(skuDeck = sku)
         } else{

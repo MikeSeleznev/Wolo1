@@ -12,6 +12,7 @@ import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 import javax.inject.Inject
 
 class TaskPresenterImpl @Inject constructor(
@@ -46,19 +47,21 @@ class TaskPresenterImpl @Inject constructor(
 
     @SuppressLint("CheckResult")
     private fun getQuestion(){
-        interactor.getQuestion()
+        val taskId = Random().nextInt(game.choosedPack.quantity)
+        interactor.getQuestion(taskId)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe{
-                    setViewState(it)
+                    setViewState(it, taskId)
                 }
     }
 
-    private fun setViewState(task: String) {
-        val leftCards = game.choosedPack.restTasks.toString() + "/" + game.choosedPack.tasks.size
-        state = state.copy(task = task, taskTheme = game.choosedPack.name, leftCards = leftCards)
+    private fun setViewState(task: String, taskId: Int) {
+        val leftCards = game.choosedPack.quantityNow.toString() + "/" + game.choosedPack.quantity
+        state = state.copy(task = task, taskTheme = game.choosedPack.namePack, leftCards = leftCards, packId = game.choosedPack.id, taskId = taskId)
     }
 
     override fun doneButtonOnClick() {
+        interactor.deleteOneQuestion(state.packId , state.taskId)
        /* game.choosedPack?.name?.let { game.minusOneCard(it) }*/
         val layoutResId = when (game.players.size) {
             2 -> R.layout.gamezone_two
@@ -70,5 +73,9 @@ class TaskPresenterImpl @Inject constructor(
             8 -> R.layout.gamezone_eight
             else -> R.layout.fragment_auth}
         navigator.doneTask(layoutResId)
+    }
+
+    override fun deleteOneQuestion() {
+        interactor.deleteOneQuestion(state.packId, state.taskId)
     }
 }

@@ -11,6 +11,8 @@ interface TaskPresenter: BasePresenter<TaskView> {
     fun initState()
 
     fun doneButtonOnClick()
+
+    fun deleteOneQuestion()
 }
 
 interface TaskView: View
@@ -19,5 +21,7 @@ interface TaskView: View
 data class TaskState(
         val task: String = "",
         val taskTheme: String = "",
-        val leftCards: String = ""
+        val leftCards: String = "",
+        val packId: String = "",
+        val taskId : Int = 0
 )

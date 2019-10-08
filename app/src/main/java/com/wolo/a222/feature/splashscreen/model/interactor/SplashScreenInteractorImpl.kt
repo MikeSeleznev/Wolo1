@@ -21,7 +21,7 @@ constructor(
                     val listPacks = mutableListOf<Pack>()
                     it.map { s->
                         var name = ""
-                        var cards = emptyList<String>()
+                        var cards = mutableListOf<String>()
                         var paid = false
                         var id = ""
                         var activeImage = ""
@@ -31,7 +31,7 @@ constructor(
                         for (i in keys!!){
                             when (i){
                                 "name" -> name = s.data?.get(i) as String
-                                "cards" -> cards = s.data?.get(i) as List<String>
+                                "cards" -> cards = s.data?.get(i) as MutableList<String>
                                 "paid" -> paid = s.data?.get(i) as Boolean
                                 "id" -> id = s.data?.get(i) as String
                                 "activeImage" -> activeImage = s.data?.get(i) as String

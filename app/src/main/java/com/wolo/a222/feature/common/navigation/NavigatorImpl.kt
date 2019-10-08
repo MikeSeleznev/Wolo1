@@ -115,7 +115,8 @@ class NavigatorImpl
     }
 
     override fun doneTask(id: Int){
-        fragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        //fragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        fragmentManager?.popBackStack()
         showGameZone(id)
     }
 

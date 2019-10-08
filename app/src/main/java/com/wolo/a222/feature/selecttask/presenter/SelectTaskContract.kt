@@ -1,9 +1,7 @@
 package com.wolo.a222.feature.selecttask.presenter
 
-import com.wolo.a222.feature.common.entity.Pack
 import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.common.presenter.View
-import com.wolo.a222.model.sku.SkuDeck
 import io.reactivex.Flowable
 
 interface SelectTaskPresenter: BasePresenter<SelectTaskView>{
@@ -16,7 +14,7 @@ interface SelectTaskPresenter: BasePresenter<SelectTaskView>{
 
     fun showSelectTask()
 
-    fun showTask(p : String)
+    fun showTask(p: SelectTaskVM)
 
     fun getPacks()
 }
@@ -32,5 +30,5 @@ data class SelectTaskVM(
         val namePack: String = "",
         val quantity: Int = 0,
         val urlImage: String = "",
-        val quantityNow: Int
+        val quantityNow: Int = 0
 )

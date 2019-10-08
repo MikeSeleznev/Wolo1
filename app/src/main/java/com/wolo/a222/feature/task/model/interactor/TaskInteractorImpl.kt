@@ -8,7 +8,12 @@ import javax.inject.Inject
 @PerFeature
 class TaskInteractorImpl @Inject constructor() : TaskInteractor{
 
-    override fun getQuestion(): Flowable<String> {
-        return Flowable.just(game.getRandomQuestion(game.choosedPack) )
+    override fun getQuestion(number : Int): Flowable<String> {
+        return Flowable.just(game.getRandomQuestion(number) )
+    }
+
+    override fun deleteOneQuestion(packId: String, taskId: Int) {
+           val p = game.packs.findLast { it.id == packId }
+            p?.tasks?.removeAt(taskId)
     }
 }

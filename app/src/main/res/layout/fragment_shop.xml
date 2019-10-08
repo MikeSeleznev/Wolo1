@@ -52,7 +52,7 @@
         android:gravity="center"
         android:horizontalSpacing="10dp"
         android:verticalSpacing="10dp"
-        android:columnWidth="150dp"
+        android:columnWidth="100dp"
         android:stretchMode="spacingWidthUniform"
         android:numColumns="2"
         android:layout_marginTop="24dp"

@@ -5,6 +5,7 @@ import com.android.billingclient.api.Purchase
 import com.wolo.a222.WoloApp
 import com.wolo.a222.feature.common.di.Scope.PerFeature
 import com.wolo.a222.feature.common.entity.Pack
+import com.wolo.a222.feature.selecttask.presenter.SelectTaskVM
 import com.wolo.a222.market.Billing
 
 import com.wolo.a222.model.sku.SkuDeck
@@ -18,7 +19,7 @@ class SelectTaskInteractorImpl @Inject constructor(
         private val billing: Billing
 ) : SelectTaskInteractor {
 
-    override fun setChoosedPack(p: Pack) {
+    override fun setChoosedPack(p: SelectTaskVM) {
         WoloApp.game.choosedPack = p
     }
 

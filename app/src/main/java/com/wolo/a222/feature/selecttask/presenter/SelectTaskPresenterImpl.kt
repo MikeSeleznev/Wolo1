@@ -2,7 +2,6 @@ package com.wolo.a222.feature.selecttask.presenter
 
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.WoloApp.Companion.game
-import com.wolo.a222.feature.common.entity.Pack
 import com.wolo.a222.feature.common.model.Cards
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
@@ -50,9 +49,9 @@ class SelectTaskPresenterImpl
             packs.map {pack->
                 val a = purchases.find { it.sku == pack.id }
                 if (a != null) {
-                    SelectTaskVM(pack.id, pack.name, pack.tasks.size, pack.nonActiveImage, pack.restTasks)
+                    SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.nonActiveImage, pack.tasks.size)
                 } else {
-                    SelectTaskVM(pack.id, pack.name, pack.tasks.size, pack.activeImage, pack.restTasks)
+                    SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size)
                 }
             }
 
@@ -85,9 +84,9 @@ class SelectTaskPresenterImpl
         navigator.showSelectTask()
     }
 
-    override fun showTask(p: String) {
-        val a = game.packs.find { it.id == p }
-        if (a !=null) interactor.setChoosedPack(a)
-        navigator.showTask()
+    override fun showTask(p: SelectTaskVM) {
+            interactor.setChoosedPack(p)
+            navigator.showTask()
+
     }
 }

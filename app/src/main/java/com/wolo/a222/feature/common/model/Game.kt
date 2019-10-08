@@ -3,6 +3,7 @@ package com.wolo.a222.feature.common.model
 import com.android.billingclient.api.SkuDetails
 import com.wolo.a222.Players
 import com.wolo.a222.feature.common.entity.Pack
+import com.wolo.a222.feature.selecttask.presenter.SelectTaskVM
 import com.wolo.a222.model.sku.SkuDeck
 import java.util.Random
 
@@ -10,17 +11,16 @@ class Game {
     var packs: List<Pack> = emptyList()
     var skuDetailsList : List<SkuDetails> = emptyList()
     var players: List<Players> = emptyList()
-    var choosedPack: Pack = Pack()
+    var choosedPack: SelectTaskVM = SelectTaskVM()
     var cards: List<Cards> = emptyList()
     var isStartGame: Boolean? = null
     private var degree: Float = 0.toFloat()
     var lastDir = 0f
     var newDir = 0f
         private set
-    private var numberOfPlayers: Int = 0
+    var numberOfPlayers: Int = 0
     var choosedPlayer: Players? = null
-        private set
-    private var previsionsPlayer: Players? = null
+    var previsionsPlayer: Players? = null
     var repeatPlayer: Boolean = false
     private lateinit var player1: Players
     private lateinit var player2: Players
@@ -29,7 +29,7 @@ class Game {
     var paidOhFuck: Boolean? = false
     private var paidAllDecks: Boolean? = false
 
-    private val firstPlayer: Players
+    val firstPlayer: Players
         get() = this.players[0]
     val numberChoosedPlayer: Int
         get() = choosedPlayer!!.number
@@ -82,14 +82,11 @@ class Game {
         return text
     }
 
-    fun getRandomQuestion(pack: Pack): String {
+    fun getRandomQuestion(number: Int): String {
         var task = ""
-        val number = Random()
         for (c in packs) {
-            if (c.id == pack.id) {
-                val r1 = number.nextInt(c.restTasks)
-                task = c.tasks[r1]
-
+            if (c.id == choosedPack.id) {
+                task = c.tasks[number]
             }
         }
         //cards.removeAt(r1)
@@ -121,7 +118,7 @@ class Game {
     fun whoRepeat(): String {
         val str = StringBuilder()
         str.append("Игрок ")
-        str.append(firstPlayer.fullName)
+        str.append(player2.fullName)
         str.append(" крутит бутылку еще раз ")
         return str.toString()
     }
@@ -158,9 +155,6 @@ class Game {
 
     fun startOnePlay() {
         this.isStartGame = false
-        if (previsionsPlayer == null) {
-            previsionsPlayer = firstPlayer
-        }
 
         newDir = getRandomAngle(lastDir)
         degree = newDir % 360
@@ -177,11 +171,8 @@ class Game {
                 }
             }
         }
-        repeatPlayer = if (previsionsPlayer == null) {
-            false
-        } else {
-            choosedPlayer!!.fullName == previsionsPlayer!!.fullName
-        }
+        repeatPlayer = choosedPlayer == previsionsPlayer
+
         choosedPlayer?.let { setPlayer2(it) }
 
     }
@@ -198,7 +189,7 @@ class Game {
         this.player1 = player
     }
 
-    private fun setPlayer2(player: Players) {
+    fun setPlayer2(player: Players) {
         this.player2 = player
     }
 
