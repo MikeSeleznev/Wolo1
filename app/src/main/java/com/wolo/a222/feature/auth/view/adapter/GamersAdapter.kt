@@ -1,9 +1,10 @@
-package com.wolo.a222.feature.auth.view.Adapter
+package com.wolo.a222.feature.auth.view.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.wolo.a222.R
@@ -11,7 +12,7 @@ import com.wolo.a222.R
 
 class GamersAdapter(private val gamersList: MutableList<String>): RecyclerView.Adapter<ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.list_row, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.list_row, parent, false)
         return ViewHolder(v)
     }
 
@@ -34,7 +35,7 @@ class GamersAdapter(private val gamersList: MutableList<String>): RecyclerView.A
 }
 
 class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-    var newUser = itemView.findViewById<Button>(R.id.newUser)
+    var newUser: Button = itemView.findViewById(R.id.newUser)
     var title = itemView.findViewById<View>(R.id.title_row)!!
-    var buttonDelete = itemView.findViewById<View>(R.id.delete_user)
+    var buttonDelete: ImageButton = itemView.findViewById(R.id.delete_user)
 }

@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".View.Activity.GamezoneActivity">
+    android:layout_height="match_parent">
 
 
     <Button
@@ -155,7 +154,6 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="40dp"
-        android:rotation="18"
         android:scaleType="centerInside"
         android:src="@drawable/bottle"
         app:layout_constraintBottom_toTopOf="@+id/user5"

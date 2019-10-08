@@ -111,6 +111,14 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
                 user6.text = game.players[5].shortName
                 user7.text = game.players[6].shortName
             }
+            8 -> {
+                user3.text = game.players[2].shortName
+                user4.text = game.players[3].shortName
+                user5.text = game.players[4].shortName
+                user6.text = game.players[5].shortName
+                user7.text = game.players[6].shortName
+                user8.text = game.players[7].shortName
+            }
             else -> {
 
             }

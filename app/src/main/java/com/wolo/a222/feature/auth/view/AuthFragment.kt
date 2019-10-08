@@ -11,7 +11,7 @@ import com.wolo.a222.R
 import com.wolo.a222.feature.auth.presenter.AuthPresenter
 import com.wolo.a222.feature.auth.presenter.AuthState
 import com.wolo.a222.feature.auth.presenter.AuthView
-import com.wolo.a222.feature.auth.view.Adapter.GamersAdapter
+import com.wolo.a222.feature.auth.view.adapter.GamersAdapter
 import com.wolo.a222.feature.common.view.PresenterFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_auth.*

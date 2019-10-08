@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".View.Activity.GamezoneActivity">
+    android:layout_height="match_parent">
 
 
     <Button
@@ -104,14 +103,14 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
-        android:rotation="18"
         android:scaleType="centerInside"
         android:src="@drawable/bottle"
         app:layout_constraintBottom_toTopOf="@+id/user4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user1" />
+        app:layout_constraintTop_toBottomOf="@+id/user1"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/startGamePlayer"
@@ -130,10 +129,10 @@
         android:id="@+id/fragmentToSpin"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

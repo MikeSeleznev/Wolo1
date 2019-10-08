@@ -23,4 +23,8 @@
     <string name="rules">Правила</string>
 
     <string name="play_store">Игровой магазин</string>
+    <string name="alter_dialog_quite_main_menu">Выйти в главное меню?</string>
+    <string name="alter_dialog_quite_app">Выйти из игры?</string>
+    <string name="dialog_button_ok">Ок</string>
+    <string name="dialog_button_cancel">Отмена</string>
 </resources>
