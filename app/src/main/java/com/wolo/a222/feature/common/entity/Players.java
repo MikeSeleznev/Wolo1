@@ -1,4 +1,4 @@
-package com.wolo.a222;
+package com.wolo.a222.feature.common.entity;
 
 
 public class Players {

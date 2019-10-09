@@ -10,7 +10,7 @@
     <string name="max_quantity_players_text">Максимальное количество участников: 8 человек</string>
     <string name="startGame_button_text">НАЧАТЬ ИГРУ</string>
     <string name="close_button">Закрыть</string>
-    <string name="newUser_text">Имя участника</string>
+    <string name="newUser_text">Введите имя участника</string>
     <string name="addPlayer_text">+</string>
 
     <string name="loading_start_text">Загрузка карт</string>

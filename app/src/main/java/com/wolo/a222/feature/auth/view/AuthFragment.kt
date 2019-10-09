@@ -12,13 +12,14 @@ import com.wolo.a222.feature.auth.presenter.AuthPresenter
 import com.wolo.a222.feature.auth.presenter.AuthState
 import com.wolo.a222.feature.auth.presenter.AuthView
 import com.wolo.a222.feature.auth.view.adapter.GamersAdapter
+import com.wolo.a222.feature.auth.view.adapter.OnItemCallback
 import com.wolo.a222.feature.common.view.PresenterFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_auth.*
 import javax.inject.Inject
 
 
-class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView {
+class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView, OnItemCallback {
 
     companion object{
         fun newInstance() = AuthFragment()
@@ -31,7 +32,7 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView {
         get() = R.layout.fragment_auth
 
     private var gamersArray = mutableListOf<String>()
-    private var adapter = GamersAdapter(gamersArray)
+    private var adapter = GamersAdapter(gamersArray, this)
 
     override fun onAttach(context: Context) {
         injector.getAuthScreen().inject(this)
@@ -47,7 +48,7 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView {
 
         val addPlayerOnClick = View.OnClickListener {
             if (new_user.text.toString() != "") {
-                presenter.addNewPlayer(new_user.text.toString(), gamersArray)
+                presenter.addNewPlayer(new_user.text.toString())
             }
         }
         add_player.setOnClickListener(addPlayerOnClick)
@@ -70,7 +71,7 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView {
 
     private fun handleState(state: AuthState) {
         gamersArray.clear()
-        for (i in state.reverseGamersArray) {
+        for (i in state.gamersArray) {
             gamersArray.add(i)
         }
         adapter.notifyDataSetChanged()
@@ -83,5 +84,9 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView {
             add_player.isEnabled = true
             new_user.isEnabled = true
         }
+    }
+
+    override fun onDeleteItem(item: Int) {
+        presenter.deletePlayer(item)
     }
 }

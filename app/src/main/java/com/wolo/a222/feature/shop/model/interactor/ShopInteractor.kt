@@ -1,7 +1,7 @@
 package com.wolo.a222.feature.shop.model.interactor
 
+import android.app.Activity
 import com.android.billingclient.api.Purchase
-import com.wolo.a222.model.sku.Sku
 import com.wolo.a222.model.sku.SkuDeck
 import io.reactivex.Flowable
 

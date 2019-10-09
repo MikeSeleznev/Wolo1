@@ -26,4 +26,8 @@ abstract class PresenterFragment<T : BasePresenter<*>> : InjectableFragment() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onFinish()
+    }
 }

@@ -1,5 +1,6 @@
 package com.wolo.a222.feature.shop.model.interactor
 
+import android.app.Activity
 import android.content.Context
 import com.android.billingclient.api.Purchase
 import com.wolo.a222.WoloApp.Companion.game
@@ -48,6 +49,6 @@ class ShopInteractorImpl @Inject constructor(
     }
 
     override fun buyDeck(i: Int) {
-       billing.buyDeck(i)
+       billing.buyDeck(i, context)
     }
 }

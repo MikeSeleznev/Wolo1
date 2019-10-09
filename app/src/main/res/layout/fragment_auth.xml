@@ -84,6 +84,7 @@
                 android:layout_weight="0.5"
                 android:background="@drawable/filed"
                 android:hint="@string/newUser_text"
+                android:textColorHint="@color/black"
                 android:inputType="text"
                 android:singleLine="true"
                 android:textAlignment="viewStart"

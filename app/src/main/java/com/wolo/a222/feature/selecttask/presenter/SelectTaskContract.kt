@@ -6,8 +6,6 @@ import io.reactivex.Flowable
 
 interface SelectTaskPresenter: BasePresenter<SelectTaskView>{
 
-    fun initState()
-
     fun viewState(): Flowable<SelectTaskState>
 
     fun setIntLeftCards()

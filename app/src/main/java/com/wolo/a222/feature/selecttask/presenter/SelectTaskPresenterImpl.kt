@@ -17,19 +17,19 @@ class SelectTaskPresenterImpl
            val navigator: Navigator,
            val interactor: SelectTaskInteractor
     ): BasePresenter<SelectTaskView>, SelectTaskPresenter{
+
+    companion object {
+        private val INITIAL_STATE = SelectTaskState()
+    }
+
     private val compositeDisposable = CompositeDisposable()
 
-    private val selectTaskSubject = BehaviorRelay.createDefault(SelectTaskState())
+    private val selectTaskSubject = BehaviorRelay.createDefault(INITIAL_STATE)
 
     private var state: SelectTaskState
         set(value) = selectTaskSubject.accept(value)
         get() = selectTaskSubject.value!!
 
-    private lateinit var pack: Cards
-
-    override fun initState() {
-        state = SelectTaskState()
-    }
 
     override fun onFinish(){
         compositeDisposable.clear()

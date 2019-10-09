@@ -1,7 +1,7 @@
 package com.wolo.a222.feature.auth.presenter
 
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.wolo.a222.Players
+import com.wolo.a222.feature.common.entity.Players
 import com.wolo.a222.R
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.di.Scope.PerScreen
@@ -27,6 +27,7 @@ class AuthPresenterImpl
         set(value) = authSubject.accept(value)
         get() = authSubject.value!!
 
+    private var gamersArray: MutableList<String> = mutableListOf()
     private var reverseGamersArray: MutableList<String> = mutableListOf()
 
     override fun initState() {
@@ -68,10 +69,17 @@ class AuthPresenterImpl
             navigator.showGameZone(layoutResId)
     }
 
-    override fun addNewPlayer(name: String, gamersArray: MutableList<String>) {
-        gamersArray.add(name)
+    override fun addNewPlayer(name: String) {
+        val gamers = state.gamersArray.toMutableList()
+        gamers.add(name)
         reverseGamersArray = gamersArray.toMutableList()
         //reverseGamersArray.reverse()
-        state = state.copy(gamersArray = gamersArray, reverseGamersArray = reverseGamersArray)
+        state = state.copy(gamersArray = gamers, reverseGamersArray = reverseGamersArray)
+    }
+
+    override fun deletePlayer(id: Int) {
+        val newArray = state.gamersArray.toMutableList()
+        newArray.removeAt(id)
+        state = state.copy(gamersArray = newArray)
     }
 }

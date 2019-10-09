@@ -1,6 +1,7 @@
 package com.wolo.a222.feature.shop.presenter
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import com.android.billingclient.api.Purchase
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.Const

@@ -14,7 +14,9 @@ interface AuthPresenter : BasePresenter<AuthView>{
 
     fun onClickStartPlay(gamers: List<String>)
 
-    fun addNewPlayer(name: String, gamersArray: MutableList<String>)
+    fun addNewPlayer(name: String)
+
+    fun deletePlayer(id: Int)
 }
 
 interface AuthView : View

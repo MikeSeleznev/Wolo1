@@ -138,12 +138,24 @@ class Billing : PurchasesUpdatedListener {
         })
     }, BackpressureStrategy.BUFFER)
 
-    fun buyDeck(i: Int){
-        val flowParams = BillingFlowParams.newBuilder()
-                .setSkuDetails(game.skuDetailsList[i])
-                .build()
+    fun buyDeck(i: Int, context: Context){
 
-        val responseCode = billingClient.launchBillingFlow(Activity(), flowParams)
+       // billingClient = BillingClient.newBuilder(context).setListener(this).build()
+        billingClient.startConnection(object : BillingClientStateListener{
+            override fun onBillingServiceDisconnected() {
+              val a ="a"
+            }
+
+            override fun onBillingSetupFinished(billingResult: BillingResult?) {
+                val flowParams = BillingFlowParams.newBuilder()
+                        .setSkuDetails(game.skuDetailsList[i])
+                        .build()
+
+                val responseCode = billingClient.launchBillingFlow(, flowParams)
+            }
+        })
+
+
     }
 }
 

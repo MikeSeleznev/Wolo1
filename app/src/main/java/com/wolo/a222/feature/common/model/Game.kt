@@ -1,11 +1,10 @@
 package com.wolo.a222.feature.common.model
 
 import com.android.billingclient.api.SkuDetails
-import com.wolo.a222.Players
 import com.wolo.a222.feature.common.entity.Pack
+import com.wolo.a222.feature.common.entity.Players
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskVM
-import com.wolo.a222.model.sku.SkuDeck
-import java.util.Random
+import java.util.*
 
 class Game {
     var packs: List<Pack> = emptyList()
@@ -38,16 +37,7 @@ class Game {
         this.isStartGame = true
     }
 
-    fun addPlayers(players: List<Players>) {
-        this.players = players
-        this.numberOfPlayers = players.size
-        this.choosedPlayer = players[0]
-        calculateAngle()
-    }
 
-    fun addCards(cards: List<Cards>) {
-        this.cards = cards
-    }
 
     fun numberOfPlayers(): Int {
         return this.players.size

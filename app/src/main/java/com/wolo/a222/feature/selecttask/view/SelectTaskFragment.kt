@@ -1,5 +1,6 @@
 package com.wolo.a222.feature.selecttask.view
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -33,22 +34,28 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
         super.onAttach(context)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isFinishing) injector.releaseSelectTaskScreen()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         presenter.viewState()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleState)
                 .run { disposeOnDestroyView(this) }
 
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        injector.getSelectTaskScreen().inject(this)
+
         presenter.getPacks()
-
         selectedUser.text = game.choosedPlayer!!.fullName
-
     }
 
     override fun onStart() {
@@ -62,5 +69,19 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
         grid_view.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
             presenter.showTask(state.taskList[i])
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+
     }
 }

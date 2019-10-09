@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wolo.a222.R
 
 
-class GamersAdapter(private val gamersList: MutableList<String>): RecyclerView.Adapter<ViewHolder>(){
+class GamersAdapter(private val gamersList: MutableList<String>, private val callback: OnItemCallback): RecyclerView.Adapter<ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.list_row, parent, false)
         return ViewHolder(v)
@@ -26,9 +26,10 @@ class GamersAdapter(private val gamersList: MutableList<String>): RecyclerView.A
         (holder.title as AppCompatTextView).text = fullText
         holder.newUser.text = shortText.toString()
         val deleteUserOnClick = View.OnClickListener {
-            gamersList.removeAt(position)
+            callback.onDeleteItem(position)
+           /* gamersList.removeAt(position)
             notifyItemRemoved(position)
-            notifyItemRangeChanged(position, gamersList.size)
+            notifyItemRangeChanged(position, gamersList.size)*/
         }
         holder.buttonDelete.setOnClickListener(deleteUserOnClick)
     }
@@ -38,4 +39,8 @@ class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     var newUser: Button = itemView.findViewById(R.id.newUser)
     var title = itemView.findViewById<View>(R.id.title_row)!!
     var buttonDelete: ImageButton = itemView.findViewById(R.id.delete_user)
+}
+
+interface OnItemCallback{
+    fun onDeleteItem(item: Int)
 }
