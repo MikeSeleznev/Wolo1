@@ -2,6 +2,7 @@ package com.wolo.a222.market
 
 import android.app.Activity
 import android.content.Context
+import android.widget.Toast
 import com.android.billingclient.api.*
 import com.wolo.a222.Const
 import com.wolo.a222.WoloApp.Companion.game
@@ -165,10 +166,9 @@ class Billing : PurchasesUpdatedListener, BillingClientStateListener {
                 .setSkuDetails(sku)
                 .build()
 
-        try {
-        val responseCode = billingClient.launchBillingFlow(activity, flowParams)}
-        catch (e: Throwable){
-            print(e.message)
+        val responseCode = billingClient.launchBillingFlow(activity, flowParams)
+        if (responseCode.responseCode == 7){
+            Toast.makeText(activity,responseCode.debugMessage , Toast.LENGTH_LONG).show()
         }
     }
 }
