@@ -5,11 +5,12 @@ import android.content.Context
 import com.android.billingclient.api.*
 import com.wolo.a222.Const
 import com.wolo.a222.WoloApp.Companion.game
+import com.wolo.a222.feature.common.view.MainActivity
 import com.wolo.a222.model.sku.SkuDeck
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 
-class Billing : PurchasesUpdatedListener {
+class Billing : PurchasesUpdatedListener, BillingClientStateListener {
 
     private lateinit var billingClient: BillingClient
     private lateinit var params: SkuDetailsParams
@@ -20,6 +21,8 @@ class Billing : PurchasesUpdatedListener {
     var sku: SkuDetails? = null
     private lateinit var byingPack: String
     var skuReady: Boolean = false
+    private lateinit var b: Unit
+    private lateinit var activity: Activity
 
 
     fun getSkuInfo(context: Context, idList: List<String>) = Flowable
@@ -138,24 +141,35 @@ class Billing : PurchasesUpdatedListener {
         })
     }, BackpressureStrategy.BUFFER)
 
-    fun buyDeck(i: Int, context: Context){
+    fun buyDeck(i: Int, context: Context, act: Activity){
 
-       // billingClient = BillingClient.newBuilder(context).setListener(this).build()
-        billingClient.startConnection(object : BillingClientStateListener{
-            override fun onBillingServiceDisconnected() {
-              val a ="a"
-            }
+        sku = game.skuDetailsList[i]
+        activity = act
+        //billingClient = BillingClient.newBuilder(context).build()
+       b = BillingClient.newBuilder(context)
+                .enablePendingPurchases()
+                .setListener(this)
+                .build()
+                .startConnection(this)
+        //billingClient.startConnection(this)
 
-            override fun onBillingSetupFinished(billingResult: BillingResult?) {
-                val flowParams = BillingFlowParams.newBuilder()
-                        .setSkuDetails(game.skuDetailsList[i])
-                        .build()
+    }
 
-                val responseCode = billingClient.launchBillingFlow(, flowParams)
-            }
-        })
+    override fun onBillingServiceDisconnected() {
 
+    }
 
+    override fun onBillingSetupFinished(billingResult: BillingResult?) {
+
+        val flowParams = BillingFlowParams.newBuilder()
+                .setSkuDetails(sku)
+                .build()
+
+        try {
+        val responseCode = billingClient.launchBillingFlow(activity, flowParams)}
+        catch (e: Throwable){
+            print(e.message)
+        }
     }
 }
 

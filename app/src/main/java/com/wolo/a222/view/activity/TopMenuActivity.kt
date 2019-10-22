@@ -1,4 +1,4 @@
-package com.wolo.a222.View.Activity
+package com.wolo.a222.view.activity
 
 import android.content.Intent
 import android.os.Bundle

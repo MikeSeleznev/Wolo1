@@ -48,7 +48,7 @@ class ShopInteractorImpl @Inject constructor(
                .subscribeOn(Schedulers.io())
     }
 
-    override fun buyDeck(i: Int) {
-       billing.buyDeck(i, context)
+    override fun buyDeck(i: Int, act: Activity) {
+       billing.buyDeck(i, context, act)
     }
 }

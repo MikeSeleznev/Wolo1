@@ -1,14 +1,10 @@
 package com.wolo.a222.feature.shop.view
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import com.android.billingclient.api.BillingFlowParams
 import com.wolo.a222.R
-import com.wolo.a222.WoloApp.Companion.game
-import com.wolo.a222.feature.common.view.MainActivity
 import com.wolo.a222.feature.common.view.PresenterFragment
 import com.wolo.a222.feature.shop.presenter.ShopPresenter
 import com.wolo.a222.feature.shop.presenter.ShopState
@@ -63,8 +59,7 @@ class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView {
         grid_view.adapter = DataAdapter(activity!!.applicationContext, state.skuDeck)
 
         grid_view.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
-
-          presenter.buyDeck(i)
+          presenter.buyDeck(i, activity!!)
         }
     }
 }

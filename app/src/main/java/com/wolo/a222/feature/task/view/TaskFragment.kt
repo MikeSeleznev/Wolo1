@@ -44,7 +44,6 @@ class TaskFragment : PresenterFragment<TaskPresenter>(), TaskView {
             presenter.doneButtonOnClick()
         }
         doneButton.setOnClickListener(doneButtonOnClickListener)
-
     }
 
     private fun handleState(state: TaskState) {

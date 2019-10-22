@@ -1,4 +1,4 @@
-package com.wolo.a222.View.Activity
+package com.wolo.a222.view.activity
 
 import androidx.test.runner.AndroidJUnit4
 import org.junit.runner.RunWith
