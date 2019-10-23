@@ -37,7 +37,7 @@ class SelectTaskDelegate (private val callback: OnClickItemSelectTaskCallback): 
 }
 
 interface OnClickItemSelectTaskCallback {
-    fun onClickItem(item: SkuDeck)
+    fun onClickItem(item: SelectTaskVM)
 }
 
 class SelectTaskViewHolder(itemView: View, private val callback: OnClickItemSelectTaskCallback) : BaseViewHolder<SelectTaskVM>(itemView) {
@@ -45,13 +45,16 @@ class SelectTaskViewHolder(itemView: View, private val callback: OnClickItemSele
     override fun bind(item: SelectTaskVM, payloads: List<Any>) {
         super.bind(item, payloads)
 
-        val image = itemView.findViewById<ImageView>(R.id.image_pack)
+        val image = itemView.findViewById<ImageView>(R.id.imagePackSelectTask)
         image.setImageResource(R.drawable.alldecks)
-        val packName = itemView.findViewById<TextView>(R.id.pack_name)
+        val packName = itemView.findViewById<TextView>(R.id.packNameSelectTask)
         packName.text = item.namePack
-        val quantity = itemView.findViewById<TextView>(R.id.quantity)
+        val quantity = itemView.findViewById<TextView>(R.id.quantitySelectTask)
         quantity.text = item.quantityNow.toString() + "/" + item.quantity.toString()
 
+        image.setOnClickListener {
+          callback.onClickItem(item)
+        }
 
         Glide.with(context).asBitmap()
                 .apply {

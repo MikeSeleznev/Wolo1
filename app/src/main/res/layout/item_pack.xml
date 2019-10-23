@@ -4,18 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:paddingStart="35dp"
+    android:paddingTop="10dp"
+    android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/image_pack"
+        android:id="@+id/imagePackSelectTask"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:foregroundGravity="center_horizontal"
         app:srcCompat="@drawable/erotic"
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/pack_name"
+        android:id="@+id/packNameSelectTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -24,10 +28,10 @@
         tools:text="TextView"/>
 
     <TextView
-        android:id="@+id/quantity"
+        android:id="@+id/quantitySelectTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_gravity="center"
         style="@style/CardsText"
         tools:text="TextView" />
 </LinearLayout>

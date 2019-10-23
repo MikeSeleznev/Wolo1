@@ -9,6 +9,7 @@ import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.view.PresenterFragment
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskPresenter
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskState
+import com.wolo.a222.feature.selecttask.presenter.SelectTaskVM
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskView
 import com.wolo.a222.feature.selecttask.view.adapter.OnClickItemSelectTaskCallback
 import com.wolo.a222.feature.selecttask.view.adapter.SelectTaskAdapter
@@ -66,6 +67,7 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
 
         packsRecycle.layoutManager = GridLayoutManager(requireContext(), 2)
         packsRecycle.adapter = adapter
+        packsRecycle.setHasFixedSize(true)
     }
 
     override fun onStart() {
@@ -75,14 +77,9 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
 
     private fun handleState(state: SelectTaskState) {
         adapter.items = state.taskList
-       /* grid_view.adapter = SelectTaskAdapter1(activity!!.applicationContext, state.taskList)
-
-        grid_view.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
-            presenter.showTask(state.taskList[i])
-        }*/
     }
 
-    override fun onClickItem(item: SkuDeck) {
-
+    override fun onClickItem(item: SelectTaskVM) {
+        presenter.showTask(item)
     }
 }
