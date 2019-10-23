@@ -146,14 +146,12 @@ class Billing : PurchasesUpdatedListener, BillingClientStateListener {
 
         sku = game.skuDetailsList[i]
         activity = act
-        //billingClient = BillingClient.newBuilder(context).build()
-       b = BillingClient.newBuilder(context)
+
+        b = BillingClient.newBuilder(context)
                 .enablePendingPurchases()
                 .setListener(this)
                 .build()
                 .startConnection(this)
-        //billingClient.startConnection(this)
-
     }
 
     override fun onBillingServiceDisconnected() {
