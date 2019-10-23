@@ -1,23 +1,24 @@
 package com.wolo.a222.feature.selecttask.view
 
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
+import androidx.recyclerview.widget.GridLayoutManager
 import com.wolo.a222.R
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.view.PresenterFragment
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskPresenter
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskState
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskView
+import com.wolo.a222.feature.selecttask.view.adapter.OnClickItemSelectTaskCallback
 import com.wolo.a222.feature.selecttask.view.adapter.SelectTaskAdapter
+import com.wolo.a222.feature.selecttask.view.adapter.SelectTaskDelegate
+import com.wolo.a222.model.sku.SkuDeck
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_select_task.*
-import kotlinx.android.synthetic.main.fragment_select_task.grid_view
 import javax.inject.Inject
 
-class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskView{
+class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskView, OnClickItemSelectTaskCallback {
 
     companion object {
         fun newInstance() = SelectTaskFragment()
@@ -28,6 +29,12 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
 
     override val layoutResId: Int
         get() = R.layout.fragment_select_task
+
+    private val adapter: SelectTaskAdapter by lazy {
+        SelectTaskAdapter().also {
+            it.addDelegate(SelectTaskDelegate(this))
+        }
+    }
 
     override fun onAttach(context: Context) {
         injector.getSelectTaskScreen().inject(this)
@@ -56,6 +63,9 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
 
         presenter.getPacks()
         selectedUser.text = game.choosedPlayer!!.fullName
+
+        packsRecycle.layoutManager = GridLayoutManager(requireContext(), 2)
+        packsRecycle.adapter = adapter
     }
 
     override fun onStart() {
@@ -64,24 +74,15 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
     }
 
     private fun handleState(state: SelectTaskState) {
-        grid_view.adapter = SelectTaskAdapter(activity!!.applicationContext, state.taskList)
+        adapter.items = state.taskList
+       /* grid_view.adapter = SelectTaskAdapter1(activity!!.applicationContext, state.taskList)
 
         grid_view.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
             presenter.showTask(state.taskList[i])
-        }
+        }*/
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
+    override fun onClickItem(item: SkuDeck) {
 
     }
 }

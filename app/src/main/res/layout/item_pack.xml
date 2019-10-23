@@ -9,27 +9,24 @@
 
     <ImageView
         android:id="@+id/image_pack"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         app:srcCompat="@drawable/erotic"
         tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/pack_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="1"
         style="@style/CardsText"
         android:gravity="center"
         tools:text="TextView"/>
 
     <TextView
         android:id="@+id/quantity"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:gravity="center"
         style="@style/CardsText"
         tools:text="TextView" />
