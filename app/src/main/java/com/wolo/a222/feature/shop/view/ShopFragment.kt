@@ -9,12 +9,12 @@ import com.wolo.a222.feature.common.view.PresenterFragment
 import com.wolo.a222.feature.shop.presenter.ShopPresenter
 import com.wolo.a222.feature.shop.presenter.ShopState
 import com.wolo.a222.feature.shop.presenter.ShopView
+import com.wolo.a222.feature.shop.view.adapter.OnClickItemCallback
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_shop.*
 import com.wolo.a222.feature.shop.view.adapter.ShopAdapter
+import com.wolo.a222.feature.shop.view.adapter.ShopDelegate
 import com.wolo.a222.model.sku.SkuDeck
-import ru.ireca.kitchen.feature.stoplist.pagefragment.view.pageAdapter.OnClickItemCallback
-import ru.ireca.kitchen.feature.stoplist.pagefragment.view.pageAdapter.ShopDelegate
 import javax.inject.Inject
 
 class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView, OnClickItemCallback {
