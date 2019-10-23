@@ -142,16 +142,17 @@ class Billing : PurchasesUpdatedListener, BillingClientStateListener {
         })
     }, BackpressureStrategy.BUFFER)
 
-    fun buyDeck(i: Int, context: Context, act: Activity){
+    fun buyDeck(i: SkuDetails, context: Context, act: Activity){
 
-        sku = game.skuDetailsList[i]
+        sku = i
         activity = act
 
-        b = BillingClient.newBuilder(context)
+       b = BillingClient.newBuilder(context)
                 .enablePendingPurchases()
                 .setListener(this)
                 .build()
                 .startConnection(this)
+
     }
 
     override fun onBillingServiceDisconnected() {

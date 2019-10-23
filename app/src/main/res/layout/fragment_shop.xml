@@ -44,9 +44,9 @@
         android:textSize="12sp" />
 
 
-    <GridView
-        android:id="@+id/grid_view"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/packs"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="100"
         android:gravity="center"

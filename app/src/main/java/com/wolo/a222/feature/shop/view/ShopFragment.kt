@@ -3,18 +3,21 @@ package com.wolo.a222.feature.shop.view
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
+import androidx.recyclerview.widget.GridLayoutManager
 import com.wolo.a222.R
 import com.wolo.a222.feature.common.view.PresenterFragment
 import com.wolo.a222.feature.shop.presenter.ShopPresenter
 import com.wolo.a222.feature.shop.presenter.ShopState
 import com.wolo.a222.feature.shop.presenter.ShopView
-import com.wolo.a222.feature.shop.view.adapter.DataAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_shop.*
+import com.wolo.a222.feature.shop.view.adapter.ShopAdapter
+import com.wolo.a222.model.sku.SkuDeck
+import ru.ireca.kitchen.feature.stoplist.pagefragment.view.pageAdapter.OnClickItemCallback
+import ru.ireca.kitchen.feature.stoplist.pagefragment.view.pageAdapter.ShopDelegate
 import javax.inject.Inject
 
-class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView {
+class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView, OnClickItemCallback {
 
     companion object {
         fun newInstance() = ShopFragment()
@@ -25,6 +28,12 @@ class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView {
 
     override val layoutResId: Int
         get() = R.layout.fragment_shop
+
+    private val adapter: ShopAdapter by lazy {
+        ShopAdapter().also {
+            it.addDelegate(ShopDelegate(this))
+        }
+    }
 
     override fun onAttach(context: Context) {
         injector.getShopScreen().inject(this)
@@ -43,10 +52,14 @@ class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleState)
                 .run { disposeOnDestroyView(this) }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        packs.layoutManager = GridLayoutManager(requireContext(), 2)
+        packs.adapter = adapter
 
         val onClickClose = View.OnClickListener {
             presenter.closeShop()
@@ -55,11 +68,10 @@ class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView {
     }
 
     private fun handleState(state: ShopState) {
+        adapter.items = state.skuDeck
+    }
 
-        grid_view.adapter = DataAdapter(activity!!.applicationContext, state.skuDeck)
-
-        grid_view.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
-          presenter.buyDeck(i, activity!!)
-        }
+    override fun onClickItem(item: SkuDeck) {
+        presenter.buyDeck(item, activity!!)
     }
 }

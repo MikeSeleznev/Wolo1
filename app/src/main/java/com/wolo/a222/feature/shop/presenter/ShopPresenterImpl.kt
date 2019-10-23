@@ -101,7 +101,7 @@ class ShopPresenterImpl @Inject constructor(
         }
     }
 
-    override fun buyDeck(i: Int, act: Activity) {
+    override fun buyDeck(i: SkuDeck, act: Activity) {
         shopInteractor.buyDeck(i, act)
     }
 }

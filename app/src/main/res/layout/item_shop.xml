@@ -8,10 +8,11 @@
 
     <ImageView
         android:id="@+id/image_pack"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:padding="5dp"
+        android:adjustViewBounds="true"
         app:srcCompat="@drawable/erotic"
         tools:ignore="ContentDescription" />
 

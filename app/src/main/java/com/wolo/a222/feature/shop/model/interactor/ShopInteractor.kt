@@ -11,5 +11,5 @@ interface ShopInteractor{
 
     fun getSkuInfo(): Flowable<List<SkuDeck>>
 
-    fun buyDeck(i: Int, act: Activity)
+    fun buyDeck(i: SkuDeck, act: Activity)
 }

@@ -11,9 +11,7 @@ import com.wolo.a222.WoloApp
 import com.wolo.a222.feature.common.view.MainActivity
 import com.wolo.a222.feature.shop.presenter.ShopPresenter
 import com.wolo.a222.feature.shop.presenter.ShopState
-import com.wolo.a222.feature.shop.view.adapter.DataAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.fragment_shop.*
 import javax.inject.Inject
 
 
@@ -73,11 +71,7 @@ class ShopActivity : AppCompatActivity(), BillingClientStateListener {
 
     private fun handleState(state: ShopState) {
 
-        grid_view.adapter = DataAdapter(this, state.skuDeck)
 
-        grid_view.setOnItemClickListener { adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
-            buyDeck(i)
-        }
     }
 
     fun buyDeck(i: Int){

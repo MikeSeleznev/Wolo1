@@ -48,7 +48,13 @@ class ShopInteractorImpl @Inject constructor(
                .subscribeOn(Schedulers.io())
     }
 
-    override fun buyDeck(i: Int, act: Activity) {
-       billing.buyDeck(i, context, act)
+    override fun buyDeck(i: SkuDeck, act: Activity) {
+        game.skuDetailsList.findLast {skuDetails ->
+            skuDetails.sku == i.skuType
+        }.let {it->
+            if (it != null) {
+                billing.buyDeck(it, context, act)
+            }
+        }
     }
 }

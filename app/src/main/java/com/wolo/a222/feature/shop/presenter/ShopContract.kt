@@ -13,7 +13,7 @@ interface ShopPresenter: BasePresenter<ShopView> {
 
     fun closeShop()
 
-    fun buyDeck(i: Int, act: Activity)
+    fun buyDeck(i: SkuDeck, act: Activity)
 }
 
 interface ShopView: View
