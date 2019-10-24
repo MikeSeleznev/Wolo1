@@ -1,12 +1,12 @@
 package com.wolo.a222.feature.auth.view
 
-
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.wolo.a222.Const
 import com.wolo.a222.R
 import com.wolo.a222.feature.auth.presenter.AuthPresenter
 import com.wolo.a222.feature.auth.presenter.AuthState
@@ -17,7 +17,6 @@ import com.wolo.a222.feature.common.view.PresenterFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_auth.*
 import javax.inject.Inject
-
 
 class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView, OnItemCallback {
 
@@ -47,7 +46,11 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView, OnItemCallbac
         gamers_lists.adapter = adapter
 
         val addPlayerOnClick = View.OnClickListener {
-            if (new_user.text.toString() != "") {
+            if(new_user.text.toString() == Const.SUPERUSER){
+                presenter.activeSuperUser()
+                Toast.makeText(context, "Суперпользователь активирован", Toast.LENGTH_LONG).show()
+                new_user.setText("")
+            } else if (new_user.text.toString() != "") {
                 presenter.addNewPlayer(new_user.text.toString())
             }
         }

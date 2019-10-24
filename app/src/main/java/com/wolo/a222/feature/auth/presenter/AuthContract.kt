@@ -17,6 +17,8 @@ interface AuthPresenter : BasePresenter<AuthView>{
     fun addNewPlayer(name: String)
 
     fun deletePlayer(id: Int)
+
+    fun activeSuperUser()
 }
 
 interface AuthView : View

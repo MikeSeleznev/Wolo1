@@ -4,6 +4,7 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.feature.common.entity.Players
 import com.wolo.a222.R
 import com.wolo.a222.WoloApp.Companion.game
+import com.wolo.a222.feature.auth.model.interactor.AuthInteractor
 import com.wolo.a222.feature.common.di.Scope.PerScreen
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @PerScreen
 class AuthPresenterImpl
 @Inject constructor(
-        val navigator: Navigator
+        val navigator: Navigator,
+        private val interactor: AuthInteractor
 ) : BasePresenter<AuthView>, AuthPresenter {
 
     private val compositeDisposable = CompositeDisposable()
@@ -81,5 +83,9 @@ class AuthPresenterImpl
         val newArray = state.gamersArray.toMutableList()
         newArray.removeAt(id)
         state = state.copy(gamersArray = newArray)
+    }
+
+    override fun activeSuperUser() {
+        interactor.activateSuperUser()
     }
 }

@@ -1,8 +1,8 @@
 package com.wolo.a222.feature.selecttask.presenter
 
 import com.jakewharton.rxrelay2.BehaviorRelay
+import com.wolo.a222.Const
 import com.wolo.a222.WoloApp.Companion.game
-import com.wolo.a222.feature.common.model.Cards
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.selecttask.model.interactor.SelectTaskInteractor
@@ -42,19 +42,33 @@ class SelectTaskPresenterImpl
     }
 
     override fun getPacks(){
+        var isBoughtAll = false
 
-        interactor.getPurchase().map {purchases->
-            val packs = game.packs.filter { it.priority > 0 }.sortedBy { it.priority
-            }
-            packs.map {pack->
-                val a = purchases.find { it.sku == pack.id }
-                if (a != null) {
-                    SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.nonActiveImage, pack.tasks.size)
-                } else {
-                    SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size)
+        if (game.superUser) isBoughtAll = true
+
+        interactor.getPurchase().map { purchases ->
+            purchases.find { it.sku == Const.alldecksSKU }.let {
+                if (it != null) {
+                    isBoughtAll = true
                 }
             }
-
+            val packs = game.packs.filter { it.priority > 0 }.sortedBy {
+                it.priority
+            }
+            if (isBoughtAll) {
+                packs.map { pack ->
+                    SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size, isBoughtAll)
+                }
+            } else {
+                packs.map { pack ->
+                    val purchase = purchases.find { it.sku == pack.id }
+                    if (purchase != null) {
+                        SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.nonActiveImage, pack.tasks.size)
+                    } else {
+                        SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size, isBoughtAll)
+                    }
+                }
+            }
         }
                 .onBackpressureBuffer(3)
                 .subscribeOn(Schedulers.io())

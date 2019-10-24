@@ -53,7 +53,7 @@ class SelectTaskViewHolder(itemView: View, private val callback: OnClickItemSele
         quantity.text = item.quantityNow.toString() + "/" + item.quantity.toString()
 
         image.setOnClickListener {
-          callback.onClickItem(item)
+            if (item.isBought) callback.onClickItem(item)
         }
 
         Glide.with(context).asBitmap()

@@ -28,5 +28,6 @@ data class SelectTaskVM(
         val namePack: String = "",
         val quantity: Int = 0,
         val urlImage: String = "",
-        val quantityNow: Int = 0
+        val quantityNow: Int = 0,
+        val isBought: Boolean = false
 )

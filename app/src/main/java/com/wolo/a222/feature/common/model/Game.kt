@@ -27,6 +27,7 @@ class Game {
     var paidErotic: Boolean? = false
     var paidOhFuck: Boolean? = false
     private var paidAllDecks: Boolean? = false
+    var superUser: Boolean = false
 
     val firstPlayer: Players
         get() = this.players[0]

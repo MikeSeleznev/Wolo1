@@ -18,7 +18,6 @@ class WoloApp: Application(), InjectorProvider {
         super.onCreate()
         injector = AppInjector(this)
         injector.getAppComponent().inject(this)
-
     }
 }
 
