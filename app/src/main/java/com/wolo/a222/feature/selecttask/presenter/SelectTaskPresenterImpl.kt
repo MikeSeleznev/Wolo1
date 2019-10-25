@@ -42,9 +42,7 @@ class SelectTaskPresenterImpl
     }
 
     override fun getPacks(){
-        var isBoughtAll = false
-
-        if (game.superUser) isBoughtAll = true
+        var isBoughtAll = game.superUser
 
         interactor.getPurchase().map { purchases ->
             purchases.find { it.sku == Const.alldecksSKU }.let {
@@ -63,9 +61,9 @@ class SelectTaskPresenterImpl
                 packs.map { pack ->
                     val purchase = purchases.find { it.sku == pack.id }
                     if (purchase != null) {
-                        SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.nonActiveImage, pack.tasks.size)
+                        SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size, true)
                     } else {
-                        SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size, isBoughtAll)
+                        SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.nonActiveImage, pack.tasks.size, pack.alwaysActive)
                     }
                 }
             }

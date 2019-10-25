@@ -14,6 +14,7 @@ import com.wolo.a222.feature.auth.presenter.AuthView
 import com.wolo.a222.feature.auth.view.adapter.GamersAdapter
 import com.wolo.a222.feature.auth.view.adapter.OnItemCallback
 import com.wolo.a222.feature.common.view.PresenterFragment
+import com.wolo.a222.utils.Keyboard
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_auth.*
 import javax.inject.Inject
@@ -60,8 +61,10 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView, OnItemCallbac
             //gamersArray.reverse()
             when (gamersArray.size) {
                 0 -> Toast.makeText(context, "Необходимо добавить минимум 2-х игроков!", Toast.LENGTH_LONG).show()
-                1 -> Toast.makeText(context, "Необходимо добавить минимум 1 игрока!", Toast.LENGTH_LONG).show()
-                else -> presenter.onClickStartPlay(gamersArray)
+                1 -> Toast.makeText(context, "Необходимо добавить еще минимум 1 игрока!", Toast.LENGTH_LONG).show()
+                else -> {
+                    Keyboard().hideKeyboard(activity!!.applicationContext)
+                    presenter.onClickStartPlay(gamersArray)}
             }
         }
         start_game_button.setOnClickListener(startGameOnClick)

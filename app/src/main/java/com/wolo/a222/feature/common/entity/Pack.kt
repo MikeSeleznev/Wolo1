@@ -8,5 +8,6 @@ data class Pack(
         val activeImage: String = "",
         val nonActiveImage: String = "",
         val priority: Long = 0L,
-        val restTasks: Int = tasks.size
+        val restTasks: Int = tasks.size,
+        val alwaysActive: Boolean = false
 )

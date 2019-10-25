@@ -1,10 +1,14 @@
 package com.wolo.a222.feature.splashscreen.model.interactor
 
+import android.content.Context
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.di.Scope.PerFeature
 import com.wolo.a222.feature.common.entity.Pack
 import com.wolo.a222.feature.common.model.repository.FB
+import com.wolo.a222.utils.SaveLoadImage
 import io.reactivex.Completable
+import io.reactivex.Scheduler
+import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -12,9 +16,13 @@ import javax.inject.Inject
 class SplashScreenInteractorImpl
 @Inject
 constructor(
-        private val fB: FB) : SplashScreenInteractor {
+        private val fB: FB,
+        private val context: Context) : SplashScreenInteractor {
 
     override fun loadPacks(): Completable {
+
+        val saveImage= SaveLoadImage(context)
+
         return fB.getPacks()
                 .subscribeOn(Schedulers.io())
                 .map {it ->
@@ -27,6 +35,7 @@ constructor(
                         var activeImage = ""
                         var nonActiveImage = ""
                         var priority = 0L
+                        var alwaysActive = false
                         val keys = s.data?.keys
                         for (i in keys!!){
                             when (i){
@@ -37,14 +46,21 @@ constructor(
                                 "activeImage" -> activeImage = s.data?.get(i) as String
                                 "nonActiveImage" -> nonActiveImage = s.data?.get(i).toString()
                                 "priority" -> priority = s.data?.get(i) as Long
+                                "alwaysActive" -> alwaysActive = s.data?.get(i) as Boolean
                             }
                         }
-                        listPacks.add(Pack(id, name, cards,paid, activeImage, nonActiveImage, priority, cards.size))
+                        listPacks.add(Pack(id, name, cards,paid, activeImage, nonActiveImage, priority, cards.size, alwaysActive))
                     }
                     game.packs = listPacks
+                    listPacks
+                }
+                .flatMap { it ->
+                    saveImage.saveImage(it)
+                    Single.just(true)
                 }
                 .flatMapCompletable {
-                    Completable.complete() }
+                    Completable.complete()
+                }
     }
 }
 
