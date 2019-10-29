@@ -15,6 +15,7 @@ import com.wolo.a222.feature.selecttask.view.adapter.OnClickItemSelectTaskCallba
 import com.wolo.a222.feature.selecttask.view.adapter.SelectTaskAdapter
 import com.wolo.a222.feature.selecttask.view.adapter.SelectTaskDelegate
 import com.wolo.a222.model.sku.SkuDeck
+import com.wolo.a222.utils.Keyboard
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_select_task.*
 import javax.inject.Inject
@@ -68,7 +69,7 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
         packsRecycle.layoutManager = GridLayoutManager(requireContext(), 2)
         packsRecycle.adapter = adapter
         packsRecycle.setHasFixedSize(true)
-    }
+            }
 
     override fun onStart() {
         super.onStart()

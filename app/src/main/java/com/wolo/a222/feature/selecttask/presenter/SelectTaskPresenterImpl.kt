@@ -99,6 +99,5 @@ class SelectTaskPresenterImpl
     override fun showTask(p: SelectTaskVM) {
             interactor.setChoosedPack(p)
             navigator.showTask()
-
     }
 }

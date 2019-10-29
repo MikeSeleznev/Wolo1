@@ -12,9 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
+        android:maxLines="1"
         android:text="@string/play_store"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="@dimen/text_20sp" />
 
     <CheckedTextView
         android:id="@+id/checkedTextView3"
@@ -23,11 +24,12 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
+        android:maxLines="1"
         android:fontFamily="sans-serif-medium"
         android:text="Обратите внимание! "
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="@dimen/text_17sp" />
 
     <CheckedTextView
         android:id="@+id/checkedTextView13"
@@ -37,11 +39,12 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="8dp"
         android:layout_weight="1"
+        android:maxLines="1"
         android:fontFamily="sans-serif"
         android:text="Вы можете выгодно приобрести сразу все колоды!"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="12sp" />
+        android:textSize="@dimen/text_13sp" />
 
 
     <androidx.recyclerview.widget.RecyclerView
