@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_shop.*
 import com.wolo.a222.feature.shop.view.adapter.ShopAdapter
 import com.wolo.a222.feature.shop.view.adapter.ShopDelegate
 import com.wolo.a222.feature.common.entity.SkuDeck
+import com.wolo.a222.feature.shop.presenter.ShopVM
 import javax.inject.Inject
 
 class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView, OnClickItemCallback {
@@ -68,10 +69,10 @@ class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView, OnClickItemCa
     }
 
     private fun handleState(state: ShopState) {
-        adapter.items = state.skuDeck
+        adapter.items = state.listVM
     }
 
-    override fun onClickItem(item: SkuDeck) {
+    override fun onClickItem(item: ShopVM) {
         presenter.buyDeck(item, activity!!)
     }
 }

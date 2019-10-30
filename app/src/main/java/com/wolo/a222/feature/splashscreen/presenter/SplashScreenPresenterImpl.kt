@@ -50,28 +50,36 @@ class SplashScreenPresenterImpl
 
     override fun loadDate() {
         splashScreenInteractor.loadPacks()
-            .subscribeOn(Schedulers.io())
-            .flatMap {
-                cacheList = it
-                woloRepository.setPacks(it)
-                    .toFlowable()
-                    .subscribeOn(Schedulers.io())}
-            .flatMap {
-                val listId = mutableListOf<String>()
-                cacheList.map {
-                    if (it.id != "") listId.add(it.id)
+                .subscribeOn(Schedulers.io())
+                .flatMap {
+                    cacheList = it
+                    woloRepository.setPacks(it)
+                            .toFlowable()
+                            .subscribeOn(Schedulers.io())
                 }
-                splashScreenInteractor.loadSku(listId)}
-            .flatMap {
-                woloRepository.setSkuDecks(it)
-                    .toFlowable()
-                    .subscribeOn(Schedulers.io())
-            }
-            .doOnSubscribe { state = state.copy(screenText = "Загрузка данных", dateIsLoaded = false) }
-            .subscribe { result ->
-                state = state.copy(screenText = "Данные загружены", dateIsLoaded = true)
-            }
-            .also { compositeDisposable.add(it) }
+                .flatMap {
+                    val listId = mutableListOf<String>()
+                    cacheList.map {
+                        if (it.id != "") listId.add(it.id)
+                    }
+                    splashScreenInteractor.loadSku(listId)
+                }
+                .flatMap {
+                    woloRepository.setSkuDecks(it)
+                            .toFlowable()
+                            .subscribeOn(Schedulers.io())
+                }.flatMap {
+                    splashScreenInteractor.loadPurchases()
+                }.flatMap {
+                    woloRepository.setPurchases(it)
+                            .toFlowable()
+                            .subscribeOn(Schedulers.io())
+                }
+                .doOnSubscribe { state = state.copy(screenText = "Загрузка данных", dateIsLoaded = false) }
+                .subscribe { result ->
+                    state = state.copy(screenText = "Данные загружены", dateIsLoaded = true)
+                }
+                .also { compositeDisposable.add(it) }
 
     }
 

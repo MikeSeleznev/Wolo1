@@ -4,11 +4,15 @@ import android.app.Activity
 import android.content.Context
 import android.widget.Toast
 import com.android.billingclient.api.*
+import com.google.api.Billing
 import com.wolo.a222.Const
+import com.wolo.a222.WoloApp
 import com.wolo.a222.WoloApp.Companion.game
+import com.wolo.a222.feature.common.entity.Purchases
 import com.wolo.a222.feature.common.entity.SkuDeck
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
+import io.reactivex.schedulers.Schedulers
 
 class Billing : PurchasesUpdatedListener, BillingClientStateListener {
 
@@ -169,5 +173,34 @@ class Billing : PurchasesUpdatedListener, BillingClientStateListener {
             Toast.makeText(activity,responseCode.debugMessage , Toast.LENGTH_LONG).show()
         }
     }
+
+    fun getPurchase(context: Context): Flowable<List<Purchases>>  = Flowable.create<List<Purchases>>({ emitter ->
+            billingClient = BillingClient.newBuilder(context)
+                    .enablePendingPurchases()
+                    .setListener(this)
+                    .build()
+            billingClient.startConnection(object : BillingClientStateListener {
+                override fun onBillingServiceDisconnected() {
+
+                }
+
+                override fun onBillingSetupFinished(billingResult: BillingResult?) {
+                    val purchasesResult: Purchase.PurchasesResult = billingClient.queryPurchases(BillingClient.SkuType.INAPP)
+                    if (billingResult != null) {
+                        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                            val list = purchasesResult.purchasesList
+                                    .map { Purchases(it.sku) }
+                            emitter.onNext(list)
+
+                        }
+                    } else {
+                        //emitter.onError()
+                    }
+                    emitter.onComplete()
+                }
+            })
+        }, BackpressureStrategy.BUFFER)
+
+
 }
 

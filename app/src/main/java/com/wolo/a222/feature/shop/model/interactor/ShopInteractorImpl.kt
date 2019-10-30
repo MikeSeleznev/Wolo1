@@ -2,55 +2,40 @@ package com.wolo.a222.feature.shop.model.interactor
 
 import android.app.Activity
 import android.content.Context
-import com.android.billingclient.api.Purchase
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.di.Scope.PerFeature
-import com.wolo.a222.market.Billing
+import com.wolo.a222.feature.common.entity.Pack
+import com.wolo.a222.feature.common.entity.Purchases
 import com.wolo.a222.feature.common.entity.SkuDeck
+import com.wolo.a222.feature.common.repository.WoloRepository
+import com.wolo.a222.feature.shop.presenter.ShopVM
+import com.wolo.a222.market.Billing
 import io.reactivex.Flowable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @PerFeature
 class ShopInteractorImpl @Inject constructor(
         private val context: Context,
-        private val billing: Billing
+        private val billing: Billing,
+        private val woloRepository: WoloRepository
 ) : ShopInteractor{
 
-    override fun getPurchase(): Flowable<MutableList<Purchase>> {
-       return billing.getPurchases(context)
-               .map {listPurchases ->
-                   val list = mutableListOf<Purchase>()
-                   val packs = game.packs.map {pack ->
-                       pack.id
-                   }
-                   listPurchases.map {purchase ->
-                       for (i in packs){
-                           if (i == purchase.sku){
-                               list.add(purchase)
-                           }
-                       }
-                   }
-                   list
-               }
-                .subscribeOn(Schedulers.io())
+    override fun getPurchase(): Flowable<List<Purchases>> {
+       return woloRepository.getPurchases()
 
     }
 
     override fun getSkuInfo(): Flowable<List<SkuDeck>> {
-        val idList = mutableListOf<String>()
-        game.packs.map {pack ->
-            if (pack.id != ""){
-                idList.add(pack.id)
-            }
-        }
-        return billing.getSkuInfo(context, idList)
-               .subscribeOn(Schedulers.io())
+        return woloRepository.getSkuDecks()
     }
 
-    override fun buyDeck(i: SkuDeck, act: Activity) {
+    override fun getPacks(): Flowable<List<Pack>> {
+        return woloRepository.getPacks()
+    }
+
+    override fun buyDeck(i: ShopVM, act: Activity) {
         game.skuDetailsList.findLast {skuDetails ->
-            skuDetails.sku == i.skuType
+            skuDetails.sku == i.id
         }.let {it->
             if (it != null) {
                 billing.buyDeck(it, context, act)

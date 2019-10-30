@@ -1,6 +1,7 @@
 package com.wolo.a222.feature.common.storage
 
 import com.wolo.a222.feature.common.entity.Pack
+import com.wolo.a222.feature.common.entity.Purchases
 import com.wolo.a222.feature.common.entity.SkuDeck
 import com.wolo.a222.feature.common.repository.WoloRepository
 import io.reactivex.Flowable
@@ -25,5 +26,13 @@ class WoloRepositoryImpl @Inject constructor(
 
     override fun getPacks(): Flowable<List<Pack>> {
         return database.PackDao().getPacks()
+    }
+
+    override fun setPurchases(purchases: List<Purchases>): Single<List<Long>>  = Single.fromCallable{
+        database.PurchasesDao().insert(purchases)
+    }
+
+    override fun getPurchases(): Flowable<List<Purchases>> {
+        return database.PurchasesDao().getPurchases()
     }
 }

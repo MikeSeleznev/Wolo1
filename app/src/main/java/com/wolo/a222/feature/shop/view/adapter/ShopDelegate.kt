@@ -15,19 +15,19 @@ import com.bumptech.glide.request.target.Target
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import com.wolo.a222.R
 import com.wolo.a222.feature.common.view.adapter.BaseViewHolder
-import com.wolo.a222.feature.common.entity.SkuDeck
+import com.wolo.a222.feature.shop.presenter.ShopVM
 
-class ShopDelegate (private val callback: OnClickItemCallback): AbsListItemAdapterDelegate<SkuDeck, SkuDeck, ShopViewHolder>(){
+class ShopDelegate (private val callback: OnClickItemCallback): AbsListItemAdapterDelegate<ShopVM, ShopVM, ShopViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup): ShopViewHolder {
         val view  = LayoutInflater.from(parent.context).inflate(R.layout.item_shop, parent, false)
         return ShopViewHolder(view, callback)
     }
 
-    override fun isForViewType(item: SkuDeck, items: MutableList<SkuDeck>, position: Int): Boolean = true
+    override fun isForViewType(item: ShopVM, items: MutableList<ShopVM>, position: Int): Boolean = true
 
     override fun onBindViewHolder(
-        item: SkuDeck,
+        item: ShopVM,
         holder: ShopViewHolder,
         payloads: MutableList<Any>
     ) {
@@ -36,12 +36,12 @@ class ShopDelegate (private val callback: OnClickItemCallback): AbsListItemAdapt
 }
 
 interface OnClickItemCallback {
-    fun onClickItem(item: SkuDeck)
+    fun onClickItem(item: ShopVM)
 }
 
-class ShopViewHolder(itemView: View, private val callback: OnClickItemCallback) : BaseViewHolder<SkuDeck>(itemView) {
+class ShopViewHolder(itemView: View, private val callback: OnClickItemCallback) : BaseViewHolder<ShopVM>(itemView) {
 
-    override fun bind(item: SkuDeck, payloads: List<Any>) {
+    override fun bind(item: ShopVM, payloads: List<Any>) {
         super.bind(item, payloads)
 
         val image = itemView.findViewById<ImageView>(R.id.image_pack)
@@ -51,15 +51,15 @@ class ShopViewHolder(itemView: View, private val callback: OnClickItemCallback) 
         val price = itemView.findViewById<TextView>(R.id.price_text)
         price.text = item.price
 
-        val setImage = item
-//        val setImage = if (item.isBought) {
-//            item.nonActiveImage
-//        } else {
-//            item.activeImage
-//        }
+
+        val setImage = if (item.isBought) {
+            item.nonActiveImage
+        } else {
+            item.activeImage
+       }
 
         image.setOnClickListener {
-           // if (!item.isBought) callback.onClickItem(item)
+            if (!item.isBought) callback.onClickItem(item)
         }
 
         Glide.with(context).asBitmap()

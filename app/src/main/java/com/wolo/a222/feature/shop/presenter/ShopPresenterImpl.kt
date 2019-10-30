@@ -2,14 +2,14 @@ package com.wolo.a222.feature.shop.presenter
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import com.android.billingclient.api.Purchase
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.Const
-import com.wolo.a222.WoloApp.Companion.game
+import com.wolo.a222.feature.common.entity.Pack
+import com.wolo.a222.feature.common.entity.Purchases
+import com.wolo.a222.feature.common.entity.SkuDeck
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.shop.model.interactor.ShopInteractor
-import com.wolo.a222.feature.common.entity.SkuDeck
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
@@ -52,34 +52,21 @@ class ShopPresenterImpl @Inject constructor(
     @SuppressLint("CheckResult")
     private fun initialLoadSettings() {
         Flowable.combineLatest(
-                shopInteractor.getSkuInfo(),
+                shopInteractor.getPacks(),
                 shopInteractor.getPurchase(),
-                BiFunction { listSku: List<SkuDeck>, purchases: MutableList<Purchase> ->
-                    if (purchases.size > 0){
-                    listSku.map { skuDeck ->
-                        val a = purchases.find { it.sku == skuDeck.skuType }
-                        if (a != null) {
-                            //skuDeck.copy(isBought = true)
-                            skuDeck.copy()
-                        } else {
-                            skuDeck.copy()
-                        }
+                BiFunction { listPack: List<Pack>, purchases: List<Purchases> ->
+                    val newList = listPack.filter { it.paid }
+                    var list = listOf<ShopVM>()
+                    if (purchases.isNotEmpty()) {
+                         list = newList.map { pack ->
+                            purchases.find { it.id == pack.id }
+                                    .let {
+                                        if (it != null) ShopVM(pack.id, pack.name, pack.activeImage, pack.nonActiveImage, true)
+                                        else ShopVM(pack.id, pack.name, pack.activeImage, pack.nonActiveImage, false)
+                                    }
+                            }
                     }
-                }else {
-                        listSku
-                    }
-                }
-        )
-                .map { it ->
-                    val packs = game.packs
-                    it.map { skuDeck ->
-                        val a = packs.find { it.id == skuDeck.skuType }
-                        if (a != null) {
-                            //skuDeck.copy(name = a.name, activeImage = a.activeImage, nonActiveImage = a.nonActiveImage)
-                            skuDeck.copy()
-                        } else skuDeck.copy()
-                    }
-                }
+                    list})
                 .onBackpressureBuffer(3)
                 .subscribeOn(Schedulers.io())
                 .subscribe {
@@ -93,19 +80,19 @@ class ShopPresenterImpl @Inject constructor(
         navigator.closeShop()
     }
 
-    private fun setViewState(skuDeck: List<SkuDeck>){
-        val allDecksSKU = skuDeck.find { it.skuType == Const.alldecksSKU}
-        //state = if (allDecksSKU != null && allDecksSKU.isBought){
-            state = if (allDecksSKU != null ){
-            val sku = skuDeck.map { it.copy() //it.copy(isBought = true)
+    private fun setViewState(shopVMList: List<ShopVM>) {
+        val allDecksSKU = shopVMList.find { it.id == Const.alldecksSKU }
+        state = if (allDecksSKU != null && allDecksSKU.isBought){
+            val sku = shopVMList.map {
+                it.copy(isBought = true)
             }
-            state.copy(skuDeck = sku)
-        } else{
-            state.copy(skuDeck = skuDeck)
+            state.copy(listVM = sku)
+        } else {
+            state.copy(listVM = shopVMList)
         }
     }
 
-    override fun buyDeck(i: SkuDeck, act: Activity) {
+    override fun buyDeck(i: ShopVM, act: Activity) {
         shopInteractor.buyDeck(i, act)
     }
 }
