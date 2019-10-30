@@ -16,7 +16,6 @@ import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import com.wolo.a222.R
 import com.wolo.a222.feature.common.view.adapter.BaseViewHolder
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskVM
-import com.wolo.a222.model.sku.SkuDeck
 
 class SelectTaskDelegate (private val callback: OnClickItemSelectTaskCallback): AbsListItemAdapterDelegate<SelectTaskVM, SelectTaskVM, SelectTaskViewHolder>(){
 

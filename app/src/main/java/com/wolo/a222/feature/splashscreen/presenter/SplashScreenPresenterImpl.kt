@@ -2,8 +2,10 @@ package com.wolo.a222.feature.splashscreen.presenter
 
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.feature.common.di.Scope.PerScreen
-import com.wolo.a222.feature.common.navigation.Navigator
+import com.wolo.a222.feature.common.entity.Pack
 import com.wolo.a222.feature.common.presenter.BasePresenter
+import com.wolo.a222.feature.common.repository.WoloRepository
+import com.wolo.a222.feature.splashscreen.model.SplashScreenResult
 import com.wolo.a222.feature.splashscreen.model.interactor.SplashScreenInteractor
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
@@ -14,11 +16,12 @@ import javax.inject.Inject
 @PerScreen
 class SplashScreenPresenterImpl
 @Inject constructor(
-        private var interactor: SplashScreenInteractor,
-        val navigator: Navigator
-        ): BasePresenter<SplashScreenView>, SplashScreenPresenter{
+    private val splashScreenInteractor: SplashScreenInteractor,
+    private val woloRepository: WoloRepository
+) : BasePresenter<SplashScreenView>, SplashScreenPresenter {
 
     private val compositeDisposable = CompositeDisposable()
+    private var cacheList = emptyList<Pack>()
 
     private val splashSubject = BehaviorRelay.createDefault(SplashScreenState())
 
@@ -46,16 +49,32 @@ class SplashScreenPresenterImpl
     }
 
     override fun loadDate() {
-        interactor.loadPacks()
-                .subscribeOn(Schedulers.io())
-                .doOnComplete {
-                    state = state.copy(screenText = "Карты загружены", dateIsLoaded = true)
+        splashScreenInteractor.loadPacks()
+            .subscribeOn(Schedulers.io())
+            .flatMap {
+                cacheList = it
+                woloRepository.setPacks(it)
+                    .toFlowable()
+                    .subscribeOn(Schedulers.io())}
+            .flatMap {
+                val listId = mutableListOf<String>()
+                cacheList.map {
+                    if (it.id != "") listId.add(it.id)
                 }
-                .doOnError {
-                        //TODO
-                }
-                .subscribe()
-                .also { compositeDisposable.add(it) }
+                splashScreenInteractor.loadSku(listId)}
+            .flatMap {
+                woloRepository.setSkuDecks(it)
+                    .toFlowable()
+                    .subscribeOn(Schedulers.io())
+            }
+            .doOnSubscribe { state = state.copy(screenText = "Загрузка данных", dateIsLoaded = false) }
+            .subscribe { result ->
+                state = state.copy(screenText = "Данные загружены", dateIsLoaded = true)
+            }
+            .also { compositeDisposable.add(it) }
+
     }
+
+
 
 }

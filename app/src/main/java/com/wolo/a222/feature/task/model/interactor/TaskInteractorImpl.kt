@@ -9,11 +9,14 @@ import javax.inject.Inject
 class TaskInteractorImpl @Inject constructor() : TaskInteractor{
 
     override fun getQuestion(number : Int): Flowable<String> {
-        return Flowable.just(game.getRandomQuestion(number) )
+        return Flowable.just(game.getRandomQuestion(number))
     }
 
     override fun deleteOneQuestion(packId: String, taskId: Int) {
-           val p = game.packs.findLast { it.id == packId }
-            p?.tasks?.removeAt(taskId)
+        val p = game.packs.findLast { it.id == packId }
+        p?.tasks?.map {
+            it != taskId.toString()
+        }
+        //p?.tasks?.removeAt(taskId)
     }
 }

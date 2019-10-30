@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
-import com.wolo.a222.model.sku.SkuDeck
+import com.wolo.a222.feature.common.entity.SkuDeck
 
 
 class ShopAdapter : AsyncListDifferDelegationAdapter<SkuDeck>(ShopDiffCallBack()){

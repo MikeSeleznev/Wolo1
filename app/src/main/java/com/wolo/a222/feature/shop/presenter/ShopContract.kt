@@ -3,7 +3,7 @@ package com.wolo.a222.feature.shop.presenter
 import android.app.Activity
 import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.common.presenter.View
-import com.wolo.a222.model.sku.SkuDeck
+import com.wolo.a222.feature.common.entity.SkuDeck
 import io.reactivex.Flowable
 
 interface ShopPresenter: BasePresenter<ShopView> {

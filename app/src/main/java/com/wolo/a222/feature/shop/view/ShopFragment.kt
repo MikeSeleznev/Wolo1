@@ -14,7 +14,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_shop.*
 import com.wolo.a222.feature.shop.view.adapter.ShopAdapter
 import com.wolo.a222.feature.shop.view.adapter.ShopDelegate
-import com.wolo.a222.model.sku.SkuDeck
+import com.wolo.a222.feature.common.entity.SkuDeck
 import javax.inject.Inject
 
 class ShopFragment : PresenterFragment<ShopPresenter>(), ShopView, OnClickItemCallback {

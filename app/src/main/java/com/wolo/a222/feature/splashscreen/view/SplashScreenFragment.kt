@@ -44,7 +44,7 @@ class SplashScreenFragment : PresenterFragment<SplashScreenPresenter>(), SplashS
         loadingText.text = state.screenText
 
         if (state.dateIsLoaded) {
-            var intent = Intent(activity, MainActivity::class.java)
+            val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
         }
     }

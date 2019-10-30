@@ -9,7 +9,7 @@ import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.shop.model.interactor.ShopInteractor
-import com.wolo.a222.model.sku.SkuDeck
+import com.wolo.a222.feature.common.entity.SkuDeck
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
@@ -59,7 +59,8 @@ class ShopPresenterImpl @Inject constructor(
                     listSku.map { skuDeck ->
                         val a = purchases.find { it.sku == skuDeck.skuType }
                         if (a != null) {
-                            skuDeck.copy(isBought = true)
+                            //skuDeck.copy(isBought = true)
+                            skuDeck.copy()
                         } else {
                             skuDeck.copy()
                         }
@@ -74,7 +75,8 @@ class ShopPresenterImpl @Inject constructor(
                     it.map { skuDeck ->
                         val a = packs.find { it.id == skuDeck.skuType }
                         if (a != null) {
-                            skuDeck.copy(name = a.name, activeImage = a.activeImage, nonActiveImage = a.nonActiveImage)
+                            //skuDeck.copy(name = a.name, activeImage = a.activeImage, nonActiveImage = a.nonActiveImage)
+                            skuDeck.copy()
                         } else skuDeck.copy()
                     }
                 }
@@ -93,8 +95,10 @@ class ShopPresenterImpl @Inject constructor(
 
     private fun setViewState(skuDeck: List<SkuDeck>){
         val allDecksSKU = skuDeck.find { it.skuType == Const.alldecksSKU}
-        state = if (allDecksSKU != null && allDecksSKU.isBought){
-            val sku = skuDeck.map { it.copy(isBought = true) }
+        //state = if (allDecksSKU != null && allDecksSKU.isBought){
+            state = if (allDecksSKU != null ){
+            val sku = skuDeck.map { it.copy() //it.copy(isBought = true)
+            }
             state.copy(skuDeck = sku)
         } else{
             state.copy(skuDeck = skuDeck)

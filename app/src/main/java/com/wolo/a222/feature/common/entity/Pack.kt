@@ -1,13 +1,22 @@
 package com.wolo.a222.feature.common.entity
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.wolo.a222.feature.common.model.PackDao
+import com.wolo.a222.feature.common.storage.Converters
+
+@Entity(tableName = PackDao.TABLE)
+@TypeConverters(Converters::class)
 data class Pack(
-        val id: String = "",
-        val name: String = "",
-        val tasks: MutableList<String> = mutableListOf(),
-        val paid: Boolean = false,
-        val activeImage: String = "",
-        val nonActiveImage: String = "",
-        val priority: Long = 0L,
-        val restTasks: Int = tasks.size,
-        val alwaysActive: Boolean = false
+    @PrimaryKey
+    var id: String = "",
+    var name: String = "",
+    var tasks: List<String> = emptyList(),
+    var paid: Boolean = false,
+    var activeImage: String = "",
+    var nonActiveImage: String = "",
+    var priority: Long = 0L,
+    var restTasks: Int = 1,
+    var alwaysActive: Boolean = false
 )

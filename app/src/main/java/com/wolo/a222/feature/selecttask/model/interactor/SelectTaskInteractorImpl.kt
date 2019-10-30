@@ -6,7 +6,7 @@ import com.wolo.a222.WoloApp
 import com.wolo.a222.feature.common.di.Scope.PerFeature
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskVM
 import com.wolo.a222.market.Billing
-import com.wolo.a222.model.sku.SkuDeck
+import com.wolo.a222.feature.common.entity.SkuDeck
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

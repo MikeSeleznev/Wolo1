@@ -6,8 +6,7 @@ import android.widget.Toast
 import com.android.billingclient.api.*
 import com.wolo.a222.Const
 import com.wolo.a222.WoloApp.Companion.game
-import com.wolo.a222.feature.common.view.MainActivity
-import com.wolo.a222.model.sku.SkuDeck
+import com.wolo.a222.feature.common.entity.SkuDeck
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 
@@ -54,7 +53,7 @@ class Billing : PurchasesUpdatedListener, BillingClientStateListener {
                     if (skuDetailsList != null) {
                         game.skuDetailsList = skuDetailsList
                         val skuList: List<SkuDeck> = skuDetailsList.map {
-                            SkuDeck(it.sku, it.title, it.price, "", false)
+                            SkuDeck(it.sku, it.title, it.price)
                         }
                         emitter.onNext(skuList)
                     }

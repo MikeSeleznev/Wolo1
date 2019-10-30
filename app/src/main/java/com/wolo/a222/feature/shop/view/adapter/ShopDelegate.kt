@@ -15,7 +15,7 @@ import com.bumptech.glide.request.target.Target
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import com.wolo.a222.R
 import com.wolo.a222.feature.common.view.adapter.BaseViewHolder
-import com.wolo.a222.model.sku.SkuDeck
+import com.wolo.a222.feature.common.entity.SkuDeck
 
 class ShopDelegate (private val callback: OnClickItemCallback): AbsListItemAdapterDelegate<SkuDeck, SkuDeck, ShopViewHolder>(){
 
@@ -27,9 +27,9 @@ class ShopDelegate (private val callback: OnClickItemCallback): AbsListItemAdapt
     override fun isForViewType(item: SkuDeck, items: MutableList<SkuDeck>, position: Int): Boolean = true
 
     override fun onBindViewHolder(
-            item: SkuDeck,
-            holder: ShopViewHolder,
-            payloads: MutableList<Any>
+        item: SkuDeck,
+        holder: ShopViewHolder,
+        payloads: MutableList<Any>
     ) {
         return holder.bind(item, payloads)
     }
@@ -51,14 +51,15 @@ class ShopViewHolder(itemView: View, private val callback: OnClickItemCallback) 
         val price = itemView.findViewById<TextView>(R.id.price_text)
         price.text = item.price
 
-        val setImage = if (item.isBought) {
-            item.nonActiveImage
-        } else {
-            item.activeImage
-        }
+        val setImage = item
+//        val setImage = if (item.isBought) {
+//            item.nonActiveImage
+//        } else {
+//            item.activeImage
+//        }
 
         image.setOnClickListener {
-            if (!item.isBought) callback.onClickItem(item)
+           // if (!item.isBought) callback.onClickItem(item)
         }
 
         Glide.with(context).asBitmap()

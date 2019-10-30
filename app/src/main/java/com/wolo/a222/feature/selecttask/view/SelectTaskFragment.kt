@@ -14,8 +14,6 @@ import com.wolo.a222.feature.selecttask.presenter.SelectTaskView
 import com.wolo.a222.feature.selecttask.view.adapter.OnClickItemSelectTaskCallback
 import com.wolo.a222.feature.selecttask.view.adapter.SelectTaskAdapter
 import com.wolo.a222.feature.selecttask.view.adapter.SelectTaskDelegate
-import com.wolo.a222.model.sku.SkuDeck
-import com.wolo.a222.utils.Keyboard
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_select_task.*
 import javax.inject.Inject

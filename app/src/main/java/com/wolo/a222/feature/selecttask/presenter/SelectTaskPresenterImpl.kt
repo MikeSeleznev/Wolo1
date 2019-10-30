@@ -15,7 +15,7 @@ import javax.inject.Inject
 class SelectTaskPresenterImpl
     @Inject constructor(
            val navigator: Navigator,
-           val interactor: SelectTaskInteractor
+           val selectTaskInteractor: SelectTaskInteractor
     ): BasePresenter<SelectTaskView>, SelectTaskPresenter{
 
     companion object {
@@ -44,7 +44,7 @@ class SelectTaskPresenterImpl
     override fun getPacks(){
         var isBoughtAll = game.superUser
 
-        interactor.getPurchase().map { purchases ->
+        selectTaskInteractor.getPurchase().map { purchases ->
             purchases.find { it.sku == Const.alldecksSKU }.let {
                 if (it != null) {
                     isBoughtAll = true
@@ -68,13 +68,13 @@ class SelectTaskPresenterImpl
                 }
             }
         }
-                .onBackpressureBuffer(3)
-                .subscribeOn(Schedulers.io())
-                .subscribe {
-                    setViewState(it)
-                }.also {
-                    compositeDisposable.add(it)
-                }
+            .onBackpressureBuffer(3)
+            .subscribeOn(Schedulers.io())
+            .subscribe {
+                setViewState(it)
+            }.also {
+                compositeDisposable.add(it)
+            }
     }
 
     private fun setViewState(taskList: List<SelectTaskVM>){
@@ -97,7 +97,7 @@ class SelectTaskPresenterImpl
     }
 
     override fun showTask(p: SelectTaskVM) {
-            interactor.setChoosedPack(p)
+            selectTaskInteractor.setChoosedPack(p)
             navigator.showTask()
     }
 }
