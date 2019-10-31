@@ -1,6 +1,6 @@
 package com.wolo.a222.feature.common.model
 
-import com.wolo.a222.model.Firebase.Packs
+
 import java.util.*
 
 
@@ -9,7 +9,7 @@ class Cards(val name: String, cards: ArrayList<String>) {
         private set
     private val allcards: Int
     private val cards: MutableList<String>
-    private val packs: Packs? = null
+
 
     val randomQuestion: String
         get() {

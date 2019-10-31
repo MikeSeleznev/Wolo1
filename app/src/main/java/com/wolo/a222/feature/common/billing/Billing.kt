@@ -1,18 +1,15 @@
-package com.wolo.a222.market
+package com.wolo.a222.feature.common.billing
 
 import android.app.Activity
 import android.content.Context
 import android.widget.Toast
 import com.android.billingclient.api.*
-import com.google.api.Billing
 import com.wolo.a222.Const
-import com.wolo.a222.WoloApp
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.entity.Purchases
 import com.wolo.a222.feature.common.entity.SkuDeck
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
-import io.reactivex.schedulers.Schedulers
 
 class Billing : PurchasesUpdatedListener, BillingClientStateListener {
 
@@ -30,7 +27,7 @@ class Billing : PurchasesUpdatedListener, BillingClientStateListener {
 
 
     fun getSkuInfo(context: Context, idList: List<String>) = Flowable
-            .create<List<SkuDeck>>({ emitter ->
+            .create<List<SkuDetails>>({ emitter ->
 
         billingClient = BillingClient.newBuilder(context)
                 .enablePendingPurchases()
@@ -55,11 +52,7 @@ class Billing : PurchasesUpdatedListener, BillingClientStateListener {
                 billingClient.querySkuDetailsAsync(params) { billingResult, skuDetailsList ->
 
                     if (skuDetailsList != null) {
-                        game.skuDetailsList = skuDetailsList
-                        val skuList: List<SkuDeck> = skuDetailsList.map {
-                            SkuDeck(it.sku, it.title, it.price)
-                        }
-                        emitter.onNext(skuList)
+                        emitter.onNext(skuDetailsList)
                     }
                 }
             }
@@ -80,17 +73,6 @@ class Billing : PurchasesUpdatedListener, BillingClientStateListener {
                             .build()
                     billingClient.acknowledgePurchase(acknowledgePurchaseParams, acknowledgePurchaseResponseListener)
                 }
-
-                if (byingPack == Const.SPORT) {
-                    game.setPaidSport()
-                } else if (byingPack == Const.EROTIC) {
-                    game.setPaidErotic()
-                } else if (byingPack == Const.OHFUCK) {
-                    game.setPaidOhFuck()
-                } else if (byingPack == Const.ALLDECK) {
-                    game.setPaidAllDecks()
-                }
-
             }
         }
     }

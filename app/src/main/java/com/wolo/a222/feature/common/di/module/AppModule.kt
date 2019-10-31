@@ -2,7 +2,7 @@ package com.wolo.a222.feature.common.di.module
 
 import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
-import com.wolo.a222.market.Billing
+import com.wolo.a222.feature.common.billing.Billing
 import com.wolo.a222.feature.common.di.Scope.PerApplication
 import com.wolo.a222.feature.common.model.repository.FB
 import com.wolo.a222.feature.common.navigation.Navigator

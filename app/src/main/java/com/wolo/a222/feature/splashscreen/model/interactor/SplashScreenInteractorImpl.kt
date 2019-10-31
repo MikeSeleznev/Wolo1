@@ -1,13 +1,13 @@
 package com.wolo.a222.feature.splashscreen.model.interactor
 
 import android.content.Context
-import com.android.billingclient.api.Purchase
+import com.android.billingclient.api.SkuDetails
 import com.wolo.a222.feature.common.di.Scope.PerFeature
 import com.wolo.a222.feature.common.entity.Pack
 import com.wolo.a222.feature.common.entity.Purchases
 import com.wolo.a222.feature.common.entity.SkuDeck
 import com.wolo.a222.feature.common.model.repository.FB
-import com.wolo.a222.market.Billing
+import com.wolo.a222.feature.common.billing.Billing
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -52,7 +52,7 @@ constructor(
                 listPacks.toList()
             }
 
-    override fun loadSku(idList: List<String>): Flowable<List<SkuDeck>> =
+    override fun loadSku(idList: List<String>): Flowable<List<SkuDetails>> =
         billing.getSkuInfo(context, idList)
 
     override fun loadPurchases(): Flowable<List<Purchases>> =
