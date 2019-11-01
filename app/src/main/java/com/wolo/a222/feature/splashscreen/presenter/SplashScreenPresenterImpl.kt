@@ -55,6 +55,10 @@ class SplashScreenPresenterImpl
 
     override fun loadDate(version: Long) {
 
+        /*woloRepository.deletePacks()
+        woloRepository.deletePurchases()
+        woloRepository.deletePurchases()
+*/
         splashScreenInteractor.loadPacks()
             .subscribeOn(Schedulers.io())
             .flatMap {

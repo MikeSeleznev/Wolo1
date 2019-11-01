@@ -11,6 +11,7 @@ import com.wolo.a222.R
 import com.wolo.a222.feature.auth.view.AuthFragment
 import com.wolo.a222.feature.common.di.Scope.PerApplication
 import com.wolo.a222.feature.gamezone.view.GameZoneFragment
+import com.wolo.a222.feature.rules.view.RulesFragment
 import com.wolo.a222.feature.selecttask.view.SelectTaskFragment
 import com.wolo.a222.feature.shop.view.ShopFragment
 import com.wolo.a222.feature.splashscreen.view.SplashScreenFragment
@@ -125,6 +126,14 @@ class NavigatorImpl
     }
 
     override fun closeShop(){
+        fragmentManager?.popBackStack()
+    }
+
+    override fun showRules() {
+        replaceFragment(RulesFragment.newInstance(), true)
+    }
+
+    override fun closeRules(){
         fragmentManager?.popBackStack()
     }
 }

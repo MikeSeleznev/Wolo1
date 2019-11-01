@@ -34,7 +34,7 @@ class MainActivity : BaseActivity(){
                     navigator.showShop()
                     }
                 R.id.nav_delete_gamer -> true
-                R.id.nav_rules -> false
+                R.id.nav_rules -> navigator.showRules()
             }
             drawerLayout.closeDrawer(GravityCompat.END)
             true

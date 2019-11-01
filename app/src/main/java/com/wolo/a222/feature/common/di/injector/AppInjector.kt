@@ -6,6 +6,8 @@ import com.wolo.a222.feature.common.di.component.DaggerAppComponent
 import com.wolo.a222.feature.common.di.module.AppModule
 import com.wolo.a222.feature.gamezone.di.component.GameZoneFeatureComponent
 import com.wolo.a222.feature.gamezone.di.component.GameZoneScreenComponent
+import com.wolo.a222.feature.rules.di.component.RulesFeatureComponent
+import com.wolo.a222.feature.rules.di.component.RulesScreenComponent
 import com.wolo.a222.feature.selecttask.di.component.SelectTaskFeatureComponent
 import com.wolo.a222.feature.selecttask.di.component.SelectTaskScreenComponent
 import com.wolo.a222.feature.shop.di.component.ShopFeatureComponent
@@ -39,6 +41,8 @@ class AppInjector(context: Context): Injector {
     private var taskScreenComponent: TaskScreenComponent? = null
     private var shopFeatureComponent: ShopFeatureComponent? = null
     private var shopScreenComponent: ShopScreenComponent? = null
+    private var rulesFeatureComponent: RulesFeatureComponent? = null
+    private var rulesScreenComponent: RulesScreenComponent? = null
 
 
     override fun getAuthScreen(): AuthScreenComponent {
@@ -173,5 +177,28 @@ class AppInjector(context: Context): Injector {
 
     override fun releaseShopScreen() {
         shopScreenComponent = null
+    }
+
+
+    override fun getRulesFeature(): RulesFeatureComponent {
+        return rulesFeatureComponent ?: let {
+            getAppComponent().plusRulesFeature()
+                .also { newComponent -> rulesFeatureComponent = newComponent }
+        }
+    }
+
+    override fun releaseRulesFeature() {
+        rulesFeatureComponent = null
+    }
+
+    override fun getRulesScreen(): RulesScreenComponent {
+       return rulesScreenComponent ?: let {
+           getRulesFeature().plusRulesScreen()
+               .also { newComponent -> rulesScreenComponent = newComponent }
+       }
+    }
+
+    override fun releaseRulesScreen() {
+      rulesScreenComponent = null
     }
 }

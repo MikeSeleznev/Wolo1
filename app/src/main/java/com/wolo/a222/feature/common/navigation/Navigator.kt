@@ -35,4 +35,8 @@ interface Navigator {
     fun showShop()
 
     fun closeShop()
+
+    fun showRules()
+
+    fun closeRules()
 }

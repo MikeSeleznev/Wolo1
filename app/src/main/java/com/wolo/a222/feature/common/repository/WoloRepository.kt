@@ -19,4 +19,10 @@ interface WoloRepository {
     fun setPurchases(purchases: List<Purchases>): Single<List<Long>>
 
     fun getPurchases(): Flowable<List<Purchases>>
+
+    fun deletePacks()
+
+    fun deleteSkuDecks()
+
+    fun deletePurchases()
 }

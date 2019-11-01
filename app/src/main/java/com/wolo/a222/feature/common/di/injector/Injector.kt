@@ -4,6 +4,8 @@ package com.wolo.a222.feature.common.di.injector
 import com.wolo.a222.feature.common.di.component.AppComponent
 import com.wolo.a222.feature.gamezone.di.component.GameZoneFeatureComponent
 import com.wolo.a222.feature.gamezone.di.component.GameZoneScreenComponent
+import com.wolo.a222.feature.rules.di.component.RulesFeatureComponent
+import com.wolo.a222.feature.rules.di.component.RulesScreenComponent
 import com.wolo.a222.feature.selecttask.di.component.SelectTaskFeatureComponent
 import com.wolo.a222.feature.selecttask.di.component.SelectTaskScreenComponent
 import com.wolo.a222.feature.shop.di.component.ShopFeatureComponent
@@ -54,4 +56,10 @@ interface Injector {
 
     fun getShopScreen(): ShopScreenComponent
     fun releaseShopScreen()
+
+    fun getRulesFeature(): RulesFeatureComponent
+    fun releaseRulesFeature()
+
+    fun getRulesScreen(): RulesScreenComponent
+    fun releaseRulesScreen()
 }

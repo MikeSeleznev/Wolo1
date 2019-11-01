@@ -35,4 +35,16 @@ class WoloRepositoryImpl @Inject constructor(
     override fun getPurchases(): Flowable<List<Purchases>> {
         return database.PurchasesDao().getPurchases()
     }
+
+    override fun deletePacks() {
+        database.PackDao().deleteAll()
+    }
+
+    override fun deleteSkuDecks() {
+       database.SkuDeckDao().deleteAll()
+    }
+
+    override fun deletePurchases() {
+        database.PurchasesDao().deleteAll()
+    }
 }
