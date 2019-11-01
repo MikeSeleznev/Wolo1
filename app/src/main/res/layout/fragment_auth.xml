@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
         android:orientation="vertical">
 
         <CheckedTextView
@@ -124,9 +125,9 @@
             android:id="@+id/gamers_lists"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="10dp"
             android:clipToPadding="false"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

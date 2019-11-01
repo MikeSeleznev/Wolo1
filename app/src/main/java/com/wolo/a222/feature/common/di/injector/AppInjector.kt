@@ -4,6 +4,8 @@ import android.content.Context
 import com.wolo.a222.feature.common.di.component.AppComponent
 import com.wolo.a222.feature.common.di.component.DaggerAppComponent
 import com.wolo.a222.feature.common.di.module.AppModule
+import com.wolo.a222.feature.deleteplayer.di.component.DeletePlayerFeatureComponent
+import com.wolo.a222.feature.deleteplayer.di.component.DeletePlayerScreenComponent
 import com.wolo.a222.feature.gamezone.di.component.GameZoneFeatureComponent
 import com.wolo.a222.feature.gamezone.di.component.GameZoneScreenComponent
 import com.wolo.a222.feature.rules.di.component.RulesFeatureComponent
@@ -43,6 +45,8 @@ class AppInjector(context: Context): Injector {
     private var shopScreenComponent: ShopScreenComponent? = null
     private var rulesFeatureComponent: RulesFeatureComponent? = null
     private var rulesScreenComponent: RulesScreenComponent? = null
+    private var deletePlayerFeatureComponent: DeletePlayerFeatureComponent? = null
+    private var deletePlayerScreenComponent: DeletePlayerScreenComponent? = null
 
 
     override fun getAuthScreen(): AuthScreenComponent {
@@ -201,4 +205,29 @@ class AppInjector(context: Context): Injector {
     override fun releaseRulesScreen() {
       rulesScreenComponent = null
     }
+
+    override fun getDeletePlayerFeature(): DeletePlayerFeatureComponent {
+        return deletePlayerFeatureComponent ?: let {
+            getAppComponent().plusDeletePlayerFeature()
+                .also { newComponent -> deletePlayerFeatureComponent = newComponent }
+        }
+    }
+
+    override fun releaseDeletePlayerFeature() {
+        deletePlayerFeatureComponent = null
+    }
+
+    override fun getDeletePlayerScreen(): DeletePlayerScreenComponent {
+        return deletePlayerScreenComponent ?: let {
+            getDeletePlayerFeature().plusDeletePlayerScreen()
+                .also { newComponent -> deletePlayerScreenComponent = newComponent }
+        }
+    }
+
+    override fun releaseDeletePlayerScreen() {
+        deletePlayerScreenComponent = null
+    }
+
+
+
 }

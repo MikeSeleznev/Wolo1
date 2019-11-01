@@ -2,6 +2,8 @@ package com.wolo.a222.feature.common.di.injector
 
 
 import com.wolo.a222.feature.common.di.component.AppComponent
+import com.wolo.a222.feature.deleteplayer.di.component.DeletePlayerFeatureComponent
+import com.wolo.a222.feature.deleteplayer.di.component.DeletePlayerScreenComponent
 import com.wolo.a222.feature.gamezone.di.component.GameZoneFeatureComponent
 import com.wolo.a222.feature.gamezone.di.component.GameZoneScreenComponent
 import com.wolo.a222.feature.rules.di.component.RulesFeatureComponent
@@ -62,4 +64,12 @@ interface Injector {
 
     fun getRulesScreen(): RulesScreenComponent
     fun releaseRulesScreen()
+
+    fun getDeletePlayerFeature(): DeletePlayerFeatureComponent
+    fun releaseDeletePlayerFeature()
+
+    fun getDeletePlayerScreen(): DeletePlayerScreenComponent
+    fun releaseDeletePlayerScreen()
+
+
 }

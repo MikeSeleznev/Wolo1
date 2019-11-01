@@ -39,4 +39,8 @@ interface Navigator {
     fun showRules()
 
     fun closeRules()
+
+    fun showDeletePlayer()
+
+    fun closeDeletePlayer()
 }

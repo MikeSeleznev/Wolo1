@@ -10,8 +10,6 @@ import com.wolo.a222.feature.rules.presenter.RulesPresenter
 import com.wolo.a222.feature.rules.presenter.RulesState
 import com.wolo.a222.feature.rules.presenter.RulesView
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.fragment_rules.*
-import kotlinx.android.synthetic.main.fragment_shop.*
 import javax.inject.Inject
 
 class RulesFragment : PresenterFragment<RulesPresenter>(), RulesView{

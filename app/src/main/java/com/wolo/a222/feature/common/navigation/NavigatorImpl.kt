@@ -10,6 +10,7 @@ import androidx.fragment.app.transaction
 import com.wolo.a222.R
 import com.wolo.a222.feature.auth.view.AuthFragment
 import com.wolo.a222.feature.common.di.Scope.PerApplication
+import com.wolo.a222.feature.deleteplayer.view.DeletePlayerFragment
 import com.wolo.a222.feature.gamezone.view.GameZoneFragment
 import com.wolo.a222.feature.rules.view.RulesFragment
 import com.wolo.a222.feature.selecttask.view.SelectTaskFragment
@@ -134,6 +135,14 @@ class NavigatorImpl
     }
 
     override fun closeRules(){
+        fragmentManager?.popBackStack()
+    }
+
+    override fun showDeletePlayer() {
+        replaceFragment(DeletePlayerFragment.newInstance(), true)
+    }
+
+    override fun closeDeletePlayer() {
         fragmentManager?.popBackStack()
     }
 }

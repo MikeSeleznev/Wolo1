@@ -33,7 +33,7 @@ class MainActivity : BaseActivity(){
                 R.id.nav_shop -> {
                     navigator.showShop()
                     }
-                R.id.nav_delete_gamer -> true
+                R.id.nav_delete_gamer -> navigator.showDeletePlayer()
                 R.id.nav_rules -> navigator.showRules()
             }
             drawerLayout.closeDrawer(GravityCompat.END)
