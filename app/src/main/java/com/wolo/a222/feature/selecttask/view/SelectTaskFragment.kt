@@ -53,9 +53,7 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleState)
                 .run { disposeOnDestroyView(this) }
-
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,7 +65,7 @@ class SelectTaskFragment : PresenterFragment<SelectTaskPresenter>(), SelectTaskV
         packsRecycle.layoutManager = GridLayoutManager(requireContext(), 2)
         packsRecycle.adapter = adapter
         packsRecycle.setHasFixedSize(true)
-            }
+    }
 
     override fun onStart() {
         super.onStart()

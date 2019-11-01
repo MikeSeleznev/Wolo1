@@ -54,12 +54,14 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Keyboard().hideKeyboard(activity!!.applicationContext)
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //Keyboard().hideKeyboard(activity!!.applicationContext)
 
         init()
 

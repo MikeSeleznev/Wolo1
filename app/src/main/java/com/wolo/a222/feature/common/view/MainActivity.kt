@@ -1,13 +1,11 @@
 package com.wolo.a222.feature.common.view
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.wolo.a222.R
-import com.wolo.a222.view.activity.ShopActivity
 import com.wolo.a222.feature.auth.view.AuthFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.navigation_layout.*

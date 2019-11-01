@@ -1,32 +1,24 @@
 package com.wolo.a222.feature.common.model
 
-import com.android.billingclient.api.SkuDetails
-import com.wolo.a222.feature.common.entity.Pack
 import com.wolo.a222.feature.common.entity.Players
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskVM
 import java.util.*
 
 class Game {
-    var packs: List<Pack> = emptyList()
-    var skuDetailsList : List<SkuDetails> = emptyList()
+    var tasksVM: List<TasksVM> = emptyList()
     var players: List<Players> = emptyList()
     var choosedPack: SelectTaskVM = SelectTaskVM()
     var cards: List<Cards> = emptyList()
-    var isStartGame: Boolean? = null
-    private var degree: Float = 0.toFloat()
+    var isStartGame = false
+    private var degree: Float = 0F
     var lastDir = 0f
     var newDir = 0f
-        private set
     var numberOfPlayers: Int = 0
     var choosedPlayer: Players? = null
     var previsionsPlayer: Players? = null
     var repeatPlayer: Boolean = false
     private lateinit var player1: Players
     private lateinit var player2: Players
-    var paidSport: Boolean? = false
-    var paidErotic: Boolean? = false
-    var paidOhFuck: Boolean? = false
-    private var paidAllDecks: Boolean? = false
     var superUser: Boolean = false
 
     val firstPlayer: Players
@@ -75,7 +67,7 @@ class Game {
 
     fun getRandomQuestion(number: Int): String {
         var task = ""
-        for (c in packs) {
+        for (c in tasksVM) {
             if (c.id == choosedPack.id) {
                 task = c.tasks[number]
             }
@@ -190,22 +182,6 @@ class Game {
         return name1[0].toString()
     }
 
-
-    fun setPaidSport() {
-        paidSport = true
-    }
-
-    fun setPaidErotic() {
-        paidErotic = true
-    }
-
-    fun setPaidOhFuck() {
-        paidOhFuck = true
-    }
-
-    fun setPaidAllDecks() {
-        paidAllDecks = true
-    }
 
     fun initDate(players: List<Players>) {
         this.numberOfPlayers = players.size

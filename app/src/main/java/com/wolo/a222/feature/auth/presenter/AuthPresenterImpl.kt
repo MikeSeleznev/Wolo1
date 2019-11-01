@@ -1,24 +1,30 @@
 package com.wolo.a222.feature.auth.presenter
 
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.wolo.a222.feature.common.entity.Players
+import com.wolo.a222.Const
 import com.wolo.a222.R
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.auth.model.interactor.AuthInteractor
 import com.wolo.a222.feature.common.di.Scope.PerScreen
+import com.wolo.a222.feature.common.entity.Pack
+import com.wolo.a222.feature.common.entity.Players
+import com.wolo.a222.feature.common.entity.Purchases
+import com.wolo.a222.feature.common.model.TasksVM
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.BiFunction
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @PerScreen
 class AuthPresenterImpl
 @Inject constructor(
         val navigator: Navigator,
-        private val interactor: AuthInteractor
+        private val authInteractor: AuthInteractor
 ) : BasePresenter<AuthView>, AuthPresenter {
 
     private val compositeDisposable = CompositeDisposable()
@@ -51,6 +57,9 @@ class AuthPresenterImpl
     }
 
     override fun onClickStartPlay(gamers: List<String>) {
+
+        prepareData()
+
         val players = mutableListOf<Players>()
         var num = 1
         for (g in gamers){
@@ -86,6 +95,47 @@ class AuthPresenterImpl
     }
 
     override fun activeSuperUser() {
-        interactor.activateSuperUser()
+        authInteractor.activateSuperUser()
+    }
+
+    private fun prepareData(){
+        var isBoughtAll = game.superUser
+
+        Flowable.combineLatest(
+            authInteractor.getPurchases(),
+            authInteractor.getPacks(),
+            BiFunction { purchases: List<Purchases>, packs: List<Pack> ->
+                val filteredPacks = packs.filter { it.priority > 0 }.sortedBy { it.priority }
+                purchases.find { it.id == Const.alldecksSKU }.let {
+                    if (it != null) {
+                        isBoughtAll = true
+                    }
+                }
+                if (isBoughtAll) {
+                    filteredPacks.map { pack ->
+                        TasksVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size, isBoughtAll, pack.tasks)
+                    }
+                } else {
+                    filteredPacks.map { pack ->
+                        val purchase = purchases.find { it.id == pack.id }
+                        if (purchase != null) {
+                            TasksVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size, true, pack.tasks)
+                        } else {
+                            TasksVM(pack.id, pack.name, pack.restTasks, pack.nonActiveImage, pack.tasks.size, pack.alwaysActive, pack.tasks)
+                        }
+                    }
+                }
+            })
+            .onBackpressureBuffer(3)
+            .subscribeOn(Schedulers.io())
+            .subscribe {
+                setData(it)
+            }.also {
+                compositeDisposable.add(it)
+            }
+    }
+
+    private fun setData(data: List<TasksVM>){
+        game.tasksVM = data
     }
 }

@@ -59,7 +59,7 @@ class ShopViewHolder(itemView: View, private val callback: OnClickItemCallback) 
        }
 
         image.setOnClickListener {
-            if (!item.isBought) callback.onClickItem(item)
+            if (!item.isBought)callback.onClickItem(item)
         }
 
         Glide.with(context).asBitmap()

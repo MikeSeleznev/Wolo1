@@ -16,5 +16,11 @@ object Const {
     const val alldecksSKU = "000007"
     const val GAME = "game"
     const val FBCollection = "packs"
+    const val FBInfo = "info"
     const val SUPERUSER = "!JSBOSS*"
+
+}
+
+object ConstInfoFields{
+    const val VERSION = "version"
 }

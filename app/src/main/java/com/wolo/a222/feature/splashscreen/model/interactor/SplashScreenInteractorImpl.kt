@@ -1,27 +1,33 @@
 package com.wolo.a222.feature.splashscreen.model.interactor
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.android.billingclient.api.SkuDetails
+import com.google.firebase.firestore.DocumentSnapshot
+import com.wolo.a222.Const
+import com.wolo.a222.ConstInfoFields
+import com.wolo.a222.feature.common.billing.Billing
 import com.wolo.a222.feature.common.di.Scope.PerFeature
 import com.wolo.a222.feature.common.entity.Pack
 import com.wolo.a222.feature.common.entity.Purchases
-import com.wolo.a222.feature.common.entity.SkuDeck
 import com.wolo.a222.feature.common.model.repository.FB
-import com.wolo.a222.feature.common.billing.Billing
 import io.reactivex.Flowable
+import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @PerFeature
 class SplashScreenInteractorImpl
 @Inject
 constructor(
     private val fireBase: FB,
     private val billing: Billing,
-    private val context: Context) : SplashScreenInteractor {
+    private val context: Context) : SplashScreenInteractor{
 
     override fun loadPacks(): Flowable<List<Pack>> =
-        fireBase.getPacks().toFlowable()
+        fireBase.getFireBaseDocuments(Const.FBCollection).toFlowable()
             .subscribeOn(Schedulers.newThread())
             .map { it ->
                 val listPacks = mutableListOf<Pack>()
@@ -58,6 +64,21 @@ constructor(
     override fun loadPurchases(): Flowable<List<Purchases>> =
         billing.getPurchase(context)
 
+    override fun loadInfo(): Single<Long> {
+       return fireBase.getFireBaseDocuments(Const.FBInfo)
+           .map {
+               var version = 0L
+               it.map {document ->
+                   val keys = document.data?.keys
+                   for (i in keys!!) {
+                       if (i == ConstInfoFields.VERSION) version = document.data?.get(i) as Long
+                   }
+               }
+               version
+           }
+
+
+    }
 }
 
 

@@ -3,19 +3,24 @@ package com.wolo.a222.feature.selecttask.presenter
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.Const
 import com.wolo.a222.WoloApp.Companion.game
+import com.wolo.a222.feature.common.entity.Pack
+import com.wolo.a222.feature.common.entity.Purchases
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
+import com.wolo.a222.feature.common.repository.WoloRepository
+import com.wolo.a222.feature.common.storage.WoloDatabase
 import com.wolo.a222.feature.selecttask.model.interactor.SelectTaskInteractor
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class SelectTaskPresenterImpl
     @Inject constructor(
-           val navigator: Navigator,
-           val selectTaskInteractor: SelectTaskInteractor
+          private val navigator: Navigator,
+          private val selectTaskInteractor: SelectTaskInteractor
     ): BasePresenter<SelectTaskView>, SelectTaskPresenter{
 
     companion object {
@@ -42,39 +47,10 @@ class SelectTaskPresenterImpl
     }
 
     override fun getPacks(){
-        var isBoughtAll = game.superUser
-
-        selectTaskInteractor.getPurchase().map { purchases ->
-            purchases.find { it.sku == Const.alldecksSKU }.let {
-                if (it != null) {
-                    isBoughtAll = true
-                }
-            }
-            val packs = game.packs.filter { it.priority > 0 }.sortedBy {
-                it.priority
-            }
-            if (isBoughtAll) {
-                packs.map { pack ->
-                    SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size, isBoughtAll)
-                }
-            } else {
-                packs.map { pack ->
-                    val purchase = purchases.find { it.sku == pack.id }
-                    if (purchase != null) {
-                        SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size, true)
-                    } else {
-                        SelectTaskVM(pack.id, pack.name, pack.restTasks, pack.nonActiveImage, pack.tasks.size, pack.alwaysActive)
-                    }
-                }
-            }
+        val selectTaskVM = selectTaskInteractor.getPacks().map {
+            SelectTaskVM(it.id, it.namePack, it.quantity, it.urlImage, it.quantityNow, it.isBought)
         }
-            .onBackpressureBuffer(3)
-            .subscribeOn(Schedulers.io())
-            .subscribe {
-                setViewState(it)
-            }.also {
-                compositeDisposable.add(it)
-            }
+        setViewState(selectTaskVM)
     }
 
     private fun setViewState(taskList: List<SelectTaskVM>){

@@ -14,6 +14,7 @@ import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.BiFunction
+import io.reactivex.functions.Function3
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -54,8 +55,9 @@ class ShopPresenterImpl @Inject constructor(
         Flowable.combineLatest(
                 shopInteractor.getPacks(),
                 shopInteractor.getPurchase(),
-                BiFunction { listPack: List<Pack>, purchases: List<Purchases> ->
-                    val newList = listPack.filter { it.paid }
+                shopInteractor.getSkuInfo(),
+                Function3 { listPack: List<Pack>, purchases: List<Purchases>, skuList:List<SkuDeck> ->
+                    val newList = listPack.filter { it.paid }.sortedBy { it.priority }.reversed()
                     var list = listOf<ShopVM>()
                     if (purchases.isNotEmpty()) {
                          list = newList.map { pack ->
@@ -66,7 +68,15 @@ class ShopPresenterImpl @Inject constructor(
                                     }
                             }
                     }
-                    list})
+                    val listWithPrice = list.map {shopVM ->
+                        skuList.find { it.skuType == shopVM.id}.let {
+                            if (it != null){
+                                shopVM.copy(price = it.price)}
+                            else {
+                                shopVM.copy()}
+                        }
+                    }
+                    listWithPrice})
                 .onBackpressureBuffer(3)
                 .subscribeOn(Schedulers.io())
                 .subscribe {

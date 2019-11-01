@@ -8,13 +8,16 @@ import io.reactivex.SingleEmitter
 
 class FB constructor(private val fbFirestore: FirebaseFirestore) {
 
-    fun getPacks(): Single<List<DocumentSnapshot>> {
+    fun getFireBaseDocuments(nameDocuments: String): Single<List<DocumentSnapshot>> {
 
-        val dbCollection = fbFirestore.collection(Const.FBCollection)
+        val dbCollection = fbFirestore.collection(nameDocuments)
 
         return Single.create { emitter: SingleEmitter<List<DocumentSnapshot>> ->
             dbCollection.get().addOnSuccessListener {
                 emitter.onSuccess(it.documents)
+            }
+            dbCollection.get().addOnCanceledListener {
+
             }
         }
     }

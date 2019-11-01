@@ -10,7 +10,9 @@ interface SplashScreenPresenter : BasePresenter<SplashScreenView> {
 
     fun viewState(): Flowable<SplashScreenState>
 
-    fun loadDate()
+    fun loadDate(version: Long)
+
+    fun loadInfo()
 
 }
 
