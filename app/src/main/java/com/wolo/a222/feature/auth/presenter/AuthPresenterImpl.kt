@@ -85,6 +85,7 @@ class AuthPresenterImpl
         gamers.add(name)
         reverseGamersArray = gamersArray.toMutableList()
         //reverseGamersArray.reverse()
+
         state = state.copy(gamersArray = gamers, reverseGamersArray = reverseGamersArray)
     }
 

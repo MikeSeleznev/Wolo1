@@ -8,12 +8,10 @@ class Game {
     var tasksVM: List<TasksVM> = emptyList()
     var players: List<Players> = emptyList()
     var choosedPack: SelectTaskVM = SelectTaskVM()
-    var cards: List<Cards> = emptyList()
     var isStartGame = false
     private var degree: Float = 0F
     var lastDir = 0f
     var newDir = 0f
-    var numberOfPlayers: Int = 0
     var choosedPlayer: Players? = null
     var previsionsPlayer: Players? = null
     var repeatPlayer: Boolean = false
@@ -36,34 +34,6 @@ class Game {
         return this.players.size
     }
 
-    fun minusOneCard(pack: String) {
-        for (c in cards) {
-            if (c.name == pack) {
-                //c.getCards().removeAt(c.sizeCards() - 1)
-                c.setLeftCards()
-            }
-        }
-    }
-
-    fun leftCardsText(pack: String): String {
-        var text = ""
-        for (c in cards) {
-            if (c.name == pack) {
-                text = c.leftCardsText()
-            }
-        }
-        return text
-    }
-
-    fun getNamePack(pack: String): String {
-        var text = ""
-        for (c in cards) {
-            if (c.name == pack) {
-                text = c.name
-            }
-        }
-        return text
-    }
 
     fun getRandomQuestion(number: Int): String {
         var task = ""
@@ -86,9 +56,6 @@ class Game {
         return str.toString()
     }
 
-    fun setNotStartGame() {
-        this.isStartGame = false
-    }
 
     fun whoContinueGame(): String {
         val str = StringBuilder()
@@ -107,7 +74,8 @@ class Game {
     }
 
 
-    fun calculateAngle() {
+    private fun calculateAngle() {
+        val numberOfPlayers = this.players.size
         val degreeForOnePlayer = (360 / numberOfPlayers).toFloat()
         for (i in 0 until numberOfPlayers) {
             when (i) {
@@ -141,7 +109,7 @@ class Game {
 
         newDir = getRandomAngle(lastDir)
         degree = newDir % 360
-        for (i in 0 until numberOfPlayers) {
+        for (i in players.indices) {
             if (i == 0) {
                 if (degree <= players[i].fromDegreeForPlayer || degree > players[i].toDegreeForPlayer) {
                     choosedPlayer = players[i]
@@ -177,19 +145,15 @@ class Game {
     }
 
 
-    fun getShortNameFromString(s: String): String {
-        val name1 = s.toCharArray()
-        return name1[0].toString()
-    }
-
-
     fun initDate(players: List<Players>) {
-        this.numberOfPlayers = players.size
         this.players = players
         this.choosedPlayer = players[0]
         this.previsionsPlayer = players[0]
         this.isStartGame = true
         calculateAngle()
+    }
 
+    fun initDateAfterRemovePlayer() {
+        calculateAngle()
     }
 }
