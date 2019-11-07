@@ -50,6 +50,12 @@ class SelectTaskViewHolder(itemView: View, private val callback: OnClickItemSele
         packName.text = item.namePack
         val quantity = itemView.findViewById<TextView>(R.id.quantitySelectTask)
         quantity.text = item.quantityNow.toString() + "/" + item.quantity.toString()
+        val lock = itemView.findViewById<ImageView>(R.id.lockSelectTask)
+        if (item.isBought) {
+            lock.visibility = View.INVISIBLE
+        } else {
+            lock.visibility = View.VISIBLE
+        }
 
         image.setOnClickListener {
             if (item.isBought) callback.onClickItem(item)

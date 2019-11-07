@@ -1,37 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingStart="35dp"
-    android:paddingTop="10dp"
-    android:orientation="vertical">
+    android:paddingLeft="40dp"
+    tools:ignore="RtlHardcoded,RtlSymmetry">
+
 
     <ImageView
         android:id="@+id/imagePackSelectTask"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        android:maxHeight="150dp"
         android:layout_gravity="center_vertical"
         android:adjustViewBounds="true"
         android:foregroundGravity="center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/erotic"
         tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/packNameSelectTask"
+        style="@style/CardsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        style="@style/CardsText"
         android:gravity="center"
-        tools:text="TextView"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagePackSelectTask"
+        tools:text="TextView" />
 
     <TextView
         android:id="@+id/quantitySelectTask"
+        style="@style/CardsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        style="@style/CardsText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/packNameSelectTask"
         tools:text="TextView" />
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/lockSelectTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="8dp"
+        android:paddingBottom="5dp"
+        android:src="@drawable/ic_lock_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imagePackSelectTask"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ContentDescription,RtlSymmetry" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

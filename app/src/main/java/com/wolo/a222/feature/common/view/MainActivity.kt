@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.wolo.a222.BuildConfig
 import com.wolo.a222.R
 import com.wolo.a222.feature.auth.view.AuthFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -41,7 +42,7 @@ class MainActivity : BaseActivity(){
         }
         nav_view.bringToFront()
         nav_view.setNavigationItemSelectedListener(navListener)
-
+        app_version.text = BuildConfig.VERSION_NAME
 
         if (savedInstanceState == null){
            navigator.onStartMainActivity()
