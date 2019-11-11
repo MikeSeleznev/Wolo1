@@ -15,16 +15,16 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/image_logo_text"
+        app:layout_constraintBottom_toTopOf="@+id/imageLogoText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/jscorplogoswhite"
+        app:srcCompat="@drawable/js_corp_logos_white"
         tools:ignore="ContentDescription" />
 
     <ImageView
-        android:id="@+id/image_logo_text"
+        android:id="@+id/imageLogoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -35,7 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.326"
-        app:srcCompat="@drawable/wolowhite"
+        app:srcCompat="@drawable/wolo_white"
         tools:ignore="ContentDescription,MissingConstraints" />
 
     <ImageView
@@ -48,9 +48,9 @@
         app:layout_constraintBottom_toTopOf="@+id/loadingText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_logo_text"
+        app:layout_constraintTop_toBottomOf="@+id/imageLogoText"
         app:layout_constraintVertical_bias="0.956"
-        app:srcCompat="@drawable/coverwolo"
+        app:srcCompat="@drawable/cover_wolo"
         tools:ignore="ContentDescription" />
 
     <TextView

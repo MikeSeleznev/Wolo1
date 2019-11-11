@@ -16,7 +16,6 @@ import io.reactivex.schedulers.Schedulers
 
 import javax.inject.Inject
 
-
 @PerScreen
 class SplashScreenPresenterImpl
 @Inject constructor(
@@ -61,11 +60,11 @@ class SplashScreenPresenterImpl
 */
         splashScreenInteractor.loadPacks()
             .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
             .flatMap {
                 cacheList = it
                 woloRepository.setPacks(it)
                     .toFlowable()
-                    .subscribeOn(Schedulers.io())
             }
             .flatMap {
                 val listId = mutableListOf<String>()
@@ -74,19 +73,20 @@ class SplashScreenPresenterImpl
                 }
                 splashScreenInteractor.loadSku(listId)
             }
+            .observeOn(Schedulers.io())
             .flatMap { skuDetails ->
                 val skuList = skuDetails.map {
                     SkuDeck(it.sku, it.title, it.price)
                 }
                 woloRepository.setSkuDecks(skuList)
                     .toFlowable()
-                    .subscribeOn(Schedulers.io())
             }.flatMap {
                 splashScreenInteractor.loadPurchases()
-            }.flatMap {
+            }
+            .observeOn(Schedulers.io())
+            .flatMap {
                 woloRepository.setPurchases(it)
                     .toFlowable()
-                    .subscribeOn(Schedulers.io())
             }
             .doOnSubscribe { state = state.copy(screenText = "Загрузка данных", dateIsLoaded = false) }
             .subscribe { result ->
@@ -106,7 +106,6 @@ class SplashScreenPresenterImpl
                     state = state.copy(screenText = "Данные загружены", dateIsLoaded = true)
                 }
             }
-
             .subscribe()
             .also { compositeDisposable.add(it) }
 

@@ -16,7 +16,6 @@ import com.wolo.a222.feature.common.view.PresenterFragment
 import com.wolo.a222.feature.gamezone.presenter.GameZonePresenter
 import com.wolo.a222.feature.gamezone.presenter.GameZoneState
 import com.wolo.a222.feature.gamezone.presenter.GameZoneView
-import com.wolo.a222.utils.Keyboard
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.gamezone_eight.*
 import kotlinx.android.synthetic.main.gamezone_three.user3

@@ -27,4 +27,6 @@
     <string name="alter_dialog_quite_app">Выйти из игры?</string>
     <string name="dialog_button_ok">Ок</string>
     <string name="dialog_button_cancel">Отмена</string>
+
+    <string name="text_loading">Загрузка карт…</string>
 </resources>
