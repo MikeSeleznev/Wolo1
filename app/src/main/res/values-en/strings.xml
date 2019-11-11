@@ -1,31 +1,24 @@
 <resources>
     <string name="app_name">WOLO</string>
-    <string name="title_activity_gamezone">GamezoneActivity</string>
-    <string name="title_activity_info">InfoActivity</string>
-    <string name="loadingText_success">Карты загружены</string>
-
-    <string name="welcome_text">ДОБРО ПОЖАЛОВАТЬ В ИГРУ</string>
+    <string name="welcome_text">WELCOME TO THE GAME</string>
     <string name="weOnlyLiveOnce_Text">«We Only Live Once»</string>
-    <string name="enter_names_text">Пожалуйста, впишите все имена участников.</string>
-    <string name="max_quantity_players_text">Максимальное количество участников: 8 человек</string>
-    <string name="startGame_button_text">НАЧАТЬ ИГРУ</string>
-    <string name="close_button">Закрыть</string>
-    <string name="newUser_text">Введите имя участника</string>
+    <string name="enter_names_text">Please, enter players names</string>
+    <string name="max_quantity_players_text">Maximum players: 8</string>
+    <string name="startGame_button_text">START GAME</string>
+    <string name="close_button">Close</string>
+    <string name="newUser_text">Enter players name</string>
     <string name="addPlayer_text">+</string>
-
-    <string name="loading_start_text">Загрузка карт</string>
-    <string name="loading_finish_text">Загрузка карт</string>
-
-    <string name="you_choosed_theme">ВЫ ВЫБРАЛИ ТЕМАТИКУ:</string>
-
-    <string name="shop">Shop</string>
+    <string name="you_choosed_theme">YOU CHOOSED A THEME:</string>
     <string name="delete_gamer">Delete players</string>
-    <string name="rules">Правила</string>
-
-    <string name="play_store">Play store</string>
+    <string name="rules">Rules</string>
+    <string name="game_store">Play store</string>
     <string name="alter_dialog_quite_main_menu">Leave to the main menu?</string>
-    <string name="dialog_button_ok">Ok</string>
+    <string name="dialog_button_ok">OK</string>
     <string name="dialog_button_cancel">Cancel</string>
     <string name="alter_dialog_quite_app">Do you want to exit?</string>
-    <string name="text_loading">Loading packs...</string>
+    <string name="text_loading">Loading data…</string>
+    <string name="data_is_loaded">Data is loaded</string>
+    <string name="attention_text">Attention!</string>
+    <string name="attention_note">You can profitably purchase all decks at once!</string>
+
 </resources>

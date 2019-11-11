@@ -41,11 +41,13 @@ class SplashScreenFragment : PresenterFragment<SplashScreenPresenter>(), SplashS
     }
 
     private fun handleState(state: SplashScreenState) {
-        loadingText.text = state.screenText
 
         if (state.dateIsLoaded) {
+            loadingText.text = resources.getString(R.string.data_is_loaded)
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
+        }else {
+            loadingText.text = resources.getString(R.string.text_loading)
         }
     }
 }

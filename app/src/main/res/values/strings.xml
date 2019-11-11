@@ -1,9 +1,5 @@
 <resources>
     <string name="app_name">WOLO</string>
-    <string name="title_activity_gamezone">GamezoneActivity</string>
-    <string name="title_activity_info">InfoActivity</string>
-    <string name="loadingText_success">Карты загружены</string>
-
     <string name="welcome_text">ДОБРО ПОЖАЛОВАТЬ В ИГРУ</string>
     <string name="weOnlyLiveOnce_Text">«We Only Live Once»</string>
     <string name="enter_names_text">Пожалуйста, впишите все имена участников.</string>
@@ -12,21 +8,17 @@
     <string name="close_button">Закрыть</string>
     <string name="newUser_text">Введите имя участника</string>
     <string name="addPlayer_text">+</string>
-
-    <string name="loading_start_text">Загрузка карт</string>
-    <string name="loading_finish_text">Загрузка карт</string>
-
     <string name="you_choosed_theme">ВЫ ВЫБРАЛИ ТЕМАТИКУ:</string>
-
-    <string name="shop">Магазин</string>
     <string name="delete_gamer">Удалить игрока</string>
     <string name="rules">Правила</string>
-
-    <string name="play_store">Игровой магазин</string>
+    <string name="game_store">Игровой магазин</string>
     <string name="alter_dialog_quite_main_menu">Выйти в главное меню?</string>
     <string name="alter_dialog_quite_app">Выйти из игры?</string>
     <string name="dialog_button_ok">Ок</string>
     <string name="dialog_button_cancel">Отмена</string>
+    <string name="text_loading">Загрузка данных…</string>
+    <string name="data_is_loaded">Данные загружены</string>
+    <string name="attention_text">Обратите внимание!</string>
+    <string name="attention_note">Вы можете выгодно приобрести сразу все колоды!</string>
 
-    <string name="text_loading">Загрузка карт…</string>
 </resources>

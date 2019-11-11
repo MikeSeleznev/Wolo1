@@ -88,10 +88,10 @@ class SplashScreenPresenterImpl
                 woloRepository.setPurchases(it)
                     .toFlowable()
             }
-            .doOnSubscribe { state = state.copy(screenText = "Загрузка данных", dateIsLoaded = false) }
+            .doOnSubscribe { state = state.copy(dateIsLoaded = false) }
             .subscribe { result ->
                 preferences.edit().putLong(ConstInfoFields.VERSION, version).commit()
-                state = state.copy(screenText = "Данные загружены", dateIsLoaded = true)
+                state = state.copy(dateIsLoaded = true)
             }
             .also { compositeDisposable.add(it) }
     }
@@ -103,7 +103,7 @@ class SplashScreenPresenterImpl
                 if (currentVersion < it) {
                     loadDate(it)
                 } else {
-                    state = state.copy(screenText = "Данные загружены", dateIsLoaded = true)
+                    state = state.copy(dateIsLoaded = true)
                 }
             }
             .subscribe()

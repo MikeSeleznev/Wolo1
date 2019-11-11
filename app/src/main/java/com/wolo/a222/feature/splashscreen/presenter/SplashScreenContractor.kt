@@ -19,6 +19,5 @@ interface SplashScreenPresenter : BasePresenter<SplashScreenView> {
 interface SplashScreenView: View
 
 data class SplashScreenState(
-        var screenText: String = "Загрузка карт",
-        var dateIsLoaded: Boolean = false
+       var dateIsLoaded: Boolean = false
 )

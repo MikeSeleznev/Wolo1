@@ -7,7 +7,7 @@
         <item
             android:id="@+id/nav_shop"
             android:icon="@drawable/ic_shopping_cart_black_24dp"
-            android:title="@string/shop"/>
+            android:title="@string/game_store"/>
         <item
             android:id="@+id/nav_delete_gamer"
             android:title="@string/delete_gamer"
