@@ -1,50 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:orientation="vertical">
-
         <CheckedTextView
             android:id="@+id/welcome_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
             android:gravity="top|center"
             android:text="@string/welcome_text"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_15sp" />
+            android:textSize="@dimen/text_15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <CheckedTextView
             android:id="@+id/we_only_live_once_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="0dp"
             android:maxLines="1"
             android:fontFamily="sans-serif-medium"
             android:gravity="center|top"
             android:text="@string/weOnlyLiveOnce_Text"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="32sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="10dp">
-
+            android:textSize="40sp"
+            android:paddingTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/welcome_text"/>
 
         <CheckedTextView
             android:id="@+id/enter_names_text"
@@ -56,7 +48,10 @@
             android:text="@string/enter_names_text"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_15sp" />
+            android:textSize="@dimen/text_15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/we_only_live_once_text"/>
 
         <CheckedTextView
             android:id="@+id/max_quantity_players_text"
@@ -68,21 +63,26 @@
             android:text="@string/max_quantity_players_text"
             android:textAlignment="center"
             android:textColor="#d62121"
-            android:textSize="@dimen/text_15sp" />
+            android:textSize="@dimen/text_12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enter_names_text"/>
 
         <LinearLayout
+            android:id="@+id/linear_players"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/max_quantity_players_text">
 
             <EditText
                 android:id="@+id/new_user"
                 style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
-                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_width="0dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="0.5"
@@ -112,36 +112,21 @@
 
         </LinearLayout>
 
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/gamers_lists"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="10dp"
             android:clipToPadding="false"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/list_row" />
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="bottom">
+            tools:listitem="@layout/list_row"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linear_players"/>
 
         <Button
             android:id="@+id/start_game_button"
@@ -154,8 +139,9 @@
             android:background="@drawable/button"
             android:text="@string/startGame_button_text"
             android:textColor="#ffffff"
-            android:textSize="18sp" />
-    </LinearLayout>
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

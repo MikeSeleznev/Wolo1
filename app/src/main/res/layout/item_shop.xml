@@ -10,11 +10,6 @@
         android:id="@+id/image_pack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingStart="15dp"
-        android:paddingTop="15dp"
-        android:paddingEnd="15dp"
-        android:paddingBottom="5dp"
         android:adjustViewBounds="true"
         app:srcCompat="@drawable/erotic"
         tools:ignore="ContentDescription" />
@@ -25,7 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_weight="1"
         android:gravity="center"
         tools:text="TextView" />
 
@@ -34,7 +28,6 @@
         style="@style/CardsText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:gravity="center"
         tools:text="TextView" />
 </LinearLayout>

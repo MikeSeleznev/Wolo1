@@ -71,7 +71,9 @@ class SplashScreenPresenterImpl
                 cacheList.map {
                     if (it.id != "") listId.add(it.id)
                 }
-                splashScreenInteractor.loadSku(listId)
+                splashScreenInteractor.loadSku(listId).doOnComplete {
+                    state = state.copy(dateIsLoaded = true)
+                }
             }
             .observeOn(Schedulers.io())
             .flatMap { skuDetails ->

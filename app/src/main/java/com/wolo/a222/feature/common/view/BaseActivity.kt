@@ -1,6 +1,8 @@
 package com.wolo.a222.feature.common.view
 
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.wolo.a222.feature.common.di.injector.Injector
 import com.wolo.a222.feature.common.di.injector.InjectorProvider
@@ -16,6 +18,8 @@ abstract class BaseActivity : AppCompatActivity() {
         get() = (applicationContext as InjectorProvider).injector
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         injector.getAppComponent().inject(this)
         super.onCreate(savedInstanceState)
         navigator.attachActivity(this)

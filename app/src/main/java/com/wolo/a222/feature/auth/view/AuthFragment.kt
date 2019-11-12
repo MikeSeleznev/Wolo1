@@ -62,7 +62,7 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView, OnItemCallbac
                 0 -> Toast.makeText(context, "Необходимо добавить минимум 2-х игроков!", Toast.LENGTH_LONG).show()
                 1 -> Toast.makeText(context, "Необходимо добавить еще минимум 1 игрока!", Toast.LENGTH_LONG).show()
                 else -> {
-                    Keyboard().hideKeyboard(activity!!.applicationContext)
+                    Keyboard().hideKeyboard(activity!!)
                     presenter.onClickStartPlay(gamersArray)}
             }
         }

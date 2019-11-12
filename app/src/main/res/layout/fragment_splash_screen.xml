@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_900"
-    tools:context=".view.activity.IntroActivity">
+    android:background="@color/green_900">
 
     <ImageView
         android:id="@+id/image_logo"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toTopOf="@+id/imageLogoText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/js_corp_logos_white"
@@ -27,14 +26,14 @@
         android:id="@+id/imageLogoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:adjustViewBounds="true"
+        android:padding="24dp"
         android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toBottomOf="@+id/loadingText"
+        android:layout_marginTop="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/image_picture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.326"
+        app:layout_constraintTop_toBottomOf="@+id/image_logo"
         app:srcCompat="@drawable/wolo_white"
         tools:ignore="ContentDescription,MissingConstraints" />
 
@@ -45,11 +44,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toTopOf="@+id/loadingText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageLogoText"
-        app:layout_constraintVertical_bias="0.956"
         app:srcCompat="@drawable/cover_wolo"
         tools:ignore="ContentDescription" />
 

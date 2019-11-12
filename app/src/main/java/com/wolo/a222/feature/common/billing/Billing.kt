@@ -52,6 +52,7 @@ class Billing : PurchasesUpdatedListener, BillingClientStateListener {
                     if (skuDetailsList != null) {
                         emitter.onNext(skuDetailsList)
                     }
+                    emitter.onComplete()
                 }
             }
         })

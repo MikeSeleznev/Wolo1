@@ -52,18 +52,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="100"
-        android:gravity="center"
-        android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp"
-        android:columnWidth="100dp"
-        android:stretchMode="spacingWidthUniform"
         android:numColumns="2"
         android:layout_marginTop="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:paddingStart="12dp"
-        android:paddingTop="12dp"
-        android:paddingEnd="12dp"
         android:layout_marginBottom="20dp"
         tools:listitem="@layout/item_shop" />
 
