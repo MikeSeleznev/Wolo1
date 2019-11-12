@@ -13,7 +13,7 @@ class Game {
     var lastDir = 0f
     var newDir = 0f
     var choosedPlayer: Players? = null
-    var previsionsPlayer: Players? = null
+    var previousPlayer: Players? = null
     var repeatPlayer: Boolean = false
     private lateinit var player1: Players
     private lateinit var player2: Players
@@ -48,20 +48,12 @@ class Game {
         return txt.replace("!2".toRegex(), player2.fullName)
     }
 
-    fun whoStartGame(): String {
-        val str = StringBuilder()
-        str.append("Игру начинает игрок ")
-        str.append(firstPlayer.fullName)
-        setPlayer1(firstPlayer)
-        return str.toString()
-    }
-
 
     fun whoContinueGame(): String {
         val str = StringBuilder()
         str.append("Теперь очередь игрока ")
-        str.append(previsionsPlayer!!.fullName)
-        setPlayer1(previsionsPlayer!!)
+        str.append(previousPlayer!!.fullName)
+        setPlayer1(previousPlayer!!)
         return str.toString()
     }
 
@@ -122,7 +114,7 @@ class Game {
                 }
             }
         }
-        repeatPlayer = choosedPlayer == previsionsPlayer
+        repeatPlayer = choosedPlayer == previousPlayer
 
         choosedPlayer?.let { setPlayer2(it) }
 
@@ -133,10 +125,10 @@ class Game {
     }
 
     fun setPrevisionsPlayer() {
-        this.previsionsPlayer = choosedPlayer
+        this.previousPlayer = choosedPlayer
     }
 
-    private fun setPlayer1(player: Players) {
+    fun setPlayer1(player: Players) {
         this.player1 = player
     }
 
@@ -148,7 +140,7 @@ class Game {
     fun initDate(players: List<Players>) {
         this.players = players
         this.choosedPlayer = players[0]
-        this.previsionsPlayer = players[0]
+        this.previousPlayer = players[0]
         this.isStartGame = true
         calculateAngle()
     }

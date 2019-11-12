@@ -4,6 +4,7 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
+import com.wolo.a222.feature.gamezone.model.interactor.GameZoneInteractor
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
@@ -13,17 +14,18 @@ import javax.inject.Inject
 
 class GameZonePresenterImpl
     @Inject constructor(
-           val navigator: Navigator ): BasePresenter<GameZoneView>, GameZonePresenter{
+           private val navigator: Navigator,
+           private val gameZoneInteractor: GameZoneInteractor): BasePresenter<GameZoneView>, GameZonePresenter{
     private val compositeDisposable = CompositeDisposable()
 
-    private val gameZoneSubject = BehaviorRelay.createDefault(GameZoneState(true))
+    private val gameZoneSubject = BehaviorRelay.createDefault(GameZoneState())
 
     private var state: GameZoneState
         set(value) = gameZoneSubject.accept(value)
         get() = gameZoneSubject.value!!
 
     override fun initState() {
-        state = GameZoneState(true)
+        state = GameZoneState()
     }
 
     override fun onFinish(){
@@ -40,15 +42,19 @@ class GameZonePresenterImpl
         navigator.showDecks()
     }
 
-    override fun whoTurn(): String {
-
-        return if (game.isStartGame!!){
-            game.whoStartGame()
+    override fun whoTurn() {
+        val str = StringBuilder()
+        var player = gameZoneInteractor.firstPlayer()
+        if (gameZoneInteractor.isStartGame()) {
+            str.append(gameZoneInteractor.getStringWhoStartGame())
+        } else {
+            player = gameZoneInteractor.previousPlayer()
+            str.append(gameZoneInteractor.getStringWhoContinueGame())
         }
-        else {
-            game.whoContinueGame()
-        }
-
+        str.append(" ")
+        str.append(player.fullName)
+        gameZoneInteractor.setPlayer1(player)
+        state = state.copy(startGamePlayer = str.toString())
     }
 
     override fun numberChoosedPlayer(): Int {
@@ -62,8 +68,8 @@ class GameZonePresenterImpl
     override fun startOnePlay() {
         game.startOnePlay()
             /*game.isStartGame = false
-            if (game.previsionsPlayer == null) {
-                game.previsionsPlayer = game.firstPlayer
+            if (game.previousPlayer == null) {
+                game.previousPlayer = game.firstPlayer
             }
 
             val newDir = getRandomAngle(game.lastDir)
@@ -81,10 +87,10 @@ class GameZonePresenterImpl
                     }
                 }
             }
-            game.repeatPlayer = if (game.previsionsPlayer == null) {
+            game.repeatPlayer = if (game.previousPlayer == null) {
                 false
             } else {
-                game.choosedPlayer!!.fullName == game.previsionsPlayer!!.fullName
+                game.choosedPlayer!!.fullName == game.previousPlayer!!.fullName
             }
             game.choosedPlayer?.let { game.setPlayer2(it) }*/
     }

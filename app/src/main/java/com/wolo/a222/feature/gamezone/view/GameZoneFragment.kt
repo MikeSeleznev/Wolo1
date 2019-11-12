@@ -78,12 +78,12 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
     }
 
     private fun handleState(state: GameZoneState) {
-
+        startGamePlayer.text = state.startGamePlayer
     }
 
     private fun init() {
 
-        startGamePlayer.text = presenter.whoTurn()
+        presenter.whoTurn()
 
         user1.text = game.players[0].shortName
         user2.text = game.players[1].shortName

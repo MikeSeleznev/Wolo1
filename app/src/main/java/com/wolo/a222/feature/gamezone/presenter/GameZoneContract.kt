@@ -12,7 +12,7 @@ interface GameZonePresenter: BasePresenter<GameZoneView>{
 
     fun showDecks()
 
-    fun whoTurn(): String
+    fun whoTurn()
 
     fun numberChoosedPlayer(): Int
 
@@ -24,5 +24,5 @@ interface GameZonePresenter: BasePresenter<GameZoneView>{
 interface GameZoneView: View
 
 data class GameZoneState(
-        var loaded: Boolean
+        var startGamePlayer: String = ""
 )

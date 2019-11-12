@@ -18,6 +18,8 @@ object Const {
     const val FBCollection = "packs"
     const val FBInfo = "info"
     const val SUPERUSER = "!JSBOSS*"
+    const val LANG_EN = "en"
+    const val LANG_RU = "ru"
 
 }
 

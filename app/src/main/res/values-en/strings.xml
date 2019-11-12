@@ -8,10 +8,10 @@
     <string name="close_button">Close</string>
     <string name="newUser_text">Enter players name</string>
     <string name="addPlayer_text">+</string>
-    <string name="you_choosed_theme">YOU CHOOSED A THEME:</string>
-    <string name="delete_gamer">Delete players</string>
+    <string name="you_choosed_theme">YOU CHOOSED THE THEME:</string>
+    <string name="delete_gamer">Exclude players</string>
     <string name="rules">Rules</string>
-    <string name="game_store">Play store</string>
+    <string name="game_store">Game store</string>
     <string name="alter_dialog_quite_main_menu">Leave to the main menu?</string>
     <string name="dialog_button_ok">OK</string>
     <string name="dialog_button_cancel">Cancel</string>
@@ -20,5 +20,9 @@
     <string name="data_is_loaded">Data is loaded</string>
     <string name="attention_text">Attention!</string>
     <string name="attention_note">You can profitably purchase all decks at once!</string>
-
+    <string name="who_start_game_text">The game starts player </string>
+    <string name="who_continue_game_text">Now turn of player </string>
+    <string name="bottle_pointed_to_text">BOTTLE POINTED TO:</string>
+    <string name="player_who_spun_the_bottle_text">The player who spun the bottle, selects the theme and must complete the task!</string>
+    <string name="done">DONE!</string>
 </resources>

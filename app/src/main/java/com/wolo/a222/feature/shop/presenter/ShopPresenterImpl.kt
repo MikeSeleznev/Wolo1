@@ -10,6 +10,7 @@ import com.wolo.a222.feature.common.entity.SkuDeck
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
 import com.wolo.a222.feature.shop.model.interactor.ShopInteractor
+import com.wolo.a222.utils.CommonUtils
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
@@ -20,7 +21,8 @@ import javax.inject.Inject
 
 class ShopPresenterImpl @Inject constructor(
         private val navigator: Navigator,
-        private val shopInteractor: ShopInteractor
+        private val shopInteractor: ShopInteractor,
+        private val commonUtils: CommonUtils
 ) : BasePresenter<ShopView>, ShopPresenter {
 
     private val compositeDisposable = CompositeDisposable()
@@ -52,6 +54,7 @@ class ShopPresenterImpl @Inject constructor(
 
     @SuppressLint("CheckResult")
     private fun initialLoadSettings() {
+        val sysLang = commonUtils.getLanguage()
         Flowable.combineLatest(
                 shopInteractor.getPacks(),
                 shopInteractor.getPurchase(),
@@ -61,11 +64,9 @@ class ShopPresenterImpl @Inject constructor(
                     var list = listOf<ShopVM>()
                     if (purchases.isNotEmpty()) {
                          list = newList.map { pack ->
-                            purchases.find { it.id == pack.id }
-                                    .let {
-                                        if (it != null) ShopVM(pack.id, pack.name, pack.activeImage, pack.nonActiveImage, true)
-                                        else ShopVM(pack.id, pack.name, pack.activeImage, pack.nonActiveImage, false)
-                                    }
+                             val isBought = purchases.find { it.id == pack.id } != null
+                             setPacksDependsOnLanguage(sysLang, pack, isBought)
+                             //ShopVM(pack.id, pack.name, pack.activeImage, pack.nonActiveImage, isBought)
                             }
                     }
                     val listWithPrice = list.map {shopVM ->
@@ -104,5 +105,14 @@ class ShopPresenterImpl @Inject constructor(
 
     override fun buyDeck(i: ShopVM, act: Activity) {
         shopInteractor.buyDeck(i, act)
+    }
+
+    private fun setPacksDependsOnLanguage(sysLang: String, pack: Pack, isBought: Boolean): ShopVM {
+        val packName: String = if (sysLang == Const.LANG_EN) {
+            pack.enName
+        } else {
+            pack.name
+        }
+        return ShopVM(pack.id, packName, pack.activeImage, pack.nonActiveImage, isBought)
     }
 }

@@ -12,6 +12,8 @@ interface PackDao{
 
     companion object{
         const val TABLE = "packs"
+        const val EN_TASKS = "enTasks"
+        const val EN_NAME = "enName"
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -24,4 +26,5 @@ interface PackDao{
         "SELECT * FROM $TABLE "
     )
     fun getPacks(): Flowable<List<Pack>>
+
 }

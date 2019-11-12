@@ -33,7 +33,7 @@ constructor(
                 val listPacks = mutableListOf<Pack>()
                 it.map { s ->
                     var name = ""
-                    var cards = mutableListOf<String>()
+                    var tasks = listOf<String>()
                     var paid = false
                     var id = ""
                     var activeImage = ""
@@ -41,19 +41,23 @@ constructor(
                     var priority = 0L
                     var alwaysActive = false
                     val keys = s.data?.keys
+                    var enTasks = listOf<String>()
+                    var enName = ""
                     for (i in keys!!) {
                         when (i) {
                             "name" -> name = s.data?.get(i) as String
-                            "cards" -> cards = s.data?.get(i) as MutableList<String>
+                            "cards" -> tasks = s.data?.get(i) as List<String>
                             "paid" -> paid = s.data?.get(i) as Boolean
                             "id" -> id = s.data?.get(i) as String
                             "activeImage" -> activeImage = s.data?.get(i) as String
                             "nonActiveImage" -> nonActiveImage = s.data?.get(i).toString()
                             "priority" -> priority = s.data?.get(i) as Long
                             "alwaysActive" -> alwaysActive = s.data?.get(i) as Boolean
+                            "enCards" -> enTasks = s.data?.get(i) as List<String>
+                            "enName" -> enName = s.data?.get(i) as String
                         }
                     }
-                    listPacks.add(Pack(id, name, cards, paid, activeImage, nonActiveImage, priority, cards.size, alwaysActive))
+                    listPacks.add(Pack(id, name, tasks, paid, activeImage, nonActiveImage, priority, tasks.size, alwaysActive, enTasks, enName))
                 }
                 listPacks.toList()
             }

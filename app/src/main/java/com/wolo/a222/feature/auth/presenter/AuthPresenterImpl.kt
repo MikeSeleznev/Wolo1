@@ -3,7 +3,6 @@ package com.wolo.a222.feature.auth.presenter
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.Const
 import com.wolo.a222.R
-import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.auth.model.interactor.AuthInteractor
 import com.wolo.a222.feature.common.di.Scope.PerScreen
 import com.wolo.a222.feature.common.entity.Pack
@@ -12,6 +11,7 @@ import com.wolo.a222.feature.common.entity.Purchases
 import com.wolo.a222.feature.common.model.TasksVM
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
+import com.wolo.a222.utils.CommonUtils
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,8 +23,9 @@ import javax.inject.Inject
 @PerScreen
 class AuthPresenterImpl
 @Inject constructor(
-        val navigator: Navigator,
-        private val authInteractor: AuthInteractor
+        private val navigator: Navigator,
+        private val authInteractor: AuthInteractor,
+        private val commonUtils: CommonUtils
 ) : BasePresenter<AuthView>, AuthPresenter {
 
     private val compositeDisposable = CompositeDisposable()
@@ -62,22 +63,25 @@ class AuthPresenterImpl
 
         val players = mutableListOf<Players>()
         var num = 1
-        for (g in gamers){
+        for (g in gamers) {
             players.add(Players(g, num))
-            num+=1
+            num += 1
         }
 
-        if (players.size > 0)  game.initDate(players)
-        val layoutResId = when (players.size) {
-            2 -> R.layout.gamezone_two
-            3 -> R.layout.gamezone_three
-            4 -> R.layout.gamezone_four
-            5 -> R.layout.gamezone_five
-            6 -> R.layout.gamezone_six
-            7 -> R.layout.gamezone_seven
-            8 -> R.layout.gamezone_eight
-            else -> R.layout.fragment_auth}
+        if (players.size > 0) {
+            authInteractor.initDate(players)
+            val layoutResId = when (players.size) {
+                2 -> R.layout.gamezone_two
+                3 -> R.layout.gamezone_three
+                4 -> R.layout.gamezone_four
+                5 -> R.layout.gamezone_five
+                6 -> R.layout.gamezone_six
+                7 -> R.layout.gamezone_seven
+                8 -> R.layout.gamezone_eight
+                else -> R.layout.fragment_auth
+            }
             navigator.showGameZone(layoutResId)
+        }
     }
 
     override fun addNewPlayer(name: String) {
@@ -100,7 +104,8 @@ class AuthPresenterImpl
     }
 
     private fun prepareData(){
-        var isBoughtAll = game.superUser
+        var isBoughtAll = authInteractor.isSuperUser()
+        val sysLang = commonUtils.getLanguage()
 
         Flowable.combineLatest(
             authInteractor.getPurchases(),
@@ -114,15 +119,15 @@ class AuthPresenterImpl
                 }
                 if (isBoughtAll) {
                     filteredPacks.map { pack ->
-                        TasksVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size, isBoughtAll, pack.tasks)
+                        setPacksDependsOnLanguage(sysLang, pack, isBoughtAll)
                     }
                 } else {
                     filteredPacks.map { pack ->
                         val purchase = purchases.find { it.id == pack.id }
                         if (purchase != null) {
-                            TasksVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size, true, pack.tasks)
+                            setPacksDependsOnLanguage(sysLang, pack, true)
                         } else {
-                            TasksVM(pack.id, pack.name, pack.restTasks, pack.nonActiveImage, pack.tasks.size, pack.alwaysActive, pack.tasks)
+                            setPacksDependsOnLanguage(sysLang, pack, pack.alwaysActive)
                         }
                     }
                 }
@@ -137,6 +142,14 @@ class AuthPresenterImpl
     }
 
     private fun setData(data: List<TasksVM>){
-        game.tasksVM = data
+       authInteractor.setTasksVM(data)
+    }
+
+    private fun setPacksDependsOnLanguage(sysLang: String, pack: Pack, isBoughtAll: Boolean): TasksVM {
+        return if (sysLang == Const.LANG_EN) {
+            TasksVM(pack.id, pack.enName, pack.restTasks, pack.activeImage, pack.tasks.size, isBoughtAll, pack.enTasks)
+        } else {
+            TasksVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size, isBoughtAll, pack.tasks)
+        }
     }
 }

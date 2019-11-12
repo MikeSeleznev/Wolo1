@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="БУТЫЛКА УКАЗАЛА НА ИГРОКА:"
+        android:text="@string/bottle_pointed_to_text"
         android:textSize="14sp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/frameLayout3"
@@ -42,7 +42,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
-        android:text="«User»"
         android:textColor="@color/black"
         android:textAlignment="center"
         android:textSize="32sp"
@@ -52,6 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/frameLayout3"
         app:layout_constraintVertical_bias="0.031"
+        tools:text="«User»"
         tools:ignore="MissingConstraints" />
 
     <View
@@ -82,7 +82,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif"
         android:textColor="@color/black"
-        android:text="Крутивший бутылку, выбирает тематику и обязательно выполняет задание!"
+        android:text="@string/player_who_spun_the_bottle_text"
         android:textAlignment="center"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout3"

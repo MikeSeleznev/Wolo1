@@ -5,9 +5,7 @@ import android.content.Context
 import android.widget.Toast
 import com.android.billingclient.api.*
 import com.wolo.a222.Const
-import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.entity.Purchases
-import com.wolo.a222.feature.common.entity.SkuDeck
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 

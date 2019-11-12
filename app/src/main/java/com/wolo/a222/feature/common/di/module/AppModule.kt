@@ -9,6 +9,7 @@ import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.navigation.NavigatorImpl
 import com.wolo.a222.feature.common.presenter.MainActivityPresenter
 import com.wolo.a222.feature.common.presenter.MainActivityPresenterImpl
+import com.wolo.a222.utils.CommonUtils
 import dagger.Module
 import dagger.Provides
 
@@ -38,5 +39,9 @@ class AppModule(private val context: Context) {
     fun provideBilling(): Billing {
         return Billing()
     }
+
+    @Provides
+    @PerApplication
+    fun provideCommonUtils(context: Context): CommonUtils = CommonUtils(context)
 
 }

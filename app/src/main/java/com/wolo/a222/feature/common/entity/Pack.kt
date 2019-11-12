@@ -1,5 +1,6 @@
 package com.wolo.a222.feature.common.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
@@ -18,5 +19,8 @@ data class Pack(
     var nonActiveImage: String = "",
     var priority: Long = 0L,
     var restTasks: Int = 1,
-    var alwaysActive: Boolean = false
+    var alwaysActive: Boolean = false,
+    @ColumnInfo(name = PackDao.EN_TASKS)
+    var enTasks: List<String> = emptyList(),
+    var enName: String = ""
 )

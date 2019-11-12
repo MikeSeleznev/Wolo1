@@ -1,11 +1,16 @@
 package com.wolo.a222.feature.auth.model.interactor
 
+import android.content.Context
+import android.os.Build
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.di.Scope.PerFeature
 import com.wolo.a222.feature.common.entity.Pack
+import com.wolo.a222.feature.common.entity.Players
 import com.wolo.a222.feature.common.entity.Purchases
+import com.wolo.a222.feature.common.model.TasksVM
 import com.wolo.a222.feature.common.repository.WoloRepository
 import io.reactivex.Flowable
+import java.util.*
 import javax.inject.Inject
 
 @PerFeature
@@ -26,4 +31,17 @@ constructor(
     override fun getPurchases(): Flowable<List<Purchases>> {
         return woloRepository.getPurchases()
     }
+
+    override fun isSuperUser(): Boolean {
+        return game.superUser
+    }
+
+    override fun setTasksVM(tasksVM: List<TasksVM>) {
+        game.tasksVM = tasksVM
+    }
+
+    override fun initDate(players: List<Players>) {
+        game.initDate(players)
+    }
 }
+
