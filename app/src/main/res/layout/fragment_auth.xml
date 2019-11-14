@@ -32,7 +32,7 @@
             android:text="@string/weOnlyLiveOnce_Text"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="40sp"
+            android:textSize="@dimen/text_40sp"
             android:paddingTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

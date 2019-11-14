@@ -36,7 +36,7 @@ class AuthPresenterImpl
         set(value) = authSubject.accept(value)
         get() = authSubject.value!!
 
-    private var gamersArray: MutableList<String> = mutableListOf()
+    private var gamersArray = emptyList<String>()
     private var reverseGamersArray: MutableList<String> = mutableListOf()
 
     override fun initState() {
@@ -85,12 +85,17 @@ class AuthPresenterImpl
     }
 
     override fun addNewPlayer(name: String) {
-        val gamers = state.gamersArray.toMutableList()
-        gamers.add(name)
-        reverseGamersArray = gamersArray.toMutableList()
+        val playersList = authInteractor.getPlayers().toMutableList()
+        playersList.add(Players(name, playersList.size + 1))
+        authInteractor.setPlayers(playersList.toList())
+
+        gamersArray = playersList.map { it.fullName }
+
+
+        //reverseGamersArray = gamersArray
         //reverseGamersArray.reverse()
 
-        state = state.copy(gamersArray = gamers, reverseGamersArray = reverseGamersArray)
+        state = state.copy(gamersArray = gamersArray, reverseGamersArray = gamersArray)
     }
 
     override fun deletePlayer(id: Int) {
@@ -151,5 +156,10 @@ class AuthPresenterImpl
         } else {
             TasksVM(pack.id, pack.name, pack.restTasks, pack.activeImage, pack.tasks.size, isBoughtAll, pack.tasks)
         }
+    }
+
+    override fun refreshState() {
+        val players = authInteractor.getPlayers().map { it.fullName }
+        state = state.copy(gamersArray = players, reverseGamersArray = players)
     }
 }

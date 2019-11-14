@@ -12,4 +12,5 @@
     <dimen name="text_19sp">19sp</dimen>
     <dimen name="text_20sp">20sp</dimen>
     <dimen name="text_25sp">25sp</dimen>
+    <dimen name="text_40sp">40sp</dimen>
 </resources>

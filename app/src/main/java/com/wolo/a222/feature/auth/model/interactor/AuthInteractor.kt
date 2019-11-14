@@ -20,4 +20,8 @@ interface AuthInteractor {
     fun setTasksVM(tasksVM: List<TasksVM>)
 
     fun initDate(players: List<Players>)
+
+    fun getPlayers(): List<Players>
+
+    fun setPlayers(players: List<Players>)
 }

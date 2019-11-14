@@ -15,7 +15,7 @@
         android:maxLines="1"
         android:text="@string/game_store"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_20sp" />
+        android:textSize="@dimen/text_40sp" />
 
     <CheckedTextView
         android:id="@+id/checkedTextView3"
@@ -29,7 +29,7 @@
         android:text="@string/attention_text"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_17sp" />
+        android:textSize="@dimen/text_15sp" />
 
     <CheckedTextView
         android:id="@+id/checkedTextView13"
@@ -53,10 +53,18 @@
         android:layout_height="match_parent"
         android:layout_weight="100"
         android:numColumns="2"
+        android:columnWidth="100dp"
         android:layout_marginTop="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="20dp"
+        android:paddingStart="12dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="12dp"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:stretchMode="spacingWidthUniform"
         tools:listitem="@layout/item_shop" />
 
         <Button

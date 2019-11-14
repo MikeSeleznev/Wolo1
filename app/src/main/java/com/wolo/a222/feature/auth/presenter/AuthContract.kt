@@ -19,11 +19,13 @@ interface AuthPresenter : BasePresenter<AuthView>{
     fun deletePlayer(id: Int)
 
     fun activeSuperUser()
+
+    fun refreshState()
 }
 
 interface AuthView : View
 
 data class AuthState(
-        val gamersArray: MutableList<String> ,
-        val reverseGamersArray: MutableList<String>
+        val gamersArray: List<String> = emptyList(),
+        val reverseGamersArray: List<String> = emptyList()
 )

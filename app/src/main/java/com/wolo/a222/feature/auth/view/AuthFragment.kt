@@ -94,4 +94,9 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView, OnItemCallbac
     override fun onDeleteItem(item: Int) {
         presenter.deletePlayer(item)
     }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.refreshState()
+    }
 }
