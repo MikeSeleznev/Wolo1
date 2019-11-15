@@ -57,7 +57,6 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView, OnItemCallbac
         add_player.setOnClickListener(addPlayerOnClick)
 
         val startGameOnClick = View.OnClickListener {
-            //gamersArray.reverse()
             when (gamersArray.size) {
                 0 -> Toast.makeText(context, "Необходимо добавить минимум 2-х игроков!", Toast.LENGTH_LONG).show()
                 1 -> Toast.makeText(context, "Необходимо добавить еще минимум 1 игрока!", Toast.LENGTH_LONG).show()
@@ -76,12 +75,12 @@ class AuthFragment : PresenterFragment<AuthPresenter>(), AuthView, OnItemCallbac
 
     private fun handleState(state: AuthState) {
         gamersArray.clear()
-        for (i in state.gamersArray) {
+        for (i in state.reverseGamersArray) {
             gamersArray.add(i)
         }
         adapter.notifyDataSetChanged()
         new_user.setText("")
-        if (gamersArray.size == 8 ){
+        if (gamersArray.size == Const.MAX_QUANTITY_PLAYERS){
             Toast.makeText(context, "Набрано максимальное количество игроков(8)", Toast.LENGTH_LONG).show()
             add_player.isEnabled = false
             new_user.isEnabled = false

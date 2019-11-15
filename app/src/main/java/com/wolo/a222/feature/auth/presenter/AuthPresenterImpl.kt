@@ -37,7 +37,6 @@ class AuthPresenterImpl
         get() = authSubject.value!!
 
     private var gamersArray = emptyList<String>()
-    private var reverseGamersArray: MutableList<String> = mutableListOf()
 
     override fun initState() {
         state = AuthState(mutableListOf(), mutableListOf())
@@ -90,12 +89,7 @@ class AuthPresenterImpl
         authInteractor.setPlayers(playersList.toList())
 
         gamersArray = playersList.map { it.fullName }
-
-
-        //reverseGamersArray = gamersArray
-        //reverseGamersArray.reverse()
-
-        state = state.copy(gamersArray = gamersArray, reverseGamersArray = gamersArray)
+        state = state.copy(gamersArray = gamersArray, reverseGamersArray = gamersArray.reversed())
     }
 
     override fun deletePlayer(id: Int) {

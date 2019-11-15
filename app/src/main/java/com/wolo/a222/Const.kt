@@ -20,6 +20,7 @@ object Const {
     const val SUPERUSER = "!JSBOSS*"
     const val LANG_EN = "en"
     const val LANG_RU = "ru"
+    const val MAX_QUANTITY_PLAYERS = 8
 
 }
 
