@@ -1,7 +1,7 @@
 package com.wolo.a222.feature.common.di.component
 
 import com.wolo.a222.WoloApp
-import com.wolo.a222.feature.common.di.Scope.PerApplication
+import com.wolo.a222.feature.common.di.scope.PerApplication
 import com.wolo.a222.feature.common.di.module.AppModule
 import com.wolo.a222.feature.common.di.module.DataModule
 import com.wolo.a222.feature.common.view.BaseActivity

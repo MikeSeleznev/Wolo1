@@ -1,6 +1,6 @@
 package com.wolo.a222.feature.task.di.module
 
-import com.wolo.a222.feature.common.di.Scope.PerFeature
+import com.wolo.a222.feature.common.di.scope.PerFeature
 import com.wolo.a222.feature.task.model.interactor.TaskInteractor
 import com.wolo.a222.feature.task.model.interactor.TaskInteractorImpl
 import dagger.Module

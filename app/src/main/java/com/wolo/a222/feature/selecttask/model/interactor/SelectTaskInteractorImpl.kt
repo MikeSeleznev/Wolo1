@@ -1,7 +1,7 @@
 package com.wolo.a222.feature.selecttask.model.interactor
 
 import com.wolo.a222.WoloApp.Companion.game
-import com.wolo.a222.feature.common.di.Scope.PerFeature
+import com.wolo.a222.feature.common.di.scope.PerFeature
 import com.wolo.a222.feature.common.model.TasksVM
 import com.wolo.a222.feature.selecttask.presenter.SelectTaskVM
 import javax.inject.Inject

@@ -22,7 +22,6 @@ abstract class BaseActivity : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         injector.getAppComponent().inject(this)
         super.onCreate(savedInstanceState)
-        navigator.attachActivity(this)
     }
 
     override fun onStart() {

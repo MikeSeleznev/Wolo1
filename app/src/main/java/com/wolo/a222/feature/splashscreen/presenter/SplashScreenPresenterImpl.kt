@@ -3,7 +3,7 @@ package com.wolo.a222.feature.splashscreen.presenter
 import com.ironz.binaryprefs.Preferences
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.ConstInfoFields
-import com.wolo.a222.feature.common.di.Scope.PerScreen
+import com.wolo.a222.feature.common.di.scope.PerScreen
 import com.wolo.a222.feature.common.entity.Pack
 import com.wolo.a222.feature.common.entity.SkuDeck
 import com.wolo.a222.feature.common.presenter.BasePresenter

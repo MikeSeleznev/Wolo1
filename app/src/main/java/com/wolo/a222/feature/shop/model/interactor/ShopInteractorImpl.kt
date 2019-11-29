@@ -3,8 +3,7 @@ package com.wolo.a222.feature.shop.model.interactor
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import com.wolo.a222.WoloApp.Companion.game
-import com.wolo.a222.feature.common.di.Scope.PerFeature
+import com.wolo.a222.feature.common.di.scope.PerFeature
 import com.wolo.a222.feature.common.entity.Pack
 import com.wolo.a222.feature.common.entity.Purchases
 import com.wolo.a222.feature.common.entity.SkuDeck
