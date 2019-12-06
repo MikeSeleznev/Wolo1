@@ -1,8 +1,8 @@
-package ru.ireca.kitchen.feature.auth.di.component
+package com.wolo.a222.feature.auth.di.component
 
 import com.wolo.a222.feature.auth.di.module.AuthScreenModule
 import com.wolo.a222.feature.auth.view.AuthFragment
-import com.wolo.a222.feature.common.di.Scope.PerScreen
+import com.wolo.a222.feature.common.di.scope.PerScreen
 import dagger.Subcomponent
 
 

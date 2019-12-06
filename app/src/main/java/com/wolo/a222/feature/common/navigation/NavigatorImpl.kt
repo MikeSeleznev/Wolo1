@@ -5,11 +5,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.transaction
 import com.wolo.a222.R
 import com.wolo.a222.feature.auth.view.AuthFragment
-import com.wolo.a222.feature.common.di.Scope.PerApplication
+import com.wolo.a222.feature.common.di.scope.PerApplication
 import com.wolo.a222.feature.deleteplayer.view.DeletePlayerFragment
 import com.wolo.a222.feature.gamezone.view.GameZoneFragment
 import com.wolo.a222.feature.rules.view.RulesFragment

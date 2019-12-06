@@ -4,11 +4,10 @@ import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.android.billingclient.api.SkuDetails
-import com.google.firebase.firestore.DocumentSnapshot
 import com.wolo.a222.Const
 import com.wolo.a222.ConstInfoFields
 import com.wolo.a222.feature.common.billing.Billing
-import com.wolo.a222.feature.common.di.Scope.PerFeature
+import com.wolo.a222.feature.common.di.scope.PerFeature
 import com.wolo.a222.feature.common.entity.Pack
 import com.wolo.a222.feature.common.entity.Purchases
 import com.wolo.a222.feature.common.model.repository.FB

@@ -2,7 +2,7 @@ package com.wolo.a222.feature.splashscreen.di.component
 
 
 import com.wolo.a222.feature.splashscreen.di.module.SplashScreenScreenModule
-import com.wolo.a222.feature.common.di.Scope.PerScreen
+import com.wolo.a222.feature.common.di.scope.PerScreen
 import com.wolo.a222.feature.splashscreen.view.SplashScreenFragment
 import dagger.Subcomponent
 

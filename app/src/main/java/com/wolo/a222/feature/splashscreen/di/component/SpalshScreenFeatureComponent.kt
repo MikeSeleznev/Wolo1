@@ -1,7 +1,7 @@
 package com.wolo.a222.feature.splashscreen.di.component
 
 import com.wolo.a222.feature.splashscreen.di.module.SplashScreenFeatureModule
-import com.wolo.a222.feature.common.di.Scope.PerFeature
+import com.wolo.a222.feature.common.di.scope.PerFeature
 import dagger.Subcomponent
 
 

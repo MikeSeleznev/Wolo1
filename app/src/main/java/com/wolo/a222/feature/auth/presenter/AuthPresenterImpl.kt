@@ -4,7 +4,7 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.Const
 import com.wolo.a222.R
 import com.wolo.a222.feature.auth.model.interactor.AuthInteractor
-import com.wolo.a222.feature.common.di.Scope.PerScreen
+import com.wolo.a222.feature.common.di.scope.PerScreen
 import com.wolo.a222.feature.common.entity.Pack
 import com.wolo.a222.feature.common.entity.Players
 import com.wolo.a222.feature.common.entity.Purchases

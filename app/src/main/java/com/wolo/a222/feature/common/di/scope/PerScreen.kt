@@ -1,4 +1,4 @@
-package com.wolo.a222.feature.common.di.Scope
+package com.wolo.a222.feature.common.di.scope
 
 import javax.inject.Scope
 

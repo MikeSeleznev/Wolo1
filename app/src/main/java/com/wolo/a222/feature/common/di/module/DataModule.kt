@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.ironz.binaryprefs.BinaryPreferencesBuilder
 import com.ironz.binaryprefs.Preferences
-import com.wolo.a222.feature.common.di.Scope.PerApplication
+import com.wolo.a222.feature.common.di.scope.PerApplication
 import com.wolo.a222.feature.common.repository.WoloRepository
 import com.wolo.a222.feature.common.storage.WOLO_DB_MIGRATIONS
 import com.wolo.a222.feature.common.storage.WoloDatabase

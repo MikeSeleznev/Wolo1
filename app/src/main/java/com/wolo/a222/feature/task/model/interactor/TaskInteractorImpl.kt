@@ -1,7 +1,7 @@
 package com.wolo.a222.feature.task.model.interactor
 
 import com.wolo.a222.WoloApp.Companion.game
-import com.wolo.a222.feature.common.di.Scope.PerFeature
+import com.wolo.a222.feature.common.di.scope.PerFeature
 import io.reactivex.Flowable
 import javax.inject.Inject
 

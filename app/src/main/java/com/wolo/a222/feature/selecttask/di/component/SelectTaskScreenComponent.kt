@@ -1,6 +1,6 @@
 package com.wolo.a222.feature.selecttask.di.component
 
-import com.wolo.a222.feature.common.di.Scope.PerScreen
+import com.wolo.a222.feature.common.di.scope.PerScreen
 import com.wolo.a222.feature.selecttask.di.module.SelectTaskScreenModule
 import com.wolo.a222.feature.selecttask.view.SelectTaskFragment
 import dagger.Subcomponent

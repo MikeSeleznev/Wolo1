@@ -1,6 +1,6 @@
 package com.wolo.a222.feature.deleteplayer.di.module
 
-import com.wolo.a222.feature.common.di.Scope.PerScreen
+import com.wolo.a222.feature.common.di.scope.PerScreen
 import com.wolo.a222.feature.deleteplayer.presenter.DeletePlayerPresenter
 import com.wolo.a222.feature.deleteplayer.presenter.DeletePlayerPresenterImpl
 import dagger.Binds
