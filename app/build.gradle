@@ -9,7 +9,7 @@ android {
         config {
             keyAlias 'MikeSeleznev'
             keyPassword 'wolo'
-            storeFile file('E:/Android/Key/2019.jks')
+            storeFile file(var1)
             storePassword 'wolo'
         }
     }
