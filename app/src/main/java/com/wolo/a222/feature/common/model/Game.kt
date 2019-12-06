@@ -8,7 +8,7 @@ class Game {
     var tasksVM: List<TasksVM> = emptyList()
     var players: List<Players> = emptyList()
     var choosedPack: SelectTaskVM = SelectTaskVM()
-    var isStartGame = false
+    var isStartGame = true
     private var degree: Float = 0F
     var lastDir = 0f
     var newDir = 0f
@@ -24,16 +24,10 @@ class Game {
     val numberChoosedPlayer: Int
         get() = choosedPlayer!!.number
 
-    init {
-        this.isStartGame = true
-    }
-
-
 
     fun numberOfPlayers(): Int {
         return this.players.size
     }
-
 
     fun getRandomQuestion(number: Int): String {
         var task = ""
@@ -42,19 +36,9 @@ class Game {
                 task = c.tasks[number]
             }
         }
-        //cards.removeAt(r1)
 
         val txt: String = task.replace("!1".toRegex(), player1.fullName)
         return txt.replace("!2".toRegex(), player2.fullName)
-    }
-
-
-    fun whoContinueGame(): String {
-        val str = StringBuilder()
-        str.append("Теперь очередь игрока ")
-        str.append(previousPlayer!!.fullName)
-        setPlayer1(previousPlayer!!)
-        return str.toString()
     }
 
     fun whoRepeat(): String {
@@ -64,7 +48,6 @@ class Game {
         str.append(" крутит бутылку еще раз ")
         return str.toString()
     }
-
 
     private fun calculateAngle() {
         val numberOfPlayers = this.players.size
@@ -132,10 +115,9 @@ class Game {
         this.player1 = player
     }
 
-    fun setPlayer2(player: Players) {
+    private fun setPlayer2(player: Players) {
         this.player2 = player
     }
-
 
     fun initDate(players: List<Players>) {
         this.players = players

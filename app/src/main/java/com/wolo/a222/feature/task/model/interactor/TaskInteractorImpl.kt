@@ -14,9 +14,9 @@ class TaskInteractorImpl @Inject constructor() : TaskInteractor{
 
     override fun deleteOneQuestion(packId: String, taskId: Int) {
        game.tasksVM.findLast { it.id == packId }
-            .let { it ->
+            .let {
                 if (it != null){
-                val a = it.tasks.filterIndexed { index, s -> index != taskId }
+                val a = it.tasks.filterIndexed { index, _ -> index != taskId }
                 it.tasks = a
                 it.quantityNow = it.tasks.size}
             }

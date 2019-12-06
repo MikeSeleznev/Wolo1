@@ -39,6 +39,7 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
     override lateinit var presenter: GameZonePresenter
 
     private lateinit var mDetector: GestureDetector
+    private var gamersIcons = mutableListOf<Button>()
 
 
     override val layoutResId: Int
@@ -50,10 +51,8 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
         super.onAttach(context)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -85,46 +84,50 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
 
         presenter.whoTurn()
 
-        user1.text = game.players[0].shortName
-        user2.text = game.players[1].shortName
+        gamersIcons.add(user1)
+        gamersIcons.add(user2)
 
         when (presenter.numberOfPlayers()) {
             3 -> {
-                user3.text = game.players[2].shortName
+                gamersIcons.add(user3)
             }
             4 -> {
-                user3.text = game.players[2].shortName
-                user4.text = game.players[3].shortName
+                gamersIcons.add(user3)
+                gamersIcons.add(user4)
             }
             5 -> {
-                user3.text = game.players[2].shortName
-                user4.text = game.players[3].shortName
-                user5.text = game.players[4].shortName
+                gamersIcons.add(user3)
+                gamersIcons.add(user4)
+                gamersIcons.add(user5)
             }
             6 -> {
-                user3.text = game.players[2].shortName
-                user4.text = game.players[3].shortName
-                user5.text = game.players[4].shortName
-                user6.text = game.players[5].shortName
+                gamersIcons.add(user3)
+                gamersIcons.add(user4)
+                gamersIcons.add(user5)
+                gamersIcons.add(user6)
             }
             7 -> {
-                user3.text = game.players[2].shortName
-                user4.text = game.players[3].shortName
-                user5.text = game.players[4].shortName
-                user6.text = game.players[5].shortName
-                user7.text = game.players[6].shortName
+                gamersIcons.add(user3)
+                gamersIcons.add(user4)
+                gamersIcons.add(user5)
+                gamersIcons.add(user6)
+                gamersIcons.add(user7)
             }
             8 -> {
-                user3.text = game.players[2].shortName
-                user4.text = game.players[3].shortName
-                user5.text = game.players[4].shortName
-                user6.text = game.players[5].shortName
-                user7.text = game.players[6].shortName
-                user8.text = game.players[7].shortName
+                gamersIcons.add(user3)
+                gamersIcons.add(user4)
+                gamersIcons.add(user5)
+                gamersIcons.add(user6)
+                gamersIcons.add(user7)
+                gamersIcons.add(user8)
             }
             else -> {
 
             }
+        }
+
+        gamersIcons.forEachIndexed { index, element ->
+            element.text = game.players[index].shortName
         }
     }
 
@@ -160,10 +163,6 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
                     val handler = Handler()
                     handler.postDelayed({
                        presenter.showDecks()
-                        //game.selectedPlayer = game.players[selectedUser-1];
-                        //val intent = Intent(this@GamezoneActivity, SelectActivity::class.java)
-                        //startActivity(intent)
-                        //finish()
                     }, 500)
                 } else {
                     startGamePlayer.text = game.whoRepeat()
@@ -236,58 +235,8 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
     }
 
     private fun setBackgroundColor() {
-
-        when (presenter.numberOfPlayers()) {
-            2 -> {
-                user1.isEnabled = true
-                user2.isEnabled = true
-            }
-            3 -> {
-                user1.isEnabled = true
-                user2.isEnabled = true
-                user3.isEnabled = true
-            }
-            4 -> {
-                user1.isEnabled = true
-                user2.isEnabled = true
-                user3.isEnabled = true
-                user4.isEnabled = true
-            }
-            5 -> {
-                user1.isEnabled = true
-                user2.isEnabled = true
-                user3.isEnabled = true
-                user4.isEnabled = true
-                user5.isEnabled = true
-            }
-            6 -> {
-                user1.isEnabled = true
-                user2.isEnabled = true
-                user3.isEnabled = true
-                user4.isEnabled = true
-                user5.isEnabled = true
-                user6.isEnabled = true
-            }
-            7 -> {
-                user1.isEnabled = true
-                user2.isEnabled = true
-                user3.isEnabled = true
-                user4.isEnabled = true
-                user5.isEnabled = true
-                user6.isEnabled = true
-                user7.isEnabled = true
-            }
-            else -> {
-                user1.isEnabled = true
-                user2.isEnabled = true
-                user3.isEnabled = true
-                user4.isEnabled = true
-                user5.isEnabled = true
-                user6.isEnabled = true
-                user7.isEnabled = true
-                user8.isEnabled = true
-
-            }
+        gamersIcons.forEach {
+            it.isEnabled = true
         }
     }
 }
