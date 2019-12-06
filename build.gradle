@@ -1,5 +1,6 @@
 ext {
     var = '2.23.1'
+    var1 = '/Users/admin/Documents/Android/2019.jks'
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
