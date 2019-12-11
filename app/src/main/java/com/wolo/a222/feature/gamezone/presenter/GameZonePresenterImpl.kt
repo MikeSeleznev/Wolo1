@@ -99,4 +99,19 @@ class GameZonePresenterImpl
         val random = Random()
         return (random.nextInt(2160) + 1000 + lD.toInt()).toFloat()
     }
+
+    override fun repeatSpin() {
+        state = state.copy(startGamePlayer = whoRepeat())
+        gameZoneInteractor.setLastDir()
+    }
+
+    private fun whoRepeat(): String {
+        val str = StringBuilder()
+        str.append(gameZoneInteractor.getStringPlayer())
+        str.append(" ")
+        str.append(gameZoneInteractor.getSecondPlayer().fullName)
+        str.append(" ")
+        str.append(gameZoneInteractor.getStringWhoRepeatSpinBottle())
+        return str.toString()
+    }
 }

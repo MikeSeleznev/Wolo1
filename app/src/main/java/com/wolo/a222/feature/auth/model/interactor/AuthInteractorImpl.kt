@@ -40,5 +40,13 @@ constructor(
     override fun initDate(players: List<Players>) {
         game.initDate(players)
     }
+
+    override fun getGamers(): List<Players> {
+        return game.players
+    }
+
+    override fun addNewGamer(players: List<Players>) {
+        game.players = players
+    }
 }
 

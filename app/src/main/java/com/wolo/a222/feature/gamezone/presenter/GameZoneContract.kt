@@ -19,6 +19,8 @@ interface GameZonePresenter: BasePresenter<GameZoneView>{
     fun numberOfPlayers(): Int
 
     fun startOnePlay()
+
+    fun repeatSpin()
 }
 
 interface GameZoneView: View

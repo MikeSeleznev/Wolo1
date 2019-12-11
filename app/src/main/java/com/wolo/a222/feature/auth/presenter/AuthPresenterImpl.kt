@@ -39,8 +39,9 @@ class AuthPresenterImpl
     private var gamersArray: MutableList<String> = mutableListOf()
     private var reverseGamersArray: MutableList<String> = mutableListOf()
 
-    override fun initState() {
-        state = AuthState(mutableListOf(), mutableListOf())
+    private fun initState() {
+        val players = authInteractor.getGamers().map { it.fullName }
+        state = state.copy(gamersArray = players)
     }
 
     override fun onStartAuth() {
@@ -51,6 +52,11 @@ class AuthPresenterImpl
         return authSubject.toFlowable(BackpressureStrategy.LATEST)
                 .onBackpressureBuffer()
                 .subscribeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    if (compositeDisposable.size() == 0) {
+                        initState()
+                    }
+                }
     }
 
     override fun onFinish() {
@@ -85,12 +91,19 @@ class AuthPresenterImpl
     }
 
     override fun addNewPlayer(name: String) {
-        val gamers = state.gamersArray.toMutableList()
+        val count = state.gamersArray.size + 1
+        val newPlayers = authInteractor.getGamers().toMutableList()
+        newPlayers.add(Players(name, count))
+        authInteractor.addNewGamer(newPlayers)
+
+        initState()
+
+        /*val gamers = state.gamersArray.toMutableList()
         gamers.add(name)
         reverseGamersArray = gamersArray.toMutableList()
         //reverseGamersArray.reverse()
 
-        state = state.copy(gamersArray = gamers, reverseGamersArray = reverseGamersArray)
+        state = state.copy(gamersArray = gamers, reverseGamersArray = reverseGamersArray)*/
     }
 
     override fun deletePlayer(id: Int) {

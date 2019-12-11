@@ -17,6 +17,7 @@ class Game {
     var repeatPlayer: Boolean = false
     private lateinit var player1: Players
     private lateinit var player2: Players
+
     var superUser: Boolean = false
 
     val firstPlayer: Players
@@ -39,14 +40,6 @@ class Game {
 
         val txt: String = task.replace("!1".toRegex(), player1.fullName)
         return txt.replace("!2".toRegex(), player2.fullName)
-    }
-
-    fun whoRepeat(): String {
-        val str = StringBuilder()
-        str.append("Игрок ")
-        str.append(player2.fullName)
-        str.append(" крутит бутылку еще раз ")
-        return str.toString()
     }
 
     private fun calculateAngle() {
@@ -103,10 +96,6 @@ class Game {
 
     }
 
-    fun setLastDir() {
-        lastDir = newDir
-    }
-
     fun setPrevisionsPlayer() {
         this.previousPlayer = choosedPlayer
     }
@@ -117,6 +106,10 @@ class Game {
 
     private fun setPlayer2(player: Players) {
         this.player2 = player
+    }
+
+    fun getPlayer2(): Players {
+        return this.player2
     }
 
     fun initDate(players: List<Players>) {

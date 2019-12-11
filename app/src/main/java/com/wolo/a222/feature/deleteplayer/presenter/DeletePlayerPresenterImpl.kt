@@ -4,6 +4,7 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import com.wolo.a222.WoloApp.Companion.game
 import com.wolo.a222.feature.common.navigation.Navigator
 import com.wolo.a222.feature.common.presenter.BasePresenter
+import com.wolo.a222.feature.deleteplayer.model.interactor.DeletePlayerInteractor
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
@@ -11,7 +12,8 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class DeletePlayerPresenterImpl @Inject constructor(
-    private val navigator: Navigator
+    private val navigator: Navigator,
+    private val deletePlayerInteractor: DeletePlayerInteractor
 ) : BasePresenter<DeletePlayerView>, DeletePlayerPresenter {
 
     private val compositeDisposable = CompositeDisposable()
@@ -37,25 +39,22 @@ class DeletePlayerPresenterImpl @Inject constructor(
     }
 
     private fun initialLoadSettings() {
-        val players = game.players.map {
-            it.fullName
-        }
-            state = state.copy(gamersArray = players, gamersList = game.players)
+        val players = deletePlayerInteractor.getPlayers()
+        val playersNames = players.map { it.fullName }
+        state = state.copy(gamersArray = playersNames, gamersList = players)
     }
 
     override fun closeDeletePlayer() {
-        if (state.gamersList.size > 2) {
-            game.players = state.gamersList
-            game.initDateAfterRemovePlayer()
-        }
+        deletePlayerInteractor.initDateAfterRemovePlayer()
         navigator.closeDeletePlayer()
     }
 
     override fun deletePlayer(item: Int) {
-        val newArray = state.gamersArray.toMutableList()
-        newArray.removeAt(item)
-        val newPlayers = state.gamersList.toMutableList()
-        newPlayers.removeAt(item)
-        state = state.copy(gamersArray = newArray, gamersList = newPlayers)
+        val players = deletePlayerInteractor.getPlayers().toMutableList()
+        if (players.size > 2) {
+            players.removeAt(item)
+            deletePlayerInteractor.setNewPlayers(players)
+            initialLoadSettings()
+        }
     }
 }

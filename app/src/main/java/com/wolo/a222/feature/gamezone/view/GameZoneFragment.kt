@@ -81,8 +81,8 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
     }
 
     private fun init() {
-
         presenter.whoTurn()
+        gamersIcons.clear()
 
         gamersIcons.add(user1)
         gamersIcons.add(user2)
@@ -165,8 +165,7 @@ class GameZoneFragment : PresenterFragment<GameZonePresenter>(), GameZoneView {
                        presenter.showDecks()
                     }, 500)
                 } else {
-                    startGamePlayer.text = game.whoRepeat()
-                    game.setLastDir()
+                    presenter.repeatSpin()
                 }
             }
 

@@ -6,8 +6,6 @@ import io.reactivex.Flowable
 
 interface AuthPresenter : BasePresenter<AuthView>{
 
-    fun initState()
-
     fun viewState(): Flowable<AuthState>
 
     fun onStartAuth()
@@ -24,6 +22,6 @@ interface AuthPresenter : BasePresenter<AuthView>{
 interface AuthView : View
 
 data class AuthState(
-        val gamersArray: MutableList<String> ,
+        val gamersArray: List<String> ,
         val reverseGamersArray: MutableList<String>
 )

@@ -18,8 +18,8 @@ android {
         applicationId "com.wolo.a222"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 26
-        versionName "1.5.9"
+        versionCode 27
+        versionName "1.5.91"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

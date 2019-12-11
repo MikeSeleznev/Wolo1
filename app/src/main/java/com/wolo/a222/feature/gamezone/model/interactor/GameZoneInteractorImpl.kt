@@ -15,6 +15,10 @@ class GameZoneInteractorImpl @Inject constructor(private val context: Context) :
         return game.firstPlayer
     }
 
+    override fun getSecondPlayer(): Players {
+        return game.getPlayer2()
+    }
+
     override fun previousPlayer(): Players {
         return game.previousPlayer!!
     }
@@ -33,5 +37,17 @@ class GameZoneInteractorImpl @Inject constructor(private val context: Context) :
 
     override fun getStringWhoContinueGame(): String {
         return context.resources.getString(R.string.who_continue_game_text)
+    }
+
+    override fun getStringWhoRepeatSpinBottle(): String {
+        return context.resources.getString(R.string.repeat_spin_the_bottle_text)
+    }
+
+    override fun getStringPlayer(): String {
+        return context.resources.getString(R.string.player_text)
+    }
+
+    override fun setLastDir() {
+        game.lastDir = game.newDir
     }
 }

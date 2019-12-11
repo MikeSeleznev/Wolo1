@@ -6,6 +6,8 @@ interface GameZoneInteractor{
 
     fun firstPlayer(): Players
 
+    fun getSecondPlayer(): Players
+
     fun previousPlayer(): Players
 
     fun isStartGame(): Boolean
@@ -15,4 +17,11 @@ interface GameZoneInteractor{
     fun getStringWhoStartGame(): String
 
     fun getStringWhoContinueGame(): String
+
+    fun getStringWhoRepeatSpinBottle(): String
+
+    fun getStringPlayer(): String
+
+    fun setLastDir()
+
 }

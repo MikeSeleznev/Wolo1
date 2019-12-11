@@ -25,4 +25,6 @@
     <string name="bottle_pointed_to_text">BOTTLE POINTED TO:</string>
     <string name="player_who_spun_the_bottle_text">The player who spun the bottle, selects the theme and must complete the task!</string>
     <string name="done">DONE!</string>
+    <string name="player_text">Player</string>
+    <string name="repeat_spin_the_bottle_text">spin the bottle again</string>
 </resources>
