@@ -1,8 +1,11 @@
 package com.wolo.a222.feature.common.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -26,6 +29,7 @@ class MainActivity : BaseActivity(){
         setContentView(R.layout.navigation_layout)
 
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val logo = findViewById<ImageView>(R.id.logo)
 
         top_menu_button.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.END) }
@@ -45,6 +49,11 @@ class MainActivity : BaseActivity(){
         nav_view.bringToFront()
         nav_view.setNavigationItemSelectedListener(navListener)
         app_version.text = BuildConfig.VERSION_NAME
+
+        logo.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?" +
+                    "id=${applicationContext.packageName}")))
+        }
 
         if (savedInstanceState == null){
            navigator.onStartMainActivity()
