@@ -36,9 +36,6 @@ class AuthPresenterImpl
         set(value) = authSubject.accept(value)
         get() = authSubject.value!!
 
-    private var gamersArray: MutableList<String> = mutableListOf()
-    private var reverseGamersArray: MutableList<String> = mutableListOf()
-
     private fun initState() {
         val players = authInteractor.getGamers().map { it.fullName }
         state = state.copy(gamersArray = players)
@@ -97,13 +94,6 @@ class AuthPresenterImpl
         authInteractor.addNewGamer(newPlayers)
 
         initState()
-
-        /*val gamers = state.gamersArray.toMutableList()
-        gamers.add(name)
-        reverseGamersArray = gamersArray.toMutableList()
-        //reverseGamersArray.reverse()
-
-        state = state.copy(gamersArray = gamers, reverseGamersArray = reverseGamersArray)*/
     }
 
     override fun deletePlayer(id: Int) {
@@ -116,46 +106,46 @@ class AuthPresenterImpl
         authInteractor.activateSuperUser()
     }
 
-    private fun prepareData(){
+    private fun prepareData() {
         var isBoughtAll = authInteractor.isSuperUser()
         val sysLang = commonUtils.getLanguage()
 
         Flowable.combineLatest(
-            authInteractor.getPurchases(),
-            authInteractor.getPacks(),
-            BiFunction { purchases: List<Purchases>, packs: List<Pack> ->
-                val filteredPacks = packs.filter { it.priority > 0 }.sortedBy { it.priority }
-                purchases.find { it.id == Const.alldecksSKU }.let {
-                    if (it != null) {
-                        isBoughtAll = true
-                    }
-                }
-                if (isBoughtAll) {
-                    filteredPacks.map { pack ->
-                        setPacksDependsOnLanguage(sysLang, pack, isBoughtAll)
-                    }
-                } else {
-                    filteredPacks.map { pack ->
-                        val purchase = purchases.find { it.id == pack.id }
-                        if (purchase != null) {
-                            setPacksDependsOnLanguage(sysLang, pack, true)
-                        } else {
-                            setPacksDependsOnLanguage(sysLang, pack, pack.alwaysActive)
+                authInteractor.getPurchases(),
+                authInteractor.getPacks(),
+                BiFunction { purchases: List<Purchases>, packs: List<Pack> ->
+                    val filteredPacks = packs.filter { it.priority > 0 }.sortedBy { it.priority }
+                    purchases.find { it.id == Const.alldecksSKU }.let {
+                        if (it != null) {
+                            isBoughtAll = true
                         }
                     }
+                    if (isBoughtAll) {
+                        filteredPacks.map { pack ->
+                            setPacksDependsOnLanguage(sysLang, pack, isBoughtAll)
+                        }
+                    } else {
+                        filteredPacks.map { pack ->
+                            val purchase = purchases.find { it.id == pack.id }
+                            if (purchase != null) {
+                                setPacksDependsOnLanguage(sysLang, pack, true)
+                            } else {
+                                setPacksDependsOnLanguage(sysLang, pack, pack.alwaysActive)
+                            }
+                        }
+                    }
+                })
+                .onBackpressureBuffer(3)
+                .subscribeOn(Schedulers.io())
+                .subscribe {
+                    setData(it)
+                }.also {
+                    compositeDisposable.add(it)
                 }
-            })
-            .onBackpressureBuffer(3)
-            .subscribeOn(Schedulers.io())
-            .subscribe {
-                setData(it)
-            }.also {
-                compositeDisposable.add(it)
-            }
     }
 
-    private fun setData(data: List<TasksVM>){
-       authInteractor.setTasksVM(data)
+    private fun setData(data: List<TasksVM>) {
+        authInteractor.setTasksVM(data)
     }
 
     private fun setPacksDependsOnLanguage(sysLang: String, pack: Pack, isBoughtAll: Boolean): TasksVM {

@@ -91,7 +91,7 @@ class SplashScreenPresenterImpl
                     .toFlowable()
             }
             .doOnSubscribe { state = state.copy(dateIsLoaded = false) }
-            .subscribe { result ->
+            .subscribe {
                 preferences.edit().putLong(ConstInfoFields.VERSION, version).commit()
                 state = state.copy(dateIsLoaded = true)
             }
